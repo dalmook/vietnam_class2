@@ -17,12 +17,18 @@ const CURRICULUM = [
 
 const STAGE_DECKS = {
   1: [
-    { term: "tr", meaningKo: "한국어 ㅉ에 가까운 소리", pronGuide: "쯔/ㅉ", pronounceVi: "trờ" },
-    { term: "phở", meaningKo: "쌀국수", pronGuide: "퍼", pronounceVi: "phở" },
-    { term: "ng", meaningKo: "응/ㅇ 계열 끝소리", pronGuide: "응", pronounceVi: "ng" },
-    { term: "nhà", meaningKo: "집", pronGuide: "냐", pronounceVi: "nhà" },
-    { term: "má", meaningKo: "어머니(성조 주의)", pronGuide: "마↗", pronounceVi: "má" },
-    { term: "mà", meaningKo: "그러나(성조 주의)", pronGuide: "마↘", pronounceVi: "mà" },
+    { term: "a", meaningKo: "모음 a", pronGuide: "아" },
+    { term: "ă", meaningKo: "짧은 a", pronGuide: "아(짧게)" },
+    { term: "â", meaningKo: "짧은 어", pronGuide: "어(짧게)" },
+    { term: "e", meaningKo: "모음 e", pronGuide: "에" },
+    { term: "ê", meaningKo: "닫힌 e", pronGuide: "에(또렷)" },
+    { term: "ơ", meaningKo: "모음 ơ", pronGuide: "어" },
+    { term: "ư", meaningKo: "모음 ư", pronGuide: "으" },
+    { term: "ph", meaningKo: "자음군 ph", pronGuide: "프/f" },
+    { term: "tr", meaningKo: "자음군 tr(ㅉ 계열)", pronGuide: "쯔/ㅉ" },
+    { term: "ng", meaningKo: "자음군 ng", pronGuide: "응" },
+    { term: "nh", meaningKo: "자음군 nh", pronGuide: "니" },
+    { term: "ma / má / mà / mả / mã / mạ", meaningKo: "6성조 패턴", pronGuide: "마 음높이 변화" },
   ],
   2: [
     { term: "Xin chào", meaningKo: "안녕하세요", pronGuide: "씬 짜오" },
@@ -168,6 +174,8 @@ function renderStageInfo() {
   el.stageTitle.textContent = stage.title;
   el.stageGoal.textContent = stage.goal;
   el.stageTasks.textContent = `오늘 미션: ${stage.tasks}`;
+  el.prevStageBtn.disabled = state.stageIndex === 1;
+  el.nextStageBtn.disabled = state.stageIndex === CURRICULUM.length;
 }
 
 function startMode(mode) {
@@ -195,13 +203,16 @@ function buildStageItems() {
   const size = Number(el.sizeSelect.value || 12);
   const stageDeck = STAGE_DECKS[state.stageIndex] ?? [];
 
+  if (stageDeck.length > 0) {
+    return shuffle(stageDeck).slice(0, Math.min(size, stageDeck.length));
+  }
+
   const jsonPool = (state.data.lessons || []).flatMap((lesson) => [
     ...(lesson.vocabCards || []).map((x) => ({ term: x.term, meaningKo: x.meaningKo, example: x.example, exampleMeaningKo: x.exampleMeaningKo, audioSrc: x.audioSrc })),
     ...(lesson.sentenceCards || []).map((x) => ({ term: x.textVi, meaningKo: x.textKo, audioSrc: x.audioSrc })),
-  ]);
+  ]).filter((x) => x.term && x.meaningKo);
 
-  const merged = [...stageDeck, ...jsonPool.filter((x) => x.term && x.meaningKo)].slice(0, 120);
-  return shuffle(merged).slice(0, Math.min(size, merged.length));
+  return shuffle(jsonPool).slice(0, Math.min(size, jsonPool.length));
 }
 
 function buildQuizQueue(items) {
