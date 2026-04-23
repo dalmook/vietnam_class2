@@ -20,7 +20,6 @@ const el = {
   sizeSelect: document.getElementById("sizeSelect"),
   startStudyBtn: document.getElementById("startStudyBtn"),
   startQuizBtn: document.getElementById("startQuizBtn"),
-  modeSelect: document.getElementById("modeSelect"),
 
   progressLabel: document.getElementById("progressLabel"),
   progressBar: document.getElementById("progressBar"),
@@ -30,7 +29,13 @@ const el = {
   xp: document.getElementById("xp"),
   hearts: document.getElementById("hearts"),
 
-  studyView: document.getElementById("studyView"),
+  screens: {
+    home: document.getElementById("homeScreen"),
+    study: document.getElementById("studyScreen"),
+    quiz: document.getElementById("quizScreen"),
+    result: document.getElementById("resultScreen"),
+  },
+
   studyTitle: document.getElementById("studyTitle"),
   flashCard: document.getElementById("flashCard"),
   studyTerm: document.getElementById("studyTerm"),
@@ -41,7 +46,6 @@ const el = {
   knownBtn: document.getElementById("knownBtn"),
   againBtn: document.getElementById("againBtn"),
 
-  quizView: document.getElementById("quizView"),
   quizTitle: document.getElementById("quizTitle"),
   quizQuestion: document.getElementById("quizQuestion"),
   quizOptions: document.getElementById("quizOptions"),
@@ -49,7 +53,6 @@ const el = {
   quizSpeakBtn: document.getElementById("quizSpeakBtn"),
   nextQuizBtn: document.getElementById("nextQuizBtn"),
 
-  resultView: document.getElementById("resultView"),
   resultText: document.getElementById("resultText"),
   retryBtn: document.getElementById("retryBtn"),
   homeBtn: document.getElementById("homeBtn"),
@@ -61,13 +64,25 @@ async function init() {
   try {
     const res = await fetch(DATA_FILE);
     state.data = await res.json();
-    initLessonSelector();
+    setupLessons();
     bindEvents();
     updateHud();
+    activateScreen("home");
   } catch (error) {
-    el.progressLabel.textContent = "JSON 로딩 실패. 경로를 확인해 주세요.";
+    el.progressLabel.textContent = "JSON 로딩 실패";
     console.error(error);
   }
+}
+
+function setupLessons() {
+  const lessons = state.data.lessons ?? [];
+  el.lessonSelect.innerHTML = lessons
+    .map((lesson, idx) => `<option value="${idx}">${lesson.unitLabel} · ${lesson.titleKo}</option>`)
+    .join("");
+
+  el.lessonSelect.disabled = false;
+  el.startStudyBtn.disabled = false;
+  el.startQuizBtn.disabled = false;
 }
 
 function bindEvents() {
@@ -79,9 +94,9 @@ function bindEvents() {
     el.flashCard.classList.toggle("flipped", !el.studyMeaning.classList.contains("hidden"));
   });
 
+  el.speakBtn.addEventListener("click", () => speakCurrent());
   el.knownBtn.addEventListener("click", () => nextStudyCard(true));
   el.againBtn.addEventListener("click", () => nextStudyCard(false));
-  el.speakBtn.addEventListener("click", () => speakCurrent());
 
   el.quizSpeakBtn.addEventListener("click", () => {
     const item = state.queue[state.index];
@@ -103,17 +118,6 @@ function bindEvents() {
   el.homeBtn.addEventListener("click", () => goHome());
 }
 
-function initLessonSelector() {
-  const lessons = state.data.lessons ?? [];
-  el.lessonSelect.innerHTML = lessons
-    .map((lesson, idx) => `<option value="${idx}">${lesson.unitLabel} · ${lesson.titleKo}</option>`)
-    .join("");
-
-  el.lessonSelect.disabled = false;
-  el.startStudyBtn.disabled = false;
-  el.startQuizBtn.disabled = false;
-}
-
 function startMode(mode) {
   state.mode = mode;
   state.lesson = (state.data.lessons ?? [])[Number(el.lessonSelect.value || 0)];
@@ -125,13 +129,15 @@ function startMode(mode) {
   const items = collectItems();
   state.queue = mode === "study" ? items : buildQuizQueue(items);
 
-  showOnly(mode === "study" ? "study" : "quiz");
   if (mode === "study") {
+    activateScreen("study");
     renderStudy();
   } else {
+    activateScreen("quiz");
     startTimer();
     renderQuiz();
   }
+
   updateProgress();
   updateHud();
 }
@@ -140,18 +146,14 @@ function collectItems() {
   const size = Number(el.sizeSelect.value || 16);
   const vocab = state.lesson.vocabCards ?? [];
   const sentence = state.lesson.sentenceCards ?? [];
-  const mixed = shuffle([...vocab, ...sentence]);
-  return mixed.slice(0, Math.min(size, mixed.length));
+  return shuffle([...vocab, ...sentence]).slice(0, Math.min(size, vocab.length + sentence.length));
 }
 
 function buildQuizQueue(items) {
   return items.map((item) => {
     const answer = item.meaningKo || item.textKo || "";
-    const pool = items
-      .map((x) => x.meaningKo || x.textKo)
-      .filter((x) => x && x !== answer);
-    const options = shuffle([answer, ...shuffle(pool).slice(0, 3)]);
-    return { ...item, answer, options };
+    const pool = items.map((x) => x.meaningKo || x.textKo).filter((x) => x && x !== answer);
+    return { ...item, answer, options: shuffle([answer, ...shuffle(pool).slice(0, 3)]) };
   });
 }
 
@@ -162,20 +164,19 @@ function renderStudy() {
   el.studyTitle.textContent = `단어 학습 (${state.index + 1}/${state.queue.length})`;
   el.studyTerm.textContent = item.term || item.textVi || "(없음)";
   el.studyMeaning.textContent = item.meaningKo || item.textKo || "";
+  el.studyExample.textContent = item.example ? `예시: ${item.example} · ${item.exampleMeaningKo || ""}` : "";
   el.studyMeaning.classList.add("hidden");
   el.flashCard.classList.remove("flipped");
-  el.studyExample.textContent = item.example
-    ? `예시: ${item.example} · ${item.exampleMeaningKo || ""}`
-    : "";
-  el.progressLabel.textContent = "학습 모드: 카드 넘기며 익히기";
-  el.timerLabel.textContent = "⏱️ 자유 학습";
+
+  el.progressLabel.textContent = "단어 학습 모드";
+  el.timerLabel.textContent = "⏱️ 자유";
 }
 
-function nextStudyCard(isKnown) {
+function nextStudyCard(known) {
   const item = state.queue[state.index];
   if (!item) return;
 
-  if (isKnown) {
+  if (known) {
     state.xp += 8;
     state.streak += 1;
   } else {
@@ -189,6 +190,7 @@ function nextStudyCard(isKnown) {
   } else {
     renderStudy();
   }
+
   updateProgress();
   updateHud();
 }
@@ -198,7 +200,7 @@ function renderQuiz() {
   if (!quiz) return finishMode();
 
   el.quizTitle.textContent = `퀴즈 모드 (${state.index + 1}/${state.queue.length})`;
-  el.quizQuestion.textContent = `"${quiz.term || quiz.textVi}"의 뜻은?`;
+  el.quizQuestion.textContent = `"${quiz.term || quiz.textVi}" 뜻은?`;
   el.quizOptions.innerHTML = "";
   el.quizFeedback.textContent = "";
   el.nextQuizBtn.disabled = true;
@@ -211,7 +213,7 @@ function renderQuiz() {
     el.quizOptions.appendChild(btn);
   });
 
-  el.progressLabel.textContent = "퀴즈 모드: 제한 시간 내 선택";
+  el.progressLabel.textContent = "퀴즈 모드";
   speakText(quiz.term || quiz.textVi);
 }
 
@@ -219,8 +221,7 @@ function gradeAnswer(button, picked, quiz) {
   if (state.quizAnswered) return;
   state.quizAnswered = true;
 
-  const allButtons = [...el.quizOptions.children];
-  allButtons.forEach((btn) => {
+  [...el.quizOptions.children].forEach((btn) => {
     btn.disabled = true;
     if (btn.textContent === quiz.answer) btn.classList.add("correct");
   });
@@ -229,13 +230,13 @@ function gradeAnswer(button, picked, quiz) {
     state.xp += 12;
     state.streak += 1;
     button.classList.add("correct");
-    el.quizFeedback.textContent = "정답! +12 XP";
+    el.quizFeedback.textContent = "정답! +12XP";
   } else {
     state.hearts -= 1;
     state.streak = 0;
     state.lastWrong.push(quiz);
     button.classList.add("wrong");
-    el.quizFeedback.textContent = `오답! 정답은 "${quiz.answer}"`;
+    el.quizFeedback.textContent = `오답! 정답: ${quiz.answer}`;
   }
 
   el.nextQuizBtn.disabled = false;
@@ -267,30 +268,34 @@ function stopTimer() {
 
 function finishMode(reason = "") {
   stopTimer();
-  showOnly("result");
-
-  const modeText = state.mode === "study" ? "단어 학습" : "퀴즈";
-  const wrongCount = state.lastWrong.length;
-  const status = state.hearts > 0 ? "성공" : "하트 소진";
-  el.resultText.textContent = `${modeText} 모드 ${status}! XP ${state.xp}, 최고 연속 ${state.streak}, 오답 ${wrongCount}개 ${reason}`;
-  el.progressLabel.textContent = "완료! 다른 모드도 도전해보세요.";
-  el.timerLabel.textContent = "⏱️ 종료";
+  activateScreen("result");
   el.progressBar.style.width = "100%";
+  el.progressLabel.textContent = "완료";
+  el.timerLabel.textContent = "⏱️ 종료";
+
+  const modeName = state.mode === "study" ? "단어 학습" : "퀴즈";
+  const status = state.hearts > 0 ? "성공" : "실패";
+  el.resultText.textContent = `${modeName} ${status} | XP ${state.xp} | 오답 ${state.lastWrong.length} ${reason}`;
 }
 
 function goHome() {
   stopTimer();
-  showOnly("home");
-  el.progressLabel.textContent = "모드를 선택해 주세요.";
+  activateScreen("home");
+  el.progressLabel.textContent = "모드 선택";
   el.timerLabel.textContent = "⏱️ --";
   el.progressBar.style.width = "0%";
+}
+
+function activateScreen(name) {
+  Object.entries(el.screens).forEach(([key, node]) => {
+    node.classList.toggle("active", key === name);
+  });
 }
 
 function updateProgress() {
   const total = state.queue.length || 1;
   const done = Math.min(state.index, total);
-  const percent = Math.floor((done / total) * 100);
-  el.progressBar.style.width = `${percent}%`;
+  el.progressBar.style.width = `${Math.floor((done / total) * 100)}%`;
 }
 
 function updateHud() {
@@ -312,13 +317,6 @@ function speakText(text) {
   utter.rate = 0.9;
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
-}
-
-function showOnly(view) {
-  el.modeSelect.classList.toggle("hidden", view !== "home");
-  el.studyView.classList.toggle("hidden", view !== "study");
-  el.quizView.classList.toggle("hidden", view !== "quiz");
-  el.resultView.classList.toggle("hidden", view !== "result");
 }
 
 function shuffle(array) {

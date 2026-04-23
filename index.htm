@@ -7,88 +7,75 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="hero panel">
-      <div>
-        <h1>🇻🇳 Vietnam Word Quest</h1>
-        <p>듀오링고 + 퀴즐렛 느낌의 베트남어 단어 학습장</p>
-      </div>
-      <div class="stats">
-        <div><span>🔥</span><strong id="streak">0</strong><small>Streak</small></div>
-        <div><span>⭐</span><strong id="xp">0</strong><small>XP</small></div>
-        <div><span>❤️</span><strong id="hearts">3</strong><small>Lives</small></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <h1>🇻🇳 Vietnam Word Quest</h1>
+      <div class="hud">
+        <span>🔥 <strong id="streak">0</strong></span>
+        <span>⭐ <strong id="xp">0</strong></span>
+        <span>❤️ <strong id="hearts">3</strong></span>
       </div>
     </header>
 
-    <section class="panel control-row">
-      <div>
+    <section class="progress-wrap">
+      <div class="progress-head">
+        <span id="progressLabel">시작 준비</span>
+        <span id="timerLabel">⏱️ --</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section class="screen-wrap">
+      <article id="homeScreen" class="screen active">
+        <h2>모드 선택</h2>
         <label for="lessonSelect">레슨</label>
         <select id="lessonSelect" disabled></select>
-      </div>
-      <div>
         <label for="sizeSelect">학습량</label>
         <select id="sizeSelect">
           <option value="10">가볍게 (10개)</option>
           <option value="16" selected>보통 (16개)</option>
           <option value="24">집중 (24개)</option>
         </select>
-      </div>
-    </section>
-
-    <section id="modeSelect" class="mode-grid">
-      <article class="panel mode-card" data-mode="study">
-        <h2>📘 단어 학습 모드</h2>
-        <p>플래시카드처럼 넘기며 발음을 듣고 뜻을 익혀요.</p>
-        <button class="btn primary" id="startStudyBtn" disabled>학습 시작</button>
+        <div class="button-grid two">
+          <button id="startStudyBtn" class="btn primary" disabled>📘 단어 학습</button>
+          <button id="startQuizBtn" class="btn blue" disabled>⚔️ 퀴즈 도전</button>
+        </div>
       </article>
-      <article class="panel mode-card" data-mode="quiz">
-        <h2>⚔️ 퀴즈 모드</h2>
-        <p>시간 제한 + 라이프 시스템으로 게임처럼 풀어요.</p>
-        <button class="btn blue" id="startQuizBtn" disabled>퀴즈 시작</button>
+
+      <article id="studyScreen" class="screen">
+        <h2 id="studyTitle">단어 학습</h2>
+        <div id="flashCard" class="flash-card">
+          <p id="studyTerm" class="term"></p>
+          <p id="studyMeaning" class="meaning hidden"></p>
+          <p id="studyExample" class="example"></p>
+        </div>
+        <div class="button-grid four">
+          <button id="speakBtn" class="btn">🔊 발음</button>
+          <button id="flipBtn" class="btn">뜻 보기</button>
+          <button id="knownBtn" class="btn primary">외웠어요</button>
+          <button id="againBtn" class="btn">다시</button>
+        </div>
       </article>
-    </section>
 
-    <section class="panel progress-wrap">
-      <div class="progress-head">
-        <span id="progressLabel">레슨을 고르면 시작할 수 있어요.</span>
-        <span id="timerLabel">⏱️ --</span>
-      </div>
-      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
-    </section>
-
-    <section id="studyView" class="panel hidden">
-      <h2 id="studyTitle">단어 학습</h2>
-      <article class="flash-card" id="flashCard">
-        <p id="studyTerm" class="term">term</p>
-        <p id="studyMeaning" class="meaning hidden">meaning</p>
-        <p id="studyExample" class="example"></p>
+      <article id="quizScreen" class="screen">
+        <h2 id="quizTitle">퀴즈</h2>
+        <p id="quizQuestion" class="quiz-question"></p>
+        <div id="quizOptions" class="options"></div>
+        <p id="quizFeedback" class="feedback"></p>
+        <div class="button-grid two">
+          <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
+          <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
+        </div>
       </article>
-      <div class="actions">
-        <button id="speakBtn" class="btn">🔊 발음</button>
-        <button id="flipBtn" class="btn">뜻 보기</button>
-        <button id="knownBtn" class="btn primary">외웠어요</button>
-        <button id="againBtn" class="btn">다시 보기</button>
-      </div>
-    </section>
 
-    <section id="quizView" class="panel hidden">
-      <h2 id="quizTitle">퀴즈</h2>
-      <p id="quizQuestion" class="quiz-question"></p>
-      <div id="quizOptions" class="options"></div>
-      <p id="quizFeedback" class="feedback"></p>
-      <div class="actions">
-        <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
-        <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
-      </div>
-    </section>
-
-    <section id="resultView" class="panel hidden">
-      <h2>🏁 결과</h2>
-      <p id="resultText"></p>
-      <div class="actions">
-        <button id="retryBtn" class="btn primary">같은 모드 다시</button>
-        <button id="homeBtn" class="btn">모드 선택으로</button>
-      </div>
+      <article id="resultScreen" class="screen">
+        <h2>결과</h2>
+        <p id="resultText" class="result-text"></p>
+        <div class="button-grid two">
+          <button id="retryBtn" class="btn primary">같은 모드 다시</button>
+          <button id="homeBtn" class="btn">홈으로</button>
+        </div>
+      </article>
     </section>
   </main>
 
