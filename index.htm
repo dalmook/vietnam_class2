@@ -102,7 +102,49 @@
         </div>
       </article>
 
-      <article id="resultScreen" class="screen">
+      
+      <article id="opicScreen" class="screen">
+        <div class="screen-head">
+          <h2>OPIc IM1 모드</h2>
+          <button id="opicHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+
+        <p class="muted">한국어 설명을 보며 베트남어 표현으로 30~60초 답변 초안을 만드세요.</p>
+
+        <section id="opicTopicList" class="topic-list"></section>
+
+        <section id="opicDetail" class="opic-detail hidden">
+          <h3 id="opicTopicTitle"></h3>
+          <p id="opicTopicGuide" class="tiny"></p>
+          <div class="opic-block">
+            <h4>핵심 표현</h4>
+            <ul id="opicCoreExpr"></ul>
+          </div>
+          <div class="opic-block">
+            <h4>추천 vocab 카드</h4>
+            <div id="opicVocabCards" class="chip-wrap"></div>
+          </div>
+          <div class="opic-block">
+            <h4>추천 sentence 카드</h4>
+            <div id="opicSentenceCards" class="chip-wrap"></div>
+          </div>
+          <div class="opic-block">
+            <h4>답변 패턴 템플릿</h4>
+            <ul id="opicTemplates"></ul>
+          </div>
+          <div class="opic-block">
+            <h4>답변 Builder</h4>
+            <p class="tiny">카드를 눌러 초안을 조합하세요.</p>
+            <div id="opicBuilderChips" class="chip-wrap"></div>
+            <textarea id="opicDraft" rows="5" placeholder="여기에 30~60초 답변 초안이 만들어집니다."></textarea>
+            <div class="button-grid two">
+              <button id="opicBuild30" class="btn">30초 가이드</button>
+              <button id="opicBuild60" class="btn blue">60초 가이드</button>
+            </div>
+          </div>
+        </section>
+      </article>
+<article id="resultScreen" class="screen">
         <h2>결과</h2>
         <p id="resultText" class="result-text"></p>
         <div class="button-grid two">

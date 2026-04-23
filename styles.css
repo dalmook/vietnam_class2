@@ -130,3 +130,13 @@ select, .btn { border: 1px solid var(--line); border-radius: 12px; padding: 11px
   .study-meta { grid-template-columns: 1fr; }
   .topbar { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+.topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.topic-btn { border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 10px; text-align: left; cursor: pointer; }
+.opic-detail { display: grid; gap: 10px; }
+.opic-block { background: #f8fbff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.opic-block h4 { margin: 0 0 6px; }
+.opic-block ul { margin: 0; padding-left: 18px; }
+.chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid #cbd5e1; background: #fff; border-radius: 999px; padding: 6px 10px; font-size: .85rem; cursor: pointer; }
+textarea#opicDraft { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font-family: inherit; }

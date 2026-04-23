@@ -34,6 +34,7 @@ const state = {
   },
   stageStats: JSON.parse(localStorage.getItem("vi-stage-stats") || "{}"),
   quizStats: null,
+  selectedOpicTopic: null,
 };
 
 const el = {
@@ -69,6 +70,7 @@ const el = {
     study: document.getElementById("studyScreen"),
     quiz: document.getElementById("quizScreen"),
     result: document.getElementById("resultScreen"),
+    opic: document.getElementById("opicScreen"),
   },
 
   studyTitle: document.getElementById("studyTitle"),
@@ -99,6 +101,20 @@ const el = {
   resultText: document.getElementById("resultText"),
   retryBtn: document.getElementById("retryBtn"),
   homeBtn: document.getElementById("homeBtn"),
+
+  opicHomeBtn: document.getElementById("opicHomeBtn"),
+  opicTopicList: document.getElementById("opicTopicList"),
+  opicDetail: document.getElementById("opicDetail"),
+  opicTopicTitle: document.getElementById("opicTopicTitle"),
+  opicTopicGuide: document.getElementById("opicTopicGuide"),
+  opicCoreExpr: document.getElementById("opicCoreExpr"),
+  opicVocabCards: document.getElementById("opicVocabCards"),
+  opicSentenceCards: document.getElementById("opicSentenceCards"),
+  opicTemplates: document.getElementById("opicTemplates"),
+  opicBuilderChips: document.getElementById("opicBuilderChips"),
+  opicDraft: document.getElementById("opicDraft"),
+  opicBuild30: document.getElementById("opicBuild30"),
+  opicBuild60: document.getElementById("opicBuild60"),
 };
 
 state.audio.preload = "none";
@@ -212,7 +228,7 @@ function bindEvents() {
   el.quickToday.addEventListener("click", () => startMode("study"));
   el.quickPron.addEventListener("click", quickPronReview);
   el.quickWrong.addEventListener("click", quickWrongReview);
-  el.quickOpic.addEventListener("click", quickOpicMode);
+  el.quickOpic.addEventListener("click", openOpicMode);
 
   el.flipBtn.addEventListener("click", toggleMeaning);
   el.toggleTipsBtn.addEventListener("click", toggleTips);
@@ -228,6 +244,9 @@ function bindEvents() {
   el.homeBtn.addEventListener("click", goHome);
   el.studyHomeBtn.addEventListener("click", goHome);
   el.quizHomeBtn.addEventListener("click", goHome);
+  el.opicHomeBtn.addEventListener("click", goHome);
+  el.opicBuild30.addEventListener("click", () => buildOpicDraft(30));
+  el.opicBuild60.addEventListener("click", () => buildOpicDraft(60));
 }
 
 function quickPronReview() {
@@ -248,10 +267,80 @@ function quickWrongReview() {
   updateProgress();
 }
 
-function quickOpicMode() {
-  const opicStage = state.curriculum.find((s) => s.slug === "opic-im1-speaking") || state.curriculum[state.curriculum.length - 1];
-  state.stageSlug = opicStage.slug;
-  startMode("quiz");
+function openOpicMode() {
+  activateScreen("opic");
+  renderOpicTopics();
+}
+
+
+function renderOpicTopics() {
+  const fallbackTopics = [
+    "자기소개", "집/동네", "가족", "일상 루틴", "취미", "음식/카페", "쇼핑", "시간/약속", "과거 경험"
+  ].map((t, i) => ({ id: `topic-${i + 1}`, title: t, slug: t }));
+
+  const topics = state.opicTopics?.length ? state.opicTopics : fallbackTopics;
+  el.opicTopicList.innerHTML = topics
+    .map((t) => `<button class="topic-btn" data-topic="${t.slug || t.id}">${t.title || t.slug}</button>`)
+    .join("");
+
+  [...el.opicTopicList.querySelectorAll(".topic-btn")].forEach((btn) => {
+    btn.addEventListener("click", () => selectOpicTopic(btn.dataset.topic));
+  });
+}
+
+function selectOpicTopic(topicKey) {
+  state.selectedOpicTopic = topicKey;
+  const topicTitle = (state.opicTopics || []).find((t) => (t.slug || t.id) === topicKey)?.title || topicKey;
+  const related = state.cards.filter((c) => c.isOpicCore || c.topicTag === topicKey || (c.type === "opic"));
+  const vocab = related.filter((c) => c.type === "vocab").slice(0, 8);
+  const sentence = related.filter((c) => c.type === "sentence" || c.type === "opic").slice(0, 8);
+
+  el.opicDetail.classList.remove("hidden");
+  el.opicTopicTitle.textContent = `${topicTitle} 말하기`;
+  el.opicTopicGuide.textContent = "30초는 핵심 2문장, 60초는 이유/예시까지 확장해 보세요.";
+
+  const expr = [
+    "Tôi là ...",
+    "Tôi sống ở ...",
+    "Tôi thích ... vì ...",
+    "Cuối tuần tôi thường ...",
+    "Trước đây ... nhưng bây giờ ...",
+  ];
+
+  el.opicCoreExpr.innerHTML = expr.map((x) => `<li>${x}</li>`).join("");
+  el.opicTemplates.innerHTML = [
+    "[도입] Tôi là ... / Tôi sống ở ...",
+    "[전개] Tôi thường ... vì ...",
+    "[확장] Trước đây ... nhưng bây giờ ...",
+  ].map((x) => `<li>${x}</li>`).join("");
+
+  el.opicVocabCards.innerHTML = vocab.map((c) => `<button class="chip" data-text="${escapeHtml(c.text || c.term || "")}">${c.text || c.term}</button>`).join("");
+  el.opicSentenceCards.innerHTML = sentence.map((c) => `<button class="chip" data-text="${escapeHtml(c.text || c.term || "")}">${c.text || c.term}</button>`).join("");
+
+  el.opicBuilderChips.innerHTML = [...expr, ...vocab.map((c) => c.text || c.term), ...sentence.map((c) => c.text || c.term)]
+    .slice(0, 16)
+    .map((txt) => `<button class="chip" data-text="${escapeHtml(txt || "")}">${txt}</button>`)
+    .join("");
+
+  [...document.querySelectorAll('.chip')].forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const text = chip.dataset.text || "";
+      el.opicDraft.value = `${el.opicDraft.value} ${text}`.trim();
+    });
+  });
+}
+
+function buildOpicDraft(sec) {
+  const base30 = "Tôi là ... Tôi sống ở ... Tôi thích ... vì ...";
+  const base60 = "Tôi là ... Tôi sống ở ... Vào ngày thường tôi ... Cuối tuần tôi thường ... Trước đây ... nhưng bây giờ ...";
+  const text = sec === 30 ? base30 : base60;
+  el.opicDraft.value = `${text}
+
+[주제: ${state.selectedOpicTopic || "선택 필요"}]`;
+}
+
+function escapeHtml(raw) {
+  return String(raw).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }
 
 function renderStageInfo() {
