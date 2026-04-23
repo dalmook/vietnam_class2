@@ -1,0 +1,42 @@
+import { getJson, getNumber, getString } from './storage.js';
+
+export function createInitialState() {
+  return {
+    dataSource: 'none',
+    data: null,
+    curriculum: [],
+    cards: [],
+    stageDecks: {},
+    opicTopics: [],
+    mode: null,
+    queue: [],
+    index: 0,
+    xp: 0,
+    streak: 0,
+    hearts: 3,
+    timer: null,
+    timeLeft: 0,
+    quizAnswered: false,
+    lastWrong: [],
+    stageSlug: null,
+    audio: new Audio(),
+    selectedOpicTopic: null,
+    reviewPool: [],
+    reviewMode: 'wrong',
+    sessionLabel: '',
+    record: {
+      totalXp: getNumber('vi-total-xp'),
+      sessions: getNumber('vi-sessions'),
+      bestStreak: getNumber('vi-best-streak'),
+      todayStudy: getNumber('vi-today-study'),
+      todayReview: getNumber('vi-today-review'),
+      streakDays: getNumber('vi-streak-days'),
+      lastStudyDate: getString('vi-last-study-date'),
+      wrongCardIds: getJson('vi-wrong-cards', []),
+    },
+    cardMeta: getJson('vi-card-meta', {}),
+    stageStats: getJson('vi-stage-stats', {}),
+    quizStats: null,
+    ui: { showMeaning: false, showTips: false },
+  };
+}

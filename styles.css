@@ -75,10 +75,15 @@ label { font-weight: 700; font-size: 0.92rem; }
 
 select, .btn { border: 1px solid var(--line); border-radius: 12px; padding: 11px; font-size: .95rem; }
 .btn { font-weight: 700; background: #fff; cursor: pointer; }
+.btn, .option, .topic-btn, .chip, select { min-height: 44px; }
 .btn.primary { background: #22a06b; color: #fff; }
 .btn.blue { background: var(--blue); color: #fff; }
 .btn.ghost { background: #f8fafc; color: var(--text); width: auto; padding: 8px 12px; }
 .btn:disabled { opacity: .6; cursor: not-allowed; }
+button:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
 
 .button-grid { display: grid; gap: 8px; }
 .button-grid.two { grid-template-columns: 1fr 1fr; }
@@ -124,6 +129,26 @@ select, .btn { border: 1px solid var(--line); border-radius: 12px; padding: 11px
 .feedback { font-weight: 700; margin: 0; min-height: 24px; }
 .result-text { font-size: 1.05rem; line-height: 1.5; }
 .hidden { display: none; }
+.app-notice {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .9rem;
+  z-index: 50;
+}
+.onboarding {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  max-width: 520px;
+  width: min(92vw, 520px);
+}
+.onboarding::backdrop { background: rgba(15,23,42,.45); }
+.onboarding ol { margin: 6px 0 12px; padding-left: 20px; display: grid; gap: 6px; }
 .review-list { display: grid; gap: 8px; max-height: 380px; overflow: auto; margin-bottom: 10px; }
 .review-item { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: #fff; display: grid; gap: 4px; }
 .review-item p { margin: 0; }
@@ -132,10 +157,12 @@ select, .btn { border: 1px solid var(--line); border-radius: 12px; padding: 11px
 .btn.starred { background: #fff7cc; border-color: #f59e0b; }
 
 @media (max-width: 720px) {
+  .app-shell { padding: 8px; }
   .summary-bar { grid-template-columns: 1fr 1fr; }
   .button-grid.six, .button-grid.five, .button-grid.two, .quick-entry, .review-widget { grid-template-columns: 1fr 1fr; }
   .study-meta { grid-template-columns: 1fr; }
   .topbar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .screen { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
 }
 
 .topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }

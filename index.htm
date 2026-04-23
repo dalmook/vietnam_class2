@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vietnam Word Quest</title>
+  <title>Vietnam Word Quest · 베트남어 IM1 학습 앱</title>
+  <meta name="description" content="베트남어 IM1 학습을 위한 스테이지 학습/퀴즈/복습/OPIc 연습 정적 웹앱입니다." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="appNotice" class="app-notice hidden" role="status" aria-live="polite"></div>
   <main class="app-shell">
     <header class="topbar">
       <h1>🇻🇳 Vietnam Word Quest</h1>
@@ -44,7 +46,7 @@
           <button id="quickReview7d" class="btn">7일 복습</button>
           <button id="quickPronConfusion" class="btn">헷갈리는 소리 복습</button>
           <button id="openWrongNote" class="btn ghost">오답노트</button>
-          <button id="openStarred" class="btn ghost">Starred 보기</button>
+          <button id="openStarred" class="btn ghost">즐겨찾기 보기</button>
           <button id="openDifficult" class="btn ghost">어려운 카드 보기</button>
         </section>
 
@@ -171,7 +173,7 @@
           </div>
         </section>
       </article>
-<article id="resultScreen" class="screen">
+      <article id="resultScreen" class="screen">
         <h2>결과</h2>
         <p id="resultText" class="result-text"></p>
         <div class="button-grid two">
@@ -186,7 +188,20 @@
     </section>
   </main>
 
+  <dialog id="onboardingDialog" class="onboarding" aria-label="앱 시작 안내">
+    <h2>Vietnam Word Quest 시작 안내</h2>
+    <ol>
+      <li>이 앱은 <strong>학습 → 퀴즈 → 복습</strong> 루프로 IM1 표현을 누적합니다.</li>
+      <li><strong>발음 모드</strong>: ‘듣기/천천히’ 버튼으로 음성 확인, 지원이 없으면 텍스트 팁이 표시됩니다.</li>
+      <li><strong>복습 큐</strong>: 틀리거나 다시 보기한 카드는 1/3/7일 복습 큐에 자동 쌓입니다.</li>
+    </ol>
+    <div class="button-grid two">
+      <button id="onboardingStartBtn" class="btn primary" aria-label="안내 닫고 시작">확인하고 시작</button>
+      <button id="onboardingSkipBtn" class="btn" aria-label="안내 다음에 보기">다음에 보기</button>
+    </div>
+  </dialog>
+
   <script src="data/curriculum.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
