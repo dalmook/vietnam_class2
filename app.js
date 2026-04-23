@@ -2,9 +2,9 @@ const DATA_FILE = "./vietnamese_a1_lessons_1_6_starter.json";
 
 const CURRICULUM = [
   { title: "발음 기초", goal: "알파벳·모음/자음·6성조·끝소리", tasks: "알파벳/자음군(ph, tr, ng, nh) + 성조 듣기" },
-  { title: "인사/생존회화", goal: "바로 쓰는 표현 먼저", tasks: "안녕하세요, 감사합니다, 얼마예요?" },
   { title: "숫자·요일·시간", goal: "실생활 핵심 표현", tasks: "1~100, 날짜, 시간, 가격" },
   { title: "기본문장 구조", goal: "S + V + O 틀 익히기", tasks: "저는 ~ 먹어요/좋아해요/가요" },
+  { title: "인사/생존회화", goal: "바로 쓰는 표현 먼저", tasks: "안녕하세요, 감사합니다, 얼마예요?" },
   { title: "필수 문법", goal: "부정·의문·시제 최소한", tasks: "không, có ... không?, đã/đang/sẽ" },
   { title: "주제 단어", goal: "자기소개~교통", tasks: "주제별 묶음 단어 학습" },
   { title: "문장 만들기", goal: "매일 10문장 만들기", tasks: "배운 단어로 직접 문장 생성" },
@@ -25,29 +25,31 @@ const STAGE_DECKS = {
     { term: "ơ", meaningKo: "모음 ơ", pronGuide: "어" },
     { term: "ư", meaningKo: "모음 ư", pronGuide: "으" },
     { term: "ph", meaningKo: "자음군 ph", pronGuide: "프/f" },
-    { term: "tr", meaningKo: "자음군 tr(ㅉ 계열)", pronGuide: "쯔/ㅉ" },
+    { term: "tr", meaningKo: "자음군 tr(ㅉ 계열)", pronGuide: "쯔/ㅉ", pronounceVi: "trờ" },
     { term: "ng", meaningKo: "자음군 ng", pronGuide: "응" },
     { term: "nh", meaningKo: "자음군 nh", pronGuide: "니" },
     { term: "ma / má / mà / mả / mã / mạ", meaningKo: "6성조 패턴", pronGuide: "마 음높이 변화" },
   ],
   2: [
+    { term: "một, hai, ba", meaningKo: "1,2,3", pronGuide: "못, 하이, 바" },
+    { term: "Hôm nay", meaningKo: "오늘", pronGuide: "홈 나이" },
+    { term: "Mấy giờ?", meaningKo: "몇 시예요?", pronGuide: "머이 저?" },
+    { term: "Số điện thoại", meaningKo: "전화번호", pronGuide: "소 띠엔 토아이" },
+    { term: "20.000 đồng", meaningKo: "2만동", pronGuide: "하이므어이 응힌 동" },
+  ],
+  3: [
+    { term: "Tôi ăn cơm", meaningKo: "저는 밥을 먹어요", pronGuide: "또이 안 껌" },
+    { term: "Tôi thích cà phê", meaningKo: "저는 커피를 좋아해요", pronGuide: "또이 틱 까페" },
+    { term: "Tôi đi làm hôm nay", meaningKo: "저는 오늘 출근해요", pronGuide: "또이 디 람 홈 나이" },
+    { term: "Tôi học tiếng Việt", meaningKo: "저는 베트남어를 공부해요", pronGuide: "또이 혹 띠엥 비엣" },
+  ],
+  4: [
     { term: "Xin chào", meaningKo: "안녕하세요", pronGuide: "씬 짜오" },
     { term: "Cảm ơn", meaningKo: "감사합니다", pronGuide: "깜 언" },
     { term: "Bao nhiêu tiền?", meaningKo: "얼마예요?", pronGuide: "바오 니우 띠엔?" },
     { term: "Tôi là người Hàn Quốc", meaningKo: "저는 한국 사람이에요", pronGuide: "또이 라 느어이 한 꾸억" },
     { term: "Nói chậm thôi", meaningKo: "천천히 말해 주세요", pronGuide: "노이 짬 토이" },
     { term: "Tôi không hiểu", meaningKo: "잘 모르겠어요", pronGuide: "또이 콩 히우" },
-  ],
-  3: [
-    { term: "một, hai, ba", meaningKo: "1,2,3", pronGuide: "못, 하이, 바" },
-    { term: "Hôm nay", meaningKo: "오늘", pronGuide: "홈 나이" },
-    { term: "Mấy giờ?", meaningKo: "몇 시예요?", pronGuide: "머이 저?" },
-    { term: "Số điện thoại", meaningKo: "전화번호", pronGuide: "소 띠엔 토아이" },
-  ],
-  4: [
-    { term: "Tôi ăn cơm", meaningKo: "저는 밥을 먹어요", pronGuide: "또이 안 껌" },
-    { term: "Tôi thích cà phê", meaningKo: "저는 커피를 좋아해요", pronGuide: "또이 틱 까페" },
-    { term: "Tôi đi làm hôm nay", meaningKo: "저는 오늘 출근해요", pronGuide: "또이 디 람 홈 나이" },
   ],
   5: [
     { term: "Tôi không đi", meaningKo: "저는 안 가요", pronGuide: "또이 콩 디" },
@@ -71,6 +73,7 @@ const state = {
   lastWrong: [],
   stageIndex: Number(localStorage.getItem("vi-stage") || 1),
   audio: new Audio(),
+  record: { totalXp: Number(localStorage.getItem("vi-total-xp") || 0), sessions: Number(localStorage.getItem("vi-sessions") || 0), bestStreak: Number(localStorage.getItem("vi-best-streak") || 0) },
 };
 
 state.audio.preload = "none";
@@ -85,6 +88,7 @@ const el = {
   stageTitle: document.getElementById("stageTitle"),
   stageGoal: document.getElementById("stageGoal"),
   stageTasks: document.getElementById("stageTasks"),
+  savedStats: document.getElementById("savedStats"),
 
   progressLabel: document.getElementById("progressLabel"),
   progressBar: document.getElementById("progressBar"),
@@ -134,6 +138,7 @@ async function init() {
     state.data = await res.json();
     bindEvents();
     renderStageInfo();
+    renderSavedStats();
     updateHud();
     activateScreen("home");
   } catch (error) {
@@ -252,7 +257,6 @@ function nextStudyCard(known) {
     state.streak += 1;
   } else {
     state.streak = 0;
-    state.queue.push(current);
   }
   state.index += 1;
   state.index >= state.queue.length ? finishMode() : renderStudy();
@@ -344,7 +348,12 @@ function finishMode(reason = "") {
   el.progressLabel.textContent = "완료";
   el.timerLabel.textContent = "⏱️ 종료";
   const status = state.hearts > 0 ? "성공" : "실패";
-  el.resultText.textContent = `STEP ${state.stageIndex} ${status} | XP ${state.xp} | 오답 ${state.lastWrong.length} ${reason}`;
+  state.record.totalXp += state.xp;
+  state.record.sessions += 1;
+  state.record.bestStreak = Math.max(state.record.bestStreak, state.streak);
+  persistRecord();
+  renderSavedStats();
+  el.resultText.textContent = `STEP ${state.stageIndex} ${status} | 이번 XP ${state.xp} | 누적 XP ${state.record.totalXp} | 오답 ${state.lastWrong.length} ${reason}`;
 }
 
 function goHome() {
@@ -383,7 +392,7 @@ function speakFallback(item) {
     utter.voice = viVoice;
     utter.lang = "vi-VN";
   } else {
-    utter.text = item.pronGuide || romanizeViToKo(item.term);
+    utter.text = getPronounceHint(item.term, item.pronGuide);
     const koVoice = voices.find((v) => v.lang.toLowerCase().startsWith("ko"));
     if (koVoice) utter.voice = koVoice;
     utter.lang = "ko-KR";
@@ -392,6 +401,15 @@ function speakFallback(item) {
   utter.pitch = 1.0;
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
+}
+
+
+function getPronounceHint(term, guide) {
+  if (guide) return guide;
+  const key = (term || "").trim().toLowerCase();
+  const map = { tr: "쯔", ph: "프", th: "트", nh: "니", ng: "응", ch: "ㅉ", gi: "지", kh: "ㅋㅎ" };
+  if (map[key]) return map[key];
+  return romanizeViToKo(key);
 }
 
 function romanizeViToKo(text) {
@@ -435,6 +453,18 @@ function updateHud() {
   el.xp.textContent = state.xp;
   el.streak.textContent = state.streak;
   el.hearts.textContent = state.hearts;
+}
+
+
+function persistRecord() {
+  localStorage.setItem("vi-total-xp", String(state.record.totalXp));
+  localStorage.setItem("vi-sessions", String(state.record.sessions));
+  localStorage.setItem("vi-best-streak", String(state.record.bestStreak));
+}
+
+function renderSavedStats() {
+  if (!el.savedStats) return;
+  el.savedStats.textContent = `기록: 누적 XP ${state.record.totalXp} · 완료 ${state.record.sessions}회 · 최고 스트릭 ${state.record.bestStreak}`;
 }
 
 function shuffle(array) {
