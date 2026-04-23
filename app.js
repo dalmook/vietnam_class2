@@ -3,38 +3,56 @@ const DATA_FILE = "./vietnamese_a1_lessons_1_6_starter.json";
 const state = {
   data: null,
   lesson: null,
-  phase: "idle",
-  studyIndex: 0,
-  quizIndex: 0,
-  score: 0,
-  studyItems: [],
-  quizItems: [],
+  mode: null,
+  queue: [],
+  index: 0,
+  xp: 0,
+  streak: 0,
+  hearts: 3,
+  timer: null,
+  timeLeft: 0,
+  quizAnswered: false,
+  lastWrong: [],
 };
 
 const el = {
   lessonSelect: document.getElementById("lessonSelect"),
-  startBtn: document.getElementById("startBtn"),
+  sizeSelect: document.getElementById("sizeSelect"),
+  startStudyBtn: document.getElementById("startStudyBtn"),
+  startQuizBtn: document.getElementById("startQuizBtn"),
+  modeSelect: document.getElementById("modeSelect"),
+
   progressLabel: document.getElementById("progressLabel"),
-  scoreLabel: document.getElementById("scoreLabel"),
   progressBar: document.getElementById("progressBar"),
+  timerLabel: document.getElementById("timerLabel"),
 
-  studyCard: document.getElementById("studyCard"),
-  cardTitle: document.getElementById("cardTitle"),
-  cardTerm: document.getElementById("cardTerm"),
-  cardMeaning: document.getElementById("cardMeaning"),
-  cardExample: document.getElementById("cardExample"),
+  streak: document.getElementById("streak"),
+  xp: document.getElementById("xp"),
+  hearts: document.getElementById("hearts"),
+
+  studyView: document.getElementById("studyView"),
+  studyTitle: document.getElementById("studyTitle"),
+  flashCard: document.getElementById("flashCard"),
+  studyTerm: document.getElementById("studyTerm"),
+  studyMeaning: document.getElementById("studyMeaning"),
+  studyExample: document.getElementById("studyExample"),
   speakBtn: document.getElementById("speakBtn"),
-  nextBtn: document.getElementById("nextBtn"),
+  flipBtn: document.getElementById("flipBtn"),
+  knownBtn: document.getElementById("knownBtn"),
+  againBtn: document.getElementById("againBtn"),
 
-  quizCard: document.getElementById("quizCard"),
+  quizView: document.getElementById("quizView"),
+  quizTitle: document.getElementById("quizTitle"),
   quizQuestion: document.getElementById("quizQuestion"),
   quizOptions: document.getElementById("quizOptions"),
   quizFeedback: document.getElementById("quizFeedback"),
-  quizNextBtn: document.getElementById("quizNextBtn"),
+  quizSpeakBtn: document.getElementById("quizSpeakBtn"),
+  nextQuizBtn: document.getElementById("nextQuizBtn"),
 
-  doneCard: document.getElementById("doneCard"),
-  doneText: document.getElementById("doneText"),
-  restartBtn: document.getElementById("restartBtn"),
+  resultView: document.getElementById("resultView"),
+  resultText: document.getElementById("resultText"),
+  retryBtn: document.getElementById("retryBtn"),
+  homeBtn: document.getElementById("homeBtn"),
 };
 
 init();
@@ -43,220 +61,271 @@ async function init() {
   try {
     const res = await fetch(DATA_FILE);
     state.data = await res.json();
-    setupLessonSelect();
-    el.progressLabel.textContent = "레슨을 선택해 주세요.";
+    initLessonSelector();
+    bindEvents();
+    updateHud();
   } catch (error) {
-    el.progressLabel.textContent = "데이터 로드 실패: JSON 파일 경로를 확인하세요.";
+    el.progressLabel.textContent = "JSON 로딩 실패. 경로를 확인해 주세요.";
     console.error(error);
   }
 }
 
-function setupLessonSelect() {
+function bindEvents() {
+  el.startStudyBtn.addEventListener("click", () => startMode("study"));
+  el.startQuizBtn.addEventListener("click", () => startMode("quiz"));
+
+  el.flipBtn.addEventListener("click", () => {
+    el.studyMeaning.classList.toggle("hidden");
+    el.flashCard.classList.toggle("flipped", !el.studyMeaning.classList.contains("hidden"));
+  });
+
+  el.knownBtn.addEventListener("click", () => nextStudyCard(true));
+  el.againBtn.addEventListener("click", () => nextStudyCard(false));
+  el.speakBtn.addEventListener("click", () => speakCurrent());
+
+  el.quizSpeakBtn.addEventListener("click", () => {
+    const item = state.queue[state.index];
+    if (item) speakText(item.term || item.textVi);
+  });
+
+  el.nextQuizBtn.addEventListener("click", () => {
+    state.index += 1;
+    state.quizAnswered = false;
+    if (state.index >= state.queue.length || state.hearts <= 0) {
+      finishMode();
+    } else {
+      renderQuiz();
+    }
+    updateProgress();
+  });
+
+  el.retryBtn.addEventListener("click", () => startMode(state.mode));
+  el.homeBtn.addEventListener("click", () => goHome());
+}
+
+function initLessonSelector() {
   const lessons = state.data.lessons ?? [];
   el.lessonSelect.innerHTML = lessons
-    .map(
-      (lesson, idx) =>
-        `<option value="${idx}">${lesson.unitLabel} · ${lesson.titleKo ?? "제목 없음"}</option>`
-    )
+    .map((lesson, idx) => `<option value="${idx}">${lesson.unitLabel} · ${lesson.titleKo}</option>`)
     .join("");
+
   el.lessonSelect.disabled = false;
-  el.startBtn.disabled = false;
+  el.startStudyBtn.disabled = false;
+  el.startQuizBtn.disabled = false;
 }
 
-el.startBtn.addEventListener("click", () => {
-  const idx = Number(el.lessonSelect.value || 0);
-  const lessons = state.data.lessons ?? [];
-  state.lesson = lessons[idx];
-  startLesson();
-});
+function startMode(mode) {
+  state.mode = mode;
+  state.lesson = (state.data.lessons ?? [])[Number(el.lessonSelect.value || 0)];
+  state.index = 0;
+  state.streak = 0;
+  state.hearts = 3;
+  state.lastWrong = [];
 
-el.nextBtn.addEventListener("click", () => {
-  state.studyIndex += 1;
-  if (state.studyIndex >= state.studyItems.length) {
-    state.phase = "quiz";
-    showQuiz();
+  const items = collectItems();
+  state.queue = mode === "study" ? items : buildQuizQueue(items);
+
+  showOnly(mode === "study" ? "study" : "quiz");
+  if (mode === "study") {
+    renderStudy();
   } else {
-    renderStudyCard();
+    startTimer();
+    renderQuiz();
   }
   updateProgress();
-});
+  updateHud();
+}
 
-el.speakBtn.addEventListener("click", () => {
-  const item = state.studyItems[state.studyIndex];
-  const text = item.term || item.textVi || "";
-  speakVietnamese(text);
-});
-
-el.quizNextBtn.addEventListener("click", () => {
-  state.quizIndex += 1;
-  if (state.quizIndex >= state.quizItems.length) {
-    finishLesson();
-    return;
-  }
-  showQuiz();
-  updateProgress();
-});
-
-el.restartBtn.addEventListener("click", () => {
-  startLesson();
-});
-
-function startLesson() {
-  if (!state.lesson) return;
-
-  state.phase = "study";
-  state.studyIndex = 0;
-  state.quizIndex = 0;
-  state.score = 0;
-
+function collectItems() {
+  const size = Number(el.sizeSelect.value || 16);
   const vocab = state.lesson.vocabCards ?? [];
-  const tones = state.lesson.sentenceCards ?? [];
-  state.studyItems = [...vocab.slice(0, 8), ...tones.slice(0, 4)];
-  state.quizItems = buildQuizFromStudyItems(state.studyItems, state.lesson.quizSeeds ?? []);
-
-  showStudy();
-  renderStudyCard();
-  updateProgress();
+  const sentence = state.lesson.sentenceCards ?? [];
+  const mixed = shuffle([...vocab, ...sentence]);
+  return mixed.slice(0, Math.min(size, mixed.length));
 }
 
-function showStudy() {
-  el.studyCard.classList.remove("hidden");
-  el.quizCard.classList.add("hidden");
-  el.doneCard.classList.add("hidden");
+function buildQuizQueue(items) {
+  return items.map((item) => {
+    const answer = item.meaningKo || item.textKo || "";
+    const pool = items
+      .map((x) => x.meaningKo || x.textKo)
+      .filter((x) => x && x !== answer);
+    const options = shuffle([answer, ...shuffle(pool).slice(0, 3)]);
+    return { ...item, answer, options };
+  });
 }
 
-function renderStudyCard() {
-  const item = state.studyItems[state.studyIndex];
+function renderStudy() {
+  const item = state.queue[state.index];
+  if (!item) return finishMode();
+
+  el.studyTitle.textContent = `단어 학습 (${state.index + 1}/${state.queue.length})`;
+  el.studyTerm.textContent = item.term || item.textVi || "(없음)";
+  el.studyMeaning.textContent = item.meaningKo || item.textKo || "";
+  el.studyMeaning.classList.add("hidden");
+  el.flashCard.classList.remove("flipped");
+  el.studyExample.textContent = item.example
+    ? `예시: ${item.example} · ${item.exampleMeaningKo || ""}`
+    : "";
+  el.progressLabel.textContent = "학습 모드: 카드 넘기며 익히기";
+  el.timerLabel.textContent = "⏱️ 자유 학습";
+}
+
+function nextStudyCard(isKnown) {
+  const item = state.queue[state.index];
   if (!item) return;
 
-  el.cardTitle.textContent = `학습 ${state.studyIndex + 1} / ${state.studyItems.length}`;
-  el.cardTerm.textContent = item.term || item.textVi || "(단어 없음)";
-  el.cardMeaning.textContent = item.meaningKo || item.textKo || "";
-
-  if (item.example) {
-    el.cardExample.textContent = `예시: ${item.example} (${item.exampleMeaningKo ?? ""})`;
+  if (isKnown) {
+    state.xp += 8;
+    state.streak += 1;
   } else {
-    el.cardExample.textContent = "";
+    state.streak = 0;
+    state.queue.push(item);
   }
 
-  const speakText = item.term || item.textVi;
-  el.speakBtn.disabled = !speakText;
+  state.index += 1;
+  if (state.index >= state.queue.length) {
+    finishMode();
+  } else {
+    renderStudy();
+  }
+  updateProgress();
+  updateHud();
 }
 
-function buildQuizFromStudyItems(studyItems, quizSeeds) {
-  const pools = studyItems.filter((i) => i.term || i.textVi);
-  const shuffled = [...pools].sort(() => Math.random() - 0.5).slice(0, 5);
+function renderQuiz() {
+  const quiz = state.queue[state.index];
+  if (!quiz) return finishMode();
 
-  return shuffled.map((item, idx) => {
-    const term = item.term || item.textVi;
-    const correct = item.meaningKo || item.textKo || "정답";
-    const distractors = pools
-      .filter((p) => (p.meaningKo || p.textKo) && (p.meaningKo || p.textKo) !== correct)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map((p) => p.meaningKo || p.textKo);
-
-    const options = shuffle([correct, ...distractors]);
-    return {
-      id: quizSeeds[idx]?.id ?? `custom-${idx}`,
-      question: `"${term}"의 뜻은?`,
-      answer: correct,
-      options,
-      speakText: term,
-    };
-  });
-}
-
-function showQuiz() {
-  state.phase = "quiz";
-  el.studyCard.classList.add("hidden");
-  el.quizCard.classList.remove("hidden");
-  el.doneCard.classList.add("hidden");
-
-  const quiz = state.quizItems[state.quizIndex];
-  el.quizQuestion.textContent = `Q${state.quizIndex + 1}. ${quiz.question}`;
+  el.quizTitle.textContent = `퀴즈 모드 (${state.index + 1}/${state.queue.length})`;
+  el.quizQuestion.textContent = `"${quiz.term || quiz.textVi}"의 뜻은?`;
   el.quizOptions.innerHTML = "";
   el.quizFeedback.textContent = "";
-  el.quizNextBtn.disabled = true;
+  el.nextQuizBtn.disabled = true;
 
   quiz.options.forEach((option) => {
-    const button = document.createElement("button");
-    button.className = "option";
-    button.textContent = option;
-    button.addEventListener("click", () => handleAnswer(button, option, quiz));
-    el.quizOptions.appendChild(button);
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = option;
+    btn.addEventListener("click", () => gradeAnswer(btn, option, quiz));
+    el.quizOptions.appendChild(btn);
   });
 
-  speakVietnamese(quiz.speakText);
+  el.progressLabel.textContent = "퀴즈 모드: 제한 시간 내 선택";
+  speakText(quiz.term || quiz.textVi);
 }
 
-function handleAnswer(button, picked, quiz) {
-  const isCorrect = picked === quiz.answer;
-  const all = [...el.quizOptions.children];
+function gradeAnswer(button, picked, quiz) {
+  if (state.quizAnswered) return;
+  state.quizAnswered = true;
 
-  all.forEach((btn) => {
+  const allButtons = [...el.quizOptions.children];
+  allButtons.forEach((btn) => {
     btn.disabled = true;
     if (btn.textContent === quiz.answer) btn.classList.add("correct");
   });
 
-  if (isCorrect) {
-    state.score += 10;
+  if (picked === quiz.answer) {
+    state.xp += 12;
+    state.streak += 1;
     button.classList.add("correct");
-    el.quizFeedback.textContent = "정답! 👍";
+    el.quizFeedback.textContent = "정답! +12 XP";
   } else {
+    state.hearts -= 1;
+    state.streak = 0;
+    state.lastWrong.push(quiz);
     button.classList.add("wrong");
-    el.quizFeedback.textContent = `아쉬워요. 정답: ${quiz.answer}`;
+    el.quizFeedback.textContent = `오답! 정답은 "${quiz.answer}"`;
   }
 
-  el.quizNextBtn.disabled = false;
-  updateProgress();
+  el.nextQuizBtn.disabled = false;
+  updateHud();
 }
 
-function finishLesson() {
-  state.phase = "done";
-  el.studyCard.classList.add("hidden");
-  el.quizCard.classList.add("hidden");
-  el.doneCard.classList.remove("hidden");
-  el.doneText.textContent = `${state.lesson.unitLabel} 완료! 최종 점수: ${state.score}점`;
-  el.progressLabel.textContent = "완료";
+function startTimer() {
+  stopTimer();
+  state.timeLeft = Math.max(30, state.queue.length * 7);
+  el.timerLabel.textContent = `⏱️ ${state.timeLeft}s`;
+
+  state.timer = setInterval(() => {
+    state.timeLeft -= 1;
+    el.timerLabel.textContent = `⏱️ ${state.timeLeft}s`;
+
+    if (state.timeLeft <= 0) {
+      stopTimer();
+      finishMode("시간 종료");
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (state.timer) {
+    clearInterval(state.timer);
+    state.timer = null;
+  }
+}
+
+function finishMode(reason = "") {
+  stopTimer();
+  showOnly("result");
+
+  const modeText = state.mode === "study" ? "단어 학습" : "퀴즈";
+  const wrongCount = state.lastWrong.length;
+  const status = state.hearts > 0 ? "성공" : "하트 소진";
+  el.resultText.textContent = `${modeText} 모드 ${status}! XP ${state.xp}, 최고 연속 ${state.streak}, 오답 ${wrongCount}개 ${reason}`;
+  el.progressLabel.textContent = "완료! 다른 모드도 도전해보세요.";
+  el.timerLabel.textContent = "⏱️ 종료";
   el.progressBar.style.width = "100%";
 }
 
-function updateProgress() {
-  const total = state.studyItems.length + state.quizItems.length;
-  const done =
-    state.phase === "study"
-      ? state.studyIndex
-      : state.phase === "quiz"
-      ? state.studyItems.length + state.quizIndex
-      : total;
-
-  const pct = total ? Math.floor((done / total) * 100) : 0;
-  el.progressBar.style.width = `${pct}%`;
-  el.scoreLabel.textContent = `점수 ${state.score}`;
-
-  if (state.phase === "study") {
-    el.progressLabel.textContent = `학습 중 (${state.studyIndex + 1}/${state.studyItems.length})`;
-  } else if (state.phase === "quiz") {
-    el.progressLabel.textContent = `퀴즈 중 (${state.quizIndex + 1}/${state.quizItems.length})`;
-  }
+function goHome() {
+  stopTimer();
+  showOnly("home");
+  el.progressLabel.textContent = "모드를 선택해 주세요.";
+  el.timerLabel.textContent = "⏱️ --";
+  el.progressBar.style.width = "0%";
 }
 
-function speakVietnamese(text) {
-  if (!text || !("speechSynthesis" in window)) return;
+function updateProgress() {
+  const total = state.queue.length || 1;
+  const done = Math.min(state.index, total);
+  const percent = Math.floor((done / total) * 100);
+  el.progressBar.style.width = `${percent}%`;
+}
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "vi-VN";
-  utterance.rate = 0.92;
+function updateHud() {
+  el.xp.textContent = state.xp;
+  el.streak.textContent = state.streak;
+  el.hearts.textContent = state.hearts;
+}
+
+function speakCurrent() {
+  const item = state.queue[state.index];
+  if (!item) return;
+  speakText(item.term || item.textVi);
+}
+
+function speakText(text) {
+  if (!text || !("speechSynthesis" in window)) return;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "vi-VN";
+  utter.rate = 0.9;
   speechSynthesis.cancel();
-  speechSynthesis.speak(utterance);
+  speechSynthesis.speak(utter);
+}
+
+function showOnly(view) {
+  el.modeSelect.classList.toggle("hidden", view !== "home");
+  el.studyView.classList.toggle("hidden", view !== "study");
+  el.quizView.classList.toggle("hidden", view !== "quiz");
+  el.resultView.classList.toggle("hidden", view !== "result");
 }
 
 function shuffle(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i -= 1) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return arr;
+  return copy;
 }
