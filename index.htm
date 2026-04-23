@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnam Word Quest</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <h1>🇻🇳 Vietnam Word Quest</h1>
+      <div class="hud">
+        <span>🔥 <strong id="streak">0</strong></span>
+        <span>⭐ <strong id="xp">0</strong></span>
+        <span>❤️ <strong id="hearts">3</strong></span>
+      </div>
+    </header>
+
+    <section class="progress-wrap">
+      <div class="progress-head">
+        <span id="progressLabel">시작 준비</span>
+        <span id="timerLabel">⏱️ --</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section class="screen-wrap">
+      <article id="homeScreen" class="screen active">
+        <h2>학습 로드맵</h2>
+        <div class="roadmap-card">
+          <p class="stage-chip" id="stageChip">STEP 1</p>
+          <h3 id="stageTitle"></h3>
+          <p id="stageGoal" class="muted"></p>
+          <p id="stageTasks" class="tiny"></p>
+        </div>
+        <p id="savedStats" class="tiny"></p>
+        <div class="button-grid two">
+          <button id="prevStageBtn" class="btn">◀ 이전 단계</button>
+          <button id="nextStageBtn" class="btn">다음 단계 ▶</button>
+        </div>
+
+        <label for="sizeSelect">학습량</label>
+        <select id="sizeSelect">
+          <option value="8">짧게 (8개)</option>
+          <option value="12" selected>보통 (12개)</option>
+          <option value="18">집중 (18개)</option>
+        </select>
+
+        <div class="button-grid two">
+          <button id="startStudyBtn" class="btn primary">📘 단계 학습</button>
+          <button id="startQuizBtn" class="btn blue">⚔️ 단계 퀴즈</button>
+        </div>
+      </article>
+
+      <article id="studyScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="studyTitle">단어 학습</h2>
+          <button id="studyHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+        <div id="flashCard" class="flash-card">
+          <p id="studyTerm" class="term"></p>
+          <p id="studyPron" class="pron"></p>
+          <p id="studyMeaning" class="meaning hidden"></p>
+          <p id="studyExample" class="example"></p>
+        </div>
+        <div class="button-grid four">
+          <button id="speakBtn" class="btn">🔊 발음</button>
+          <button id="flipBtn" class="btn">뜻 보기</button>
+          <button id="knownBtn" class="btn primary">외웠어요</button>
+          <button id="againBtn" class="btn">다음</button>
+        </div>
+      </article>
+
+      <article id="quizScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="quizTitle">퀴즈</h2>
+          <button id="quizHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+        <p id="quizQuestion" class="quiz-question"></p>
+        <div id="quizOptions" class="options"></div>
+        <p id="quizFeedback" class="feedback"></p>
+        <div class="button-grid two">
+          <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
+          <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
+        </div>
+      </article>
+
+      <article id="resultScreen" class="screen">
+        <h2>결과</h2>
+        <p id="resultText" class="result-text"></p>
+        <div class="button-grid two">
+          <button id="retryBtn" class="btn primary">같은 모드 다시</button>
+          <button id="homeBtn" class="btn">홈으로</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
