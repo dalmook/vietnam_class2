@@ -33,6 +33,7 @@ const state = {
     wrongCardIds: JSON.parse(localStorage.getItem("vi-wrong-cards") || "[]"),
   },
   stageStats: JSON.parse(localStorage.getItem("vi-stage-stats") || "{}"),
+  quizStats: null,
 };
 
 const el = {
@@ -360,6 +361,7 @@ function startMode(mode) {
     renderStudy();
   } else {
     activateScreen("quiz");
+    state.quizStats = { total: 0, correct: 0, byType: {}, byCategory: {} };
     state.queue = buildQuizQueue(state.queue);
     startTimer();
     renderQuiz();
@@ -383,11 +385,193 @@ function buildStageItems() {
 }
 
 function buildQuizQueue(items) {
-  return items.map((item) => {
-    const answer = item.meaningKo || "";
-    const pool = items.map((x) => x.meaningKo).filter((x) => x && x !== answer);
-    return { ...item, answer, options: shuffle([answer, ...shuffle(pool).slice(0, 3)]) };
-  });
+  const stage = getCurrentStage();
+  const plan = getQuizPlanForStage(stage.slug);
+  const count = Math.min(items.length, 10);
+  const pool = [...items];
+  const quizzes = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const item = pool[i % pool.length];
+    const preferredType = mapSkillTypeToQuizType(item.skillType);
+    const type = preferredType && Math.random() < 0.4 ? preferredType : weightedPick(plan);
+    const quiz = createQuizByType(type, item, items);
+    if (quiz) quizzes.push(quiz);
+  }
+
+  return quizzes;
+}
+
+function getQuizPlanForStage(slug) {
+  if (["letters-tones", "pronunciation-rules"].includes(slug)) {
+    return [
+      ["listen-spelling", 4],
+      ["tone-discrimination", 3],
+      ["vi-meaning", 2],
+      ["meaning-choice", 1],
+    ];
+  }
+
+  const mid = [
+    ["meaning-choice", 2],
+    ["vi-meaning", 2],
+    ["fill-blank", 2],
+    ["situation-choice", 2],
+    ["sentence-arrange", 2],
+  ];
+
+  if (["reasons-frequency-emotions", "comparison-experience-time", "opic-im1-speaking", "survival-repair-review"].includes(slug)) {
+    return [
+      ["pattern-continue", 3],
+      ["situation-choice", 3],
+      ["sentence-arrange", 2],
+      ["fill-blank", 2],
+    ];
+  }
+
+  return mid;
+}
+
+function weightedPick(entries) {
+  const total = entries.reduce((a, [, w]) => a + w, 0);
+  let r = Math.random() * total;
+  for (const [k, w] of entries) {
+    r -= w;
+    if (r <= 0) return k;
+  }
+  return entries[0][0];
+}
+
+function createQuizByType(type, item, all) {
+  const term = item.text || item.term || "";
+  const meaning = item.meaningKo || "";
+  const randomMeanings = shuffle(all.map((c) => c.meaningKo).filter(Boolean)).slice(0, 3);
+  const randomTerms = shuffle(all.map((c) => c.text || c.term).filter(Boolean)).slice(0, 3);
+
+  if (type === "meaning-choice") {
+    return {
+      type,
+      prompt: `뜻 고르기: "${meaning}"에 맞는 표현은?`,
+      options: shuffle([term, ...randomTerms.filter((x) => x !== term)]).slice(0, 4),
+      answer: term,
+      speakText: term,
+      category: categorizeCard(item),
+      cardId: item.id,
+    };
+  }
+
+  if (type === "vi-meaning") {
+    return {
+      type,
+      prompt: `베트남어 보고 뜻 고르기: "${term}"`,
+      options: shuffle([meaning, ...randomMeanings.filter((x) => x !== meaning)]).slice(0, 4),
+      answer: meaning,
+      speakText: term,
+      category: categorizeCard(item),
+      cardId: item.id,
+    };
+  }
+
+  if (type === "listen-spelling") {
+    return {
+      type,
+      prompt: `발음 듣고 철자 고르기`,
+      options: shuffle([term, ...randomTerms.filter((x) => x !== term)]).slice(0, 4),
+      answer: term,
+      speakText: item.pronounceVi || term,
+      category: "pronunciation",
+      cardId: item.id,
+    };
+  }
+
+  if (type === "tone-discrimination") {
+    const base = item.minimalPairGroup || term;
+    const opts = shuffle([term, ...randomTerms]).slice(0, 4);
+    return {
+      type,
+      prompt: `비슷한 성조/철자 구별하기 (${base})`,
+      options: opts,
+      answer: term,
+      speakText: item.pronounceVi || term,
+      category: "pronunciation",
+      cardId: item.id,
+    };
+  }
+
+  if (type === "fill-blank") {
+    const sentence = term.includes(" ") ? term : `${term} ${meaning}`;
+    const tokens = sentence.split(" ");
+    const blankIdx = Math.min(1, tokens.length - 1);
+    const answer = tokens[blankIdx] || term;
+    tokens[blankIdx] = "____";
+    return {
+      type,
+      prompt: `빈칸 채우기: ${tokens.join(" ")}`,
+      options: shuffle([answer, ...randomTerms.filter((x) => x !== answer)]).slice(0, 4),
+      answer,
+      speakText: sentence,
+      category: categorizeCard(item),
+      cardId: item.id,
+    };
+  }
+
+  if (type === "sentence-arrange") {
+    const sentence = term.includes(" ") ? term : `${term} ${meaning}`;
+    const shuffled = shuffle(sentence.split(" ")).join(" ");
+    return {
+      type,
+      prompt: `문장 배열: ${shuffled}`,
+      options: shuffle([sentence, ...randomTerms.map((t) => `${t}`)]).slice(0, 4),
+      answer: sentence,
+      speakText: sentence,
+      category: "sentence",
+      cardId: item.id,
+    };
+  }
+
+  if (type === "pattern-continue") {
+    const stem = term.split(" ").slice(0, 2).join(" ") || "Tôi";
+    const answer = `${stem} ...`;
+    return {
+      type,
+      prompt: `패턴 이어말하기: "${stem}" 다음으로 가장 자연스러운 것은?`,
+      options: shuffle([answer, "Vì vậy...", "Nhưng mà...", "Tôi nghĩ..."]),
+      answer,
+      speakText: term,
+      category: "opic",
+      cardId: item.id,
+    };
+  }
+
+  // situation-choice
+  return {
+    type: "situation-choice",
+    prompt: `상황별 적절한 표현 고르기 (${item.topicTag || "일상"})`,
+    options: shuffle([term, ...randomTerms.filter((x) => x !== term)]).slice(0, 4),
+    answer: term,
+    speakText: term,
+    category: categorizeCard(item),
+    cardId: item.id,
+  };
+}
+
+function mapSkillTypeToQuizType(skillType) {
+  const map = {
+    pronunciation: "listen-spelling",
+    tone: "tone-discrimination",
+    vocab: "meaning-choice",
+    sentence: "fill-blank",
+    pattern: "pattern-continue",
+    situation: "situation-choice",
+  };
+  return map[(skillType || "").toLowerCase()] || null;
+}
+
+function categorizeCard(item) {
+  if (item.isOpicCore || item.type === "opic") return "opic";
+  if (item.isPronunciationCore || item.type === "pronunciation") return "pronunciation";
+  if (item.type === "sentence" || item.skillType === "sentence") return "sentence";
+  return "vocab";
 }
 
 function toggleMeaning() {
@@ -516,7 +700,7 @@ function renderQuiz() {
   const stage = getCurrentStage();
   const idx = state.curriculum.findIndex((c) => c.slug === stage.slug) + 1;
   el.quizTitle.textContent = `STEP ${idx} 퀴즈 (${state.index + 1}/${state.queue.length})`;
-  el.quizQuestion.textContent = `"${quiz.text || quiz.term}" 뜻은?`;
+  el.quizQuestion.textContent = `[${quiz.type}] ${quiz.prompt}`;
   el.quizFeedback.textContent = "";
   el.quizOptions.innerHTML = "";
   el.nextQuizBtn.disabled = true;
@@ -529,7 +713,7 @@ function renderQuiz() {
     el.quizOptions.appendChild(btn);
   });
 
-  speakItem(quiz);
+  speakItem({ ...quiz, text: quiz.speakText || quiz.answer });
 }
 
 function gradeAnswer(button, picked, quiz) {
@@ -541,8 +725,17 @@ function gradeAnswer(button, picked, quiz) {
     if (btn.textContent === quiz.answer) btn.classList.add("correct");
   });
 
+  state.quizStats.total += 1;
+  state.quizStats.byType[quiz.type] = state.quizStats.byType[quiz.type] || { total: 0, correct: 0 };
+  state.quizStats.byCategory[quiz.category] = state.quizStats.byCategory[quiz.category] || { total: 0, correct: 0 };
+  state.quizStats.byType[quiz.type].total += 1;
+  state.quizStats.byCategory[quiz.category].total += 1;
+
   if (picked === quiz.answer) {
     state.xp += 12;
+    state.quizStats.correct += 1;
+    state.quizStats.byType[quiz.type].correct += 1;
+    state.quizStats.byCategory[quiz.category].correct += 1;
     state.streak += 1;
     button.classList.add("correct");
     el.quizFeedback.textContent = "정답!";
@@ -553,6 +746,7 @@ function gradeAnswer(button, picked, quiz) {
     if (quiz.id) {
       if (!state.record.wrongCardIds.includes(quiz.id)) state.record.wrongCardIds.push(quiz.id);
       localStorage.setItem("vi-wrong-cards", JSON.stringify(state.record.wrongCardIds));
+      localStorage.setItem("vi-wrong-meta", JSON.stringify({ cardId: quiz.cardId, quizType: quiz.type, category: quiz.category, at: Date.now() }));
     }
     button.classList.add("wrong");
     el.quizFeedback.textContent = `오답! 정답: ${quiz.answer}`;
@@ -614,7 +808,10 @@ function finishMode(reason = "") {
   renderStageInfo();
   renderDashboard();
 
-  el.resultText.textContent = `STEP ${idx}(${stage.slug}) ${status} | 이번 XP ${state.xp} | 누적 XP ${state.record.totalXp} | 오답 ${state.lastWrong.length} ${reason}`;
+  const totalAcc = state.quizStats?.total ? Math.round((state.quizStats.correct / state.quizStats.total) * 100) : 0;
+  const byType = state.quizStats ? Object.entries(state.quizStats.byType).map(([k,v]) => `${k}:${v.total ? Math.round((v.correct/v.total)*100) : 0}%`).join(" / ") : "-";
+  const weak = state.quizStats ? Object.entries(state.quizStats.byCategory).sort((a,b)=> (a[1].correct/a[1].total) - (b[1].correct/b[1].total)).slice(0,2).map(([k])=>k).join(", ") : "-";
+  el.resultText.textContent = `STEP ${idx}(${stage.slug}) ${status} | 이번 XP ${state.xp} | 총 정답률 ${totalAcc}% | 유형별 ${byType} | 약점 ${weak} | 오답 ${state.lastWrong.length} ${reason}`;
 }
 
 function goHome() {
