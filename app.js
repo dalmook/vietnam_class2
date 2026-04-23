@@ -13,7 +13,10 @@ const state = {
   timeLeft: 0,
   quizAnswered: false,
   lastWrong: [],
+  audio: new Audio(),
 };
+
+state.audio.preload = "none";
 
 const el = {
   lessonSelect: document.getElementById("lessonSelect"),
@@ -100,7 +103,7 @@ function bindEvents() {
 
   el.quizSpeakBtn.addEventListener("click", () => {
     const item = state.queue[state.index];
-    if (item) speakText(item.term || item.textVi);
+    if (item) speakItem(item);
   });
 
   el.nextQuizBtn.addEventListener("click", () => {
@@ -214,7 +217,7 @@ function renderQuiz() {
   });
 
   el.progressLabel.textContent = "퀴즈 모드";
-  speakText(quiz.term || quiz.textVi);
+  speakItem(quiz);
 }
 
 function gradeAnswer(button, picked, quiz) {
@@ -307,14 +310,47 @@ function updateHud() {
 function speakCurrent() {
   const item = state.queue[state.index];
   if (!item) return;
-  speakText(item.term || item.textVi);
+  speakItem(item);
 }
 
-function speakText(text) {
+function speakItem(item) {
+  const src = item.audioSrc;
+  if (src) {
+    playAudio(src).catch(() => {
+      speakWithSpeechSynthesis(item.term || item.textVi || "");
+    });
+    return;
+  }
+  speakWithSpeechSynthesis(item.term || item.textVi || "");
+}
+
+async function playAudio(src) {
+  state.audio.pause();
+  state.audio.currentTime = 0;
+  state.audio.src = normalizeAudioPath(src);
+  await state.audio.play();
+}
+
+function normalizeAudioPath(src) {
+  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  if (src.startsWith("/")) return `.${src}`;
+  return src;
+}
+
+function speakWithSpeechSynthesis(text) {
   if (!text || !("speechSynthesis" in window)) return;
+
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = "vi-VN";
-  utter.rate = 0.9;
+  utter.rate = 0.82;
+  utter.pitch = 1.0;
+
+  const voices = speechSynthesis.getVoices();
+  const preferred =
+    voices.find((v) => v.lang.toLowerCase().startsWith("vi-vn") && /natural|neural|premium/i.test(v.name)) ||
+    voices.find((v) => v.lang.toLowerCase().startsWith("vi"));
+
+  if (preferred) utter.voice = preferred;
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
 }
