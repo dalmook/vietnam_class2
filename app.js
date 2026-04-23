@@ -46,6 +46,7 @@ const el = {
   studyExample: document.getElementById("studyExample"),
   speakBtn: document.getElementById("speakBtn"),
   flipBtn: document.getElementById("flipBtn"),
+  studyHomeBtn: document.getElementById("studyHomeBtn"),
   knownBtn: document.getElementById("knownBtn"),
   againBtn: document.getElementById("againBtn"),
 
@@ -55,6 +56,7 @@ const el = {
   quizFeedback: document.getElementById("quizFeedback"),
   quizSpeakBtn: document.getElementById("quizSpeakBtn"),
   nextQuizBtn: document.getElementById("nextQuizBtn"),
+  quizHomeBtn: document.getElementById("quizHomeBtn"),
 
   resultText: document.getElementById("resultText"),
   retryBtn: document.getElementById("retryBtn"),
@@ -88,14 +90,17 @@ function setupLessons() {
   el.startQuizBtn.disabled = false;
 }
 
+function toggleCardMeaning() {
+  el.studyMeaning.classList.toggle("hidden");
+  el.flashCard.classList.toggle("flipped", !el.studyMeaning.classList.contains("hidden"));
+}
+
 function bindEvents() {
   el.startStudyBtn.addEventListener("click", () => startMode("study"));
   el.startQuizBtn.addEventListener("click", () => startMode("quiz"));
 
-  el.flipBtn.addEventListener("click", () => {
-    el.studyMeaning.classList.toggle("hidden");
-    el.flashCard.classList.toggle("flipped", !el.studyMeaning.classList.contains("hidden"));
-  });
+  el.flipBtn.addEventListener("click", toggleCardMeaning);
+  el.flashCard.addEventListener("click", toggleCardMeaning);
 
   el.speakBtn.addEventListener("click", () => speakCurrent());
   el.knownBtn.addEventListener("click", () => nextStudyCard(true));
@@ -119,6 +124,8 @@ function bindEvents() {
 
   el.retryBtn.addEventListener("click", () => startMode(state.mode));
   el.homeBtn.addEventListener("click", () => goHome());
+  el.studyHomeBtn.addEventListener("click", () => goHome());
+  el.quizHomeBtn.addEventListener("click", () => goHome());
 }
 
 function startMode(mode) {
@@ -283,6 +290,8 @@ function finishMode(reason = "") {
 
 function goHome() {
   stopTimer();
+  state.audio.pause();
+  speechSynthesis.cancel();
   activateScreen("home");
   el.progressLabel.textContent = "모드 선택";
   el.timerLabel.textContent = "⏱️ --";
