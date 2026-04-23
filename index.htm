@@ -27,18 +27,28 @@
 
     <section class="screen-wrap">
       <article id="homeScreen" class="screen active">
-        <h2>모드 선택</h2>
-        <label for="lessonSelect">레슨</label>
-        <select id="lessonSelect" disabled></select>
+        <h2>학습 로드맵</h2>
+        <div class="roadmap-card">
+          <p class="stage-chip" id="stageChip">STEP 1</p>
+          <h3 id="stageTitle"></h3>
+          <p id="stageGoal" class="muted"></p>
+          <p id="stageTasks" class="tiny"></p>
+        </div>
+        <div class="button-grid two">
+          <button id="prevStageBtn" class="btn">◀ 이전 단계</button>
+          <button id="nextStageBtn" class="btn">다음 단계 ▶</button>
+        </div>
+
         <label for="sizeSelect">학습량</label>
         <select id="sizeSelect">
-          <option value="10">가볍게 (10개)</option>
-          <option value="16" selected>보통 (16개)</option>
-          <option value="24">집중 (24개)</option>
+          <option value="8">짧게 (8개)</option>
+          <option value="12" selected>보통 (12개)</option>
+          <option value="18">집중 (18개)</option>
         </select>
+
         <div class="button-grid two">
-          <button id="startStudyBtn" class="btn primary" disabled>📘 단어 학습</button>
-          <button id="startQuizBtn" class="btn blue" disabled>⚔️ 퀴즈 도전</button>
+          <button id="startStudyBtn" class="btn primary">📘 단계 학습</button>
+          <button id="startQuizBtn" class="btn blue">⚔️ 단계 퀴즈</button>
         </div>
       </article>
 
@@ -49,6 +59,7 @@
         </div>
         <div id="flashCard" class="flash-card">
           <p id="studyTerm" class="term"></p>
+          <p id="studyPron" class="pron"></p>
           <p id="studyMeaning" class="meaning hidden"></p>
           <p id="studyExample" class="example"></p>
         </div>
