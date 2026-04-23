@@ -1,22 +1,9 @@
 const DATA_FILE = "./vietnamese_a1_lessons_1_6_starter.json";
 
-const CURRICULUM = [
-  { title: "발음 기초", goal: "알파벳·모음/자음·6성조·끝소리", tasks: "알파벳/자음군(ph, tr, ng, nh) + 성조 듣기" },
-  { title: "숫자·요일·시간", goal: "실생활 핵심 표현", tasks: "1~100, 날짜, 시간, 가격" },
-  { title: "기본문장 구조", goal: "S + V + O 틀 익히기", tasks: "저는 ~ 먹어요/좋아해요/가요" },
-  { title: "인사/생존회화", goal: "바로 쓰는 표현 먼저", tasks: "안녕하세요, 감사합니다, 얼마예요?" },
-  { title: "필수 문법", goal: "부정·의문·시제 최소한", tasks: "không, có ... không?, đã/đang/sẽ" },
-  { title: "주제 단어", goal: "자기소개~교통", tasks: "주제별 묶음 단어 학습" },
-  { title: "문장 만들기", goal: "매일 10문장 만들기", tasks: "배운 단어로 직접 문장 생성" },
-  { title: "듣기/쉐도잉", goal: "짧게 듣고 따라 말하기", tasks: "문장 단위 반복/성조 모사" },
-  { title: "패턴회화", goal: "핵심 패턴 자동화", tasks: "Tôi muốn..., Tôi đang..., Tôi thích..." },
-  { title: "실전 말하기", goal: "1분 말하기", tasks: "자기소개/가족/일과/주문" },
-  { title: "짧은 읽기", goal: "메뉴/광고/대화문", tasks: "읽고 해석 + 발음" },
-  { title: "목표 분기", goal: "여행/시험/실무", tasks: "목적별 맞춤 학습" },
-];
+const CURRICULUM = window.CURRICULUM_DATA || [];
 
 const STAGE_DECKS = {
-  1: [
+  "letters-tones": [
     { term: "b", meaningKo: "단자음", pronGuide: "ㅂ" },
     { term: "c", meaningKo: "단자음", pronGuide: "ㄲ/ㅋ" },
     { term: "d", meaningKo: "단자음", pronGuide: "ㅈ 계열" },
@@ -59,20 +46,20 @@ const STAGE_DECKS = {
     { term: "ưa / ươ", meaningKo: "복모음", pronGuide: "으어" },
     { term: "ua / uô", meaningKo: "복모음", pronGuide: "우어" },
   ],
-  2: [
+  "numbers-time-date": [
     { term: "một, hai, ba", meaningKo: "1,2,3", pronGuide: "못, 하이, 바" },
     { term: "Hôm nay", meaningKo: "오늘", pronGuide: "홈 나이" },
     { term: "Mấy giờ?", meaningKo: "몇 시예요?", pronGuide: "머이 저?" },
     { term: "Số điện thoại", meaningKo: "전화번호", pronGuide: "소 띠엔 토아이" },
     { term: "20.000 đồng", meaningKo: "2만동", pronGuide: "하이므어이 응힌 동" },
   ],
-  3: [
+  "self-intro-basics": [
     { term: "Tôi ăn cơm", meaningKo: "저는 밥을 먹어요", pronGuide: "또이 안 껌" },
     { term: "Tôi thích cà phê", meaningKo: "저는 커피를 좋아해요", pronGuide: "또이 틱 까페" },
     { term: "Tôi đi làm hôm nay", meaningKo: "저는 오늘 출근해요", pronGuide: "또이 디 람 홈 나이" },
     { term: "Tôi học tiếng Việt", meaningKo: "저는 베트남어를 공부해요", pronGuide: "또이 혹 띠엥 비엣" },
   ],
-  4: [
+  "greetings-politeness": [
     { term: "Xin chào", meaningKo: "안녕하세요", pronGuide: "씬 짜오" },
     { term: "Cảm ơn", meaningKo: "감사합니다", pronGuide: "깜 언" },
     { term: "Bao nhiêu tiền?", meaningKo: "얼마예요?", pronGuide: "바오 니우 띠엔?" },
@@ -80,13 +67,27 @@ const STAGE_DECKS = {
     { term: "Nói chậm thôi", meaningKo: "천천히 말해 주세요", pronGuide: "노이 짬 토이" },
     { term: "Tôi không hiểu", meaningKo: "잘 모르겠어요", pronGuide: "또이 콩 히우" },
   ],
-  5: [
+  "core-pos-location": [
     { term: "Tôi không đi", meaningKo: "저는 안 가요", pronGuide: "또이 콩 디" },
     { term: "Bạn có khỏe không?", meaningKo: "잘 지내요?", pronGuide: "반 꺼 훼 콩" },
     { term: "Tôi đang học", meaningKo: "저는 공부 중이에요", pronGuide: "또이 당 혹" },
     { term: "Tôi sẽ đi", meaningKo: "저는 갈 거예요", pronGuide: "또이 세 디" },
   ],
 };
+
+
+function resolveInitialStageSlug() {
+  const savedSlug = localStorage.getItem("vi-stage-slug");
+  if (savedSlug && CURRICULUM.some((c) => c.slug === savedSlug)) return savedSlug;
+
+  const legacyIndex = Number(localStorage.getItem("vi-stage") || 1);
+  const byLegacy = CURRICULUM[Math.max(0, legacyIndex - 1)];
+  return byLegacy?.slug || CURRICULUM[0]?.slug || "letters-tones";
+}
+
+function getCurrentStage() {
+  return CURRICULUM.find((c) => c.slug === state.stageSlug) || CURRICULUM[0];
+}
 
 const state = {
   data: null,
@@ -100,7 +101,7 @@ const state = {
   timeLeft: 0,
   quizAnswered: false,
   lastWrong: [],
-  stageIndex: Number(localStorage.getItem("vi-stage") || 1),
+  stageSlug: resolveInitialStageSlug(),
   audio: new Audio(),
   record: { totalXp: Number(localStorage.getItem("vi-total-xp") || 0), sessions: Number(localStorage.getItem("vi-sessions") || 0), bestStreak: Number(localStorage.getItem("vi-best-streak") || 0) },
 };
@@ -118,6 +119,7 @@ const el = {
   stageGoal: document.getElementById("stageGoal"),
   stageTasks: document.getElementById("stageTasks"),
   savedStats: document.getElementById("savedStats"),
+  stageList: document.getElementById("stageList"),
 
   progressLabel: document.getElementById("progressLabel"),
   progressBar: document.getElementById("progressBar"),
@@ -165,6 +167,7 @@ async function init() {
   try {
     const res = await fetch(DATA_FILE);
     state.data = await res.json();
+    if (!CURRICULUM.length) throw new Error("curriculum data missing");
     bindEvents();
     renderStageInfo();
     renderSavedStats();
@@ -197,19 +200,23 @@ function bindEvents() {
 }
 
 function moveStage(delta) {
-  state.stageIndex = Math.min(12, Math.max(1, state.stageIndex + delta));
-  localStorage.setItem("vi-stage", String(state.stageIndex));
+  const currentIndex = Math.max(0, CURRICULUM.findIndex((c) => c.slug === state.stageSlug));
+  const nextIndex = Math.min(CURRICULUM.length - 1, Math.max(0, currentIndex + delta));
+  state.stageSlug = CURRICULUM[nextIndex].slug;
+  localStorage.setItem("vi-stage-slug", state.stageSlug);
   renderStageInfo();
 }
 
 function renderStageInfo() {
-  const stage = CURRICULUM[state.stageIndex - 1];
-  el.stageChip.textContent = `STEP ${state.stageIndex}`;
-  el.stageTitle.textContent = stage.title;
-  el.stageGoal.textContent = stage.goal;
-  el.stageTasks.textContent = `오늘 미션: ${stage.tasks}`;
-  el.prevStageBtn.disabled = state.stageIndex === 1;
-  el.nextStageBtn.disabled = state.stageIndex === CURRICULUM.length;
+  const stage = getCurrentStage();
+  const currentIndex = CURRICULUM.findIndex((c) => c.slug === stage.slug);
+  el.stageChip.textContent = `STEP ${currentIndex + 1} · ${stage.id}`;
+  el.stageTitle.textContent = `${stage.title}`;
+  el.stageGoal.textContent = `${stage.subtitle} · 목표: ${stage.goal}`;
+  el.stageTasks.textContent = `오늘 미션: ${stage.tasks.join(" / ")}`;
+  el.prevStageBtn.disabled = currentIndex <= 0;
+  el.nextStageBtn.disabled = currentIndex >= CURRICULUM.length - 1;
+  renderStageCards(stage.slug);
 }
 
 function startMode(mode) {
@@ -219,6 +226,7 @@ function startMode(mode) {
   state.hearts = 3;
   state.lastWrong = [];
   state.queue = buildStageItems();
+  localStorage.setItem("vi-stage-slug", state.stageSlug);
 
   if (mode === "study") {
     activateScreen("study");
@@ -235,7 +243,7 @@ function startMode(mode) {
 
 function buildStageItems() {
   const size = Number(el.sizeSelect.value || 12);
-  const stageDeck = STAGE_DECKS[state.stageIndex] ?? [];
+  const stageDeck = STAGE_DECKS[state.stageSlug] ?? [];
 
   if (stageDeck.length > 0) {
     return shuffle(stageDeck).slice(0, Math.min(size, stageDeck.length));
@@ -266,7 +274,9 @@ function renderStudy() {
   const item = state.queue[state.index];
   if (!item) return finishMode();
 
-  el.studyTitle.textContent = `STEP ${state.stageIndex} 학습 (${state.index + 1}/${state.queue.length})`;
+  const stage = getCurrentStage();
+  const stageOrder = CURRICULUM.findIndex((c) => c.slug === stage.slug) + 1;
+  el.studyTitle.textContent = `STEP ${stageOrder} 학습 (${state.index + 1}/${state.queue.length})`;
   el.studyTerm.textContent = item.term;
   el.studyPron.textContent = item.pronGuide ? `발음 팁: ${item.pronGuide}` : "";
   el.studyMeaning.textContent = item.meaningKo;
@@ -274,7 +284,7 @@ function renderStudy() {
   el.studyMeaning.classList.add("hidden");
   el.flashCard.classList.remove("flipped");
 
-  el.progressLabel.textContent = `STEP ${state.stageIndex} - ${CURRICULUM[state.stageIndex - 1].title}`;
+  el.progressLabel.textContent = `STEP ${stageOrder} - ${stage.title}`;
   el.timerLabel.textContent = "⏱️ 자유";
 }
 
@@ -297,7 +307,9 @@ function renderQuiz() {
   const quiz = state.queue[state.index];
   if (!quiz) return finishMode();
 
-  el.quizTitle.textContent = `STEP ${state.stageIndex} 퀴즈 (${state.index + 1}/${state.queue.length})`;
+  const stage = getCurrentStage();
+  const stageOrder = CURRICULUM.findIndex((c) => c.slug === stage.slug) + 1;
+  el.quizTitle.textContent = `STEP ${stageOrder} 퀴즈 (${state.index + 1}/${state.queue.length})`;
   el.quizQuestion.textContent = `"${quiz.term}" 뜻은?`;
   el.quizFeedback.textContent = "";
   el.quizOptions.innerHTML = "";
@@ -382,7 +394,9 @@ function finishMode(reason = "") {
   state.record.bestStreak = Math.max(state.record.bestStreak, state.streak);
   persistRecord();
   renderSavedStats();
-  el.resultText.textContent = `STEP ${state.stageIndex} ${status} | 이번 XP ${state.xp} | 누적 XP ${state.record.totalXp} | 오답 ${state.lastWrong.length} ${reason}`;
+  const stage = getCurrentStage();
+  const stageOrder = CURRICULUM.findIndex((c) => c.slug === stage.slug) + 1;
+  el.resultText.textContent = `STEP ${stageOrder}(${stage.slug}) ${status} | 이번 XP ${state.xp} | 누적 XP ${state.record.totalXp} | 오답 ${state.lastWrong.length} ${reason}`;
 }
 
 function goHome() {
@@ -482,6 +496,23 @@ function updateHud() {
   el.hearts.textContent = state.hearts;
 }
 
+
+
+function renderStageCards(activeSlug) {
+  if (!el.stageList) return;
+  el.stageList.innerHTML = CURRICULUM.map((stage, idx) => {
+    const active = stage.slug === activeSlug ? "active" : "";
+    return `<button class="stage-pill ${active}" data-slug="${stage.slug}">STEP ${idx + 1} ${stage.title}</button>`;
+  }).join("");
+
+  [...el.stageList.querySelectorAll(".stage-pill")].forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.stageSlug = btn.dataset.slug;
+      localStorage.setItem("vi-stage-slug", state.stageSlug);
+      renderStageInfo();
+    });
+  });
+}
 
 function persistRecord() {
   localStorage.setItem("vi-total-xp", String(state.record.totalXp));
