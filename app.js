@@ -17,18 +17,47 @@ const CURRICULUM = [
 
 const STAGE_DECKS = {
   1: [
-    { term: "a", meaningKo: "모음 a", pronGuide: "아" },
-    { term: "ă", meaningKo: "짧은 a", pronGuide: "아(짧게)" },
-    { term: "â", meaningKo: "짧은 어", pronGuide: "어(짧게)" },
-    { term: "e", meaningKo: "모음 e", pronGuide: "에" },
-    { term: "ê", meaningKo: "닫힌 e", pronGuide: "에(또렷)" },
-    { term: "ơ", meaningKo: "모음 ơ", pronGuide: "어" },
-    { term: "ư", meaningKo: "모음 ư", pronGuide: "으" },
-    { term: "ph", meaningKo: "자음군 ph", pronGuide: "프/f" },
-    { term: "tr", meaningKo: "자음군 tr(ㅉ 계열)", pronGuide: "쯔/ㅉ", pronounceVi: "trờ" },
-    { term: "ng", meaningKo: "자음군 ng", pronGuide: "응" },
-    { term: "nh", meaningKo: "자음군 nh", pronGuide: "니" },
-    { term: "ma / má / mà / mả / mã / mạ", meaningKo: "6성조 패턴", pronGuide: "마 음높이 변화" },
+    { term: "b", meaningKo: "단자음", pronGuide: "ㅂ" },
+    { term: "c", meaningKo: "단자음", pronGuide: "ㄲ/ㅋ" },
+    { term: "d", meaningKo: "단자음", pronGuide: "ㅈ 계열" },
+    { term: "đ", meaningKo: "단자음", pronGuide: "ㄷ" },
+    { term: "g", meaningKo: "단자음", pronGuide: "ㄱ" },
+    { term: "h", meaningKo: "단자음", pronGuide: "ㅎ" },
+    { term: "k", meaningKo: "단자음", pronGuide: "ㅋ" },
+    { term: "l", meaningKo: "단자음", pronGuide: "ㄹ" },
+    { term: "m", meaningKo: "단자음", pronGuide: "ㅁ" },
+    { term: "n", meaningKo: "단자음", pronGuide: "ㄴ" },
+    { term: "p", meaningKo: "단자음", pronGuide: "ㅍ" },
+    { term: "q", meaningKo: "단자음", pronGuide: "꾸" },
+    { term: "r", meaningKo: "단자음", pronGuide: "ㄹ/르" },
+    { term: "s", meaningKo: "단자음", pronGuide: "ㅅ" },
+    { term: "t", meaningKo: "단자음", pronGuide: "ㅌ" },
+    { term: "v", meaningKo: "단자음", pronGuide: "ㅂ/브" },
+    { term: "x", meaningKo: "단자음", pronGuide: "ㅅ" },
+    { term: "ch", meaningKo: "복합자음", pronGuide: "ㅉ" },
+    { term: "gh", meaningKo: "복합자음", pronGuide: "ㄱ" },
+    { term: "kh", meaningKo: "복합자음", pronGuide: "ㅋㅎ" },
+    { term: "ng", meaningKo: "복합자음", pronGuide: "응" },
+    { term: "ngh", meaningKo: "복합자음", pronGuide: "응" },
+    { term: "nh", meaningKo: "복합자음", pronGuide: "니" },
+    { term: "ph", meaningKo: "복합자음", pronGuide: "프" },
+    { term: "th", meaningKo: "복합자음", pronGuide: "트" },
+    { term: "tr", meaningKo: "복합자음(ㅉ 계열)", pronGuide: "쯔" },
+    { term: "a", meaningKo: "단모음", pronGuide: "아" },
+    { term: "ă", meaningKo: "단모음", pronGuide: "아(짧게)" },
+    { term: "â", meaningKo: "단모음", pronGuide: "어(짧게)" },
+    { term: "e", meaningKo: "단모음", pronGuide: "에" },
+    { term: "ê", meaningKo: "단모음", pronGuide: "에(닫힘)" },
+    { term: "i", meaningKo: "단모음", pronGuide: "이" },
+    { term: "y", meaningKo: "단모음", pronGuide: "이" },
+    { term: "o", meaningKo: "단모음", pronGuide: "오" },
+    { term: "ô", meaningKo: "단모음", pronGuide: "오(닫힘)" },
+    { term: "ơ", meaningKo: "단모음", pronGuide: "어" },
+    { term: "u", meaningKo: "단모음", pronGuide: "우" },
+    { term: "ư", meaningKo: "단모음", pronGuide: "으" },
+    { term: "ia / iê / yê", meaningKo: "복모음", pronGuide: "이아/이에" },
+    { term: "ưa / ươ", meaningKo: "복모음", pronGuide: "으어" },
+    { term: "ua / uô", meaningKo: "복모음", pronGuide: "우어" },
   ],
   2: [
     { term: "một, hai, ba", meaningKo: "1,2,3", pronGuide: "못, 하이, 바" },
@@ -384,20 +413,18 @@ function speakItem(item) {
 function speakFallback(item) {
   if (!("speechSynthesis" in window)) return;
   const voices = speechSynthesis.getVoices();
-  const viVoice = voices.find((v) => v.lang.toLowerCase().startsWith("vi"));
+  const viVoice = voices.find((v) => v.lang.toLowerCase().startsWith("vi-vn")) || voices.find((v) => v.lang.toLowerCase().startsWith("vi"));
 
-  const utter = new SpeechSynthesisUtterance();
-  if (viVoice) {
-    utter.text = item.pronounceVi || item.term;
-    utter.voice = viVoice;
-    utter.lang = "vi-VN";
-  } else {
-    utter.text = getPronounceHint(item.term, item.pronGuide);
-    const koVoice = voices.find((v) => v.lang.toLowerCase().startsWith("ko"));
-    if (koVoice) utter.voice = koVoice;
-    utter.lang = "ko-KR";
+  if (!viVoice) {
+    el.quizFeedback.textContent = "베트남어 음성(vi-VN)이 없어 발음을 재생할 수 없어요.";
+    el.studyPron.textContent = `발음 팁: ${getPronounceHint(item.term, item.pronGuide)}`;
+    return;
   }
-  utter.rate = 0.85;
+
+  const utter = new SpeechSynthesisUtterance(item.pronounceVi || item.term);
+  utter.voice = viVoice;
+  utter.lang = "vi-VN";
+  utter.rate = 0.82;
   utter.pitch = 1.0;
   speechSynthesis.cancel();
   speechSynthesis.speak(utter);
