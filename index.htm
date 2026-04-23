@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnam Duo Vocab</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>🇻🇳 Vietnam Duo Vocab</h1>
+      <p class="sub">듀오링고 느낌으로 베트남어 단어를 순서대로 학습해요.</p>
+    </header>
+
+    <section class="panel controls">
+      <label for="lessonSelect">레슨 선택</label>
+      <select id="lessonSelect" disabled></select>
+      <button id="startBtn" class="btn primary" disabled>학습 시작</button>
+    </section>
+
+    <section class="panel progress-wrap">
+      <div class="progress-head">
+        <span id="progressLabel">준비 중...</span>
+        <span id="scoreLabel">점수 0</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section id="studyCard" class="panel card hidden">
+      <h2 id="cardTitle">단어</h2>
+      <p id="cardTerm" class="term">...</p>
+      <p id="cardMeaning" class="meaning"></p>
+      <p id="cardExample" class="example"></p>
+      <div class="actions">
+        <button id="speakBtn" class="btn">🔊 발음 듣기</button>
+        <button id="nextBtn" class="btn primary">다음</button>
+      </div>
+    </section>
+
+    <section id="quizCard" class="panel card hidden">
+      <h2>퀴즈</h2>
+      <p id="quizQuestion" class="quiz-question"></p>
+      <div id="quizOptions" class="options"></div>
+      <p id="quizFeedback" class="feedback"></p>
+      <div class="actions">
+        <button id="quizNextBtn" class="btn primary" disabled>다음 문제</button>
+      </div>
+    </section>
+
+    <section id="doneCard" class="panel card hidden">
+      <h2>🎉 완료!</h2>
+      <p id="doneText"></p>
+      <button id="restartBtn" class="btn primary">다시 하기</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+:root {
+  --bg: #f3f7ff;
+  --panel: #ffffff;
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --blue: #1cb0f6;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", "Pretendard", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #e9f7ff, var(--bg));
+  color: var(--text);
+}
+
+.app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+}
+
+.topbar h1 { margin: 0; font-size: 1.8rem; }
+.sub { margin-top: 4px; color: var(--muted); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.controls label { grid-column: 1 / -1; font-weight: 700; }
+
+select, .btn {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.btn {
+  font-weight: 700;
+  cursor: pointer;
+  background: #fff;
+}
+
+.btn.primary {
+  color: #fff;
+  background: var(--green);
+  border-color: var(--green-dark);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: #e5f5ff;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), #7dd3fc);
+  transition: width 220ms ease;
+}
+
+.hidden { display: none; }
+
+.card h2 { margin-top: 0; }
+.term {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 6px 0;
+}
+.meaning { font-size: 1.1rem; }
+.example { color: var(--muted); }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.option {
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.option:hover { border-color: #c7d2fe; }
+.option.correct { border-color: var(--green); background: #f0ffe4; }
+.option.wrong { border-color: #f43f5e; background: #fff1f2; }
+
+.feedback {
+  min-height: 24px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .controls { grid-template-columns: 1fr; }
+}
