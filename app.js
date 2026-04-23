@@ -32,9 +32,13 @@ const state = {
     lastStudyDate: localStorage.getItem("vi-last-study-date") || "",
     wrongCardIds: JSON.parse(localStorage.getItem("vi-wrong-cards") || "[]"),
   },
+  cardMeta: JSON.parse(localStorage.getItem("vi-card-meta") || "{}"),
   stageStats: JSON.parse(localStorage.getItem("vi-stage-stats") || "{}"),
   quizStats: null,
   selectedOpicTopic: null,
+  reviewPool: [],
+  reviewMode: "wrong",
+  sessionLabel: "",
 };
 
 const el = {
@@ -45,6 +49,13 @@ const el = {
   quickPron: document.getElementById("quickPron"),
   quickWrong: document.getElementById("quickWrong"),
   quickOpic: document.getElementById("quickOpic"),
+  quickReview1d: document.getElementById("quickReview1d"),
+  quickReview3d: document.getElementById("quickReview3d"),
+  quickReview7d: document.getElementById("quickReview7d"),
+  quickPronConfusion: document.getElementById("quickPronConfusion"),
+  openWrongNote: document.getElementById("openWrongNote"),
+  openStarred: document.getElementById("openStarred"),
+  openDifficult: document.getElementById("openDifficult"),
 
   stageChip: document.getElementById("stageChip"),
   stageTitle: document.getElementById("stageTitle"),
@@ -56,6 +67,9 @@ const el = {
   sumToday: document.getElementById("sumToday"),
   sumReview: document.getElementById("sumReview"),
   sumStreakDays: document.getElementById("sumStreakDays"),
+  sumDueToday: document.getElementById("sumDueToday"),
+  sumRecentWrong: document.getElementById("sumRecentWrong"),
+  sumPronConfusion: document.getElementById("sumPronConfusion"),
 
   progressLabel: document.getElementById("progressLabel"),
   progressBar: document.getElementById("progressBar"),
@@ -71,6 +85,7 @@ const el = {
     quiz: document.getElementById("quizScreen"),
     result: document.getElementById("resultScreen"),
     opic: document.getElementById("opicScreen"),
+    review: document.getElementById("reviewScreen"),
   },
 
   studyTitle: document.getElementById("studyTitle"),
@@ -86,6 +101,7 @@ const el = {
   slowSpeakBtn: document.getElementById("slowSpeakBtn"),
   flipBtn: document.getElementById("flipBtn"),
   toggleTipsBtn: document.getElementById("toggleTipsBtn"),
+  starBtn: document.getElementById("starBtn"),
   studyHomeBtn: document.getElementById("studyHomeBtn"),
   knownBtn: document.getElementById("knownBtn"),
   againBtn: document.getElementById("againBtn"),
@@ -101,6 +117,8 @@ const el = {
   resultText: document.getElementById("resultText"),
   retryBtn: document.getElementById("retryBtn"),
   homeBtn: document.getElementById("homeBtn"),
+  resultReviewBtn: document.getElementById("resultReviewBtn"),
+  resultDueBtn: document.getElementById("resultDueBtn"),
 
   opicHomeBtn: document.getElementById("opicHomeBtn"),
   opicTopicList: document.getElementById("opicTopicList"),
@@ -115,6 +133,13 @@ const el = {
   opicDraft: document.getElementById("opicDraft"),
   opicBuild30: document.getElementById("opicBuild30"),
   opicBuild60: document.getElementById("opicBuild60"),
+
+  reviewTitle: document.getElementById("reviewTitle"),
+  reviewDesc: document.getElementById("reviewDesc"),
+  reviewList: document.getElementById("reviewList"),
+  reviewHomeBtn: document.getElementById("reviewHomeBtn"),
+  reviewStartBtn: document.getElementById("reviewStartBtn"),
+  reviewClearBtn: document.getElementById("reviewClearBtn"),
 };
 
 state.audio.preload = "none";
@@ -229,9 +254,17 @@ function bindEvents() {
   el.quickPron.addEventListener("click", quickPronReview);
   el.quickWrong.addEventListener("click", quickWrongReview);
   el.quickOpic.addEventListener("click", openOpicMode);
+  el.quickReview1d.addEventListener("click", () => quickReviewByDays(1));
+  el.quickReview3d.addEventListener("click", () => quickReviewByDays(3));
+  el.quickReview7d.addEventListener("click", () => quickReviewByDays(7));
+  el.quickPronConfusion.addEventListener("click", quickPronConfusionReview);
+  el.openWrongNote.addEventListener("click", () => openReviewNotebook("wrong"));
+  el.openStarred.addEventListener("click", () => openReviewNotebook("starred"));
+  el.openDifficult.addEventListener("click", () => openReviewNotebook("difficult"));
 
   el.flipBtn.addEventListener("click", toggleMeaning);
   el.toggleTipsBtn.addEventListener("click", toggleTips);
+  el.starBtn.addEventListener("click", toggleCardStar);
 
   el.speakBtn.addEventListener("click", () => speakCurrent(false));
   el.slowSpeakBtn.addEventListener("click", () => speakCurrent(true));
@@ -242,11 +275,16 @@ function bindEvents() {
 
   el.retryBtn.addEventListener("click", () => startMode(state.mode));
   el.homeBtn.addEventListener("click", goHome);
+  el.resultReviewBtn.addEventListener("click", quickWrongReview);
+  el.resultDueBtn.addEventListener("click", () => quickReviewByDays(1));
   el.studyHomeBtn.addEventListener("click", goHome);
   el.quizHomeBtn.addEventListener("click", goHome);
   el.opicHomeBtn.addEventListener("click", goHome);
   el.opicBuild30.addEventListener("click", () => buildOpicDraft(30));
   el.opicBuild60.addEventListener("click", () => buildOpicDraft(60));
+  el.reviewHomeBtn.addEventListener("click", goHome);
+  el.reviewStartBtn.addEventListener("click", startSelectedReview);
+  el.reviewClearBtn.addEventListener("click", clearReviewMetaForCurrentPool);
 }
 
 function quickPronReview() {
@@ -256,15 +294,96 @@ function quickPronReview() {
 }
 
 function quickWrongReview() {
-  if (!state.record.wrongCardIds.length) return;
   const set = new Set(state.record.wrongCardIds);
-  state.queue = state.cards.filter((c) => set.has(c.id)).slice(0, Number(el.sizeSelect.value || 12));
+  const items = state.cards.filter((c) => set.has(c.id));
+  startReviewSession(items, "오답 복습");
+}
+
+function quickReviewByDays(days) {
+  const queue = buildReviewQueueByDays(days);
+  startReviewSession(queue, `${days}일 복습`);
+}
+
+function quickPronConfusionReview() {
+  const groups = getPronConfusionGroups();
+  const ids = groups.flatMap(([, cards]) => cards.map((c) => c.id));
+  const set = new Set(ids);
+  const queue = state.cards.filter((c) => set.has(c.id));
+  startReviewSession(queue, "헷갈리는 소리 복습");
+}
+
+function startReviewSession(items, label = "복습") {
+  if (!items.length) return;
   state.mode = "study";
-  updateDailyRecord(true);
+  state.sessionLabel = label;
   state.index = 0;
+  state.streak = 0;
+  state.hearts = 3;
+  state.lastWrong = [];
+  state.queue = shuffle(items).slice(0, Number(el.sizeSelect.value || 12));
+  updateDailyRecord(true);
   activateScreen("study");
   renderStudy();
   updateProgress();
+  updateHud();
+}
+
+function openReviewNotebook(mode) {
+  state.reviewMode = mode;
+  state.reviewPool = getReviewPool(mode);
+  el.reviewTitle.textContent = mode === "wrong" ? "오답노트" : mode === "starred" ? "Starred 카드" : "어려운 카드";
+  el.reviewDesc.textContent = `총 ${state.reviewPool.length}개 카드`;
+  renderReviewList();
+  activateScreen("review");
+}
+
+function getReviewPool(mode) {
+  if (mode === "starred") {
+    return state.cards.filter((card) => getCardMeta(card.id).starred);
+  }
+  if (mode === "difficult") {
+    return state.cards.filter((card) => isDifficultMeta(getCardMeta(card.id)));
+  }
+  const set = new Set(state.record.wrongCardIds);
+  return state.cards.filter((card) => set.has(card.id));
+}
+
+function renderReviewList() {
+  if (!state.reviewPool.length) {
+    el.reviewList.innerHTML = "<p class='muted'>표시할 카드가 없습니다.</p>";
+    return;
+  }
+  el.reviewList.innerHTML = state.reviewPool.map((card) => {
+    const meta = getCardMeta(card.id);
+    const next = meta.nextReviewAt ? new Date(meta.nextReviewAt).toLocaleDateString() : "-";
+    return `<article class="review-item">
+      <p><strong>${card.text || card.term || "-"}</strong></p>
+      <p class="tiny">${card.meaningKo || "-"}</p>
+      <div class="meta-chips">
+        <span class="meta-chip">seen ${meta.seen}</span>
+        <span class="meta-chip">wrong ${meta.wrongCount}</span>
+        <span class="meta-chip">ease ${meta.easeScore.toFixed(2)}</span>
+        <span class="meta-chip">next ${next}</span>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function startSelectedReview() {
+  startReviewSession(state.reviewPool, "노트 기반 복습");
+}
+
+function clearReviewMetaForCurrentPool() {
+  state.reviewPool.forEach((card) => {
+    const meta = getCardMeta(card.id);
+    meta.wrongCount = 0;
+    meta.lastWrongAt = null;
+    if (state.reviewMode === "starred") meta.starred = false;
+    upsertCardMeta(card.id, meta);
+  });
+  state.record.wrongCardIds = state.record.wrongCardIds.filter((id) => !state.reviewPool.some((c) => c.id === id));
+  persistRecord();
+  openReviewNotebook(state.reviewMode);
 }
 
 function openOpicMode() {
@@ -420,6 +539,15 @@ function renderDashboard() {
   el.sumToday.textContent = String(state.record.todayStudy);
   el.sumReview.textContent = String(state.record.todayReview);
   el.sumStreakDays.textContent = String(state.record.streakDays);
+  el.sumDueToday.textContent = String(buildReviewQueueByDays(1).length);
+  el.sumRecentWrong.textContent = String(
+    state.cards.filter((card) => {
+      const wrongAt = getCardMeta(card.id).lastWrongAt;
+      if (!wrongAt) return false;
+      return Date.now() - new Date(wrongAt).getTime() <= 3 * 86400000;
+    }).length
+  );
+  el.sumPronConfusion.textContent = String(getPronConfusionGroups().length);
 }
 
 function updateDailyRecord(review = false) {
@@ -436,8 +564,94 @@ function updateDailyRecord(review = false) {
   else state.record.todayStudy += 1;
 }
 
+function getCardMeta(cardId) {
+  const base = state.cardMeta[cardId] || {};
+  return {
+    seen: Number(base.seen || 0),
+    known: Number(base.known || 0),
+    wrongCount: Number(base.wrongCount || 0),
+    starred: Boolean(base.starred),
+    easeScore: Number(base.easeScore || 1.8),
+    lastSeenAt: base.lastSeenAt || null,
+    lastWrongAt: base.lastWrongAt || null,
+    nextReviewAt: base.nextReviewAt || null,
+  };
+}
+
+function upsertCardMeta(cardId, patch) {
+  state.cardMeta[cardId] = { ...getCardMeta(cardId), ...patch };
+  localStorage.setItem("vi-card-meta", JSON.stringify(state.cardMeta));
+}
+
+function computeReviewDays(meta, wrong = false) {
+  if (wrong) return 1;
+  if (meta.easeScore < 1.4) return 1;
+  if (meta.easeScore < 2.1) return 3;
+  return 7;
+}
+
+function toIsoAfterDays(days) {
+  return new Date(Date.now() + days * 86400000).toISOString();
+}
+
+function updateCardMetaAfterStudy(card, known) {
+  if (!card?.id) return;
+  const now = new Date().toISOString();
+  const meta = getCardMeta(card.id);
+  meta.seen += 1;
+  meta.lastSeenAt = now;
+  if (known) {
+    meta.known += 1;
+    meta.easeScore = Math.min(3.0, meta.easeScore + 0.18);
+    meta.nextReviewAt = toIsoAfterDays(computeReviewDays(meta, false));
+  } else {
+    meta.wrongCount += 1;
+    meta.lastWrongAt = now;
+    meta.easeScore = Math.max(0.8, meta.easeScore - 0.35);
+    meta.nextReviewAt = toIsoAfterDays(computeReviewDays(meta, true));
+  }
+  upsertCardMeta(card.id, meta);
+}
+
+function updateCardMetaAfterQuiz(quiz, correct) {
+  const cardId = quiz.cardId || quiz.id;
+  if (!cardId) return;
+  const card = state.cards.find((c) => c.id === cardId);
+  updateCardMetaAfterStudy(card || { id: cardId }, correct);
+}
+
+function isDifficultMeta(meta) {
+  return meta.wrongCount >= 2 || meta.easeScore <= 1.35;
+}
+
+function buildReviewQueueByDays(days) {
+  const horizon = Date.now() + days * 86400000;
+  return state.cards.filter((card) => {
+    const meta = getCardMeta(card.id);
+    if (!meta.nextReviewAt) return false;
+    return new Date(meta.nextReviewAt).getTime() <= horizon;
+  });
+}
+
+function getPronConfusionGroups() {
+  const grouped = new Map();
+  state.cards
+    .filter((card) => card.minimalPairGroup)
+    .forEach((card) => {
+      const group = card.minimalPairGroup;
+      const bucket = grouped.get(group) || [];
+      const meta = getCardMeta(card.id);
+      if (meta.wrongCount > 0) {
+        bucket.push(card);
+        grouped.set(group, bucket);
+      }
+    });
+  return [...grouped.entries()].filter(([, cards]) => cards.length >= 1);
+}
+
 function startMode(mode) {
   state.mode = mode;
+  state.sessionLabel = "";
   state.index = 0;
   state.streak = 0;
   state.hearts = 3;
@@ -681,7 +895,7 @@ function renderStudy() {
   const idx = state.curriculum.findIndex((c) => c.slug === stage.slug) + 1;
   const remain = Math.max(0, state.queue.length - (state.index + 1));
 
-  el.studyTitle.textContent = `학습 카드`;
+  el.studyTitle.textContent = state.sessionLabel ? `학습 카드 · ${state.sessionLabel}` : "학습 카드";
   el.studyStageName.textContent = `현재 단계: STEP ${idx} · ${stage.title}`;
   el.studySubtopic.textContent = `서브주제: ${stage.subtitle || "기초 학습"}`;
   el.studyProgressMeta.textContent = `진행률: ${Math.floor(((state.index + 1) / state.queue.length) * 100)}%`;
@@ -702,6 +916,18 @@ function renderStudy() {
 
   el.progressLabel.textContent = `STEP ${idx} - ${stage.title}`;
   el.timerLabel.textContent = "⏱️ 자유";
+  const meta = getCardMeta(item.id);
+  el.starBtn.classList.toggle("starred", Boolean(meta.starred));
+  el.starBtn.textContent = meta.starred ? "⭐ Starred" : "☆ Starred";
+}
+
+function toggleCardStar() {
+  const item = state.queue[state.index];
+  if (!item?.id) return;
+  const meta = getCardMeta(item.id);
+  upsertCardMeta(item.id, { ...meta, starred: !meta.starred });
+  renderStudy();
+  renderDashboard();
 }
 
 function renderCardByType(item, type, showMeaning) {
@@ -767,6 +993,8 @@ function getCardReason(item, stage) {
 }
 
 function nextStudyCard(known) {
+  const item = state.queue[state.index];
+  updateCardMetaAfterStudy(item, known);
   if (known) {
     state.xp += 8;
     state.streak += 1;
@@ -821,6 +1049,11 @@ function gradeAnswer(button, picked, quiz) {
   state.quizStats.byCategory[quiz.category].total += 1;
 
   if (picked === quiz.answer) {
+    updateCardMetaAfterQuiz(quiz, true);
+    const currentMeta = getCardMeta(quiz.cardId);
+    if (currentMeta.known >= 2) {
+      state.record.wrongCardIds = state.record.wrongCardIds.filter((id) => id !== quiz.cardId);
+    }
     state.xp += 12;
     state.quizStats.correct += 1;
     state.quizStats.byType[quiz.type].correct += 1;
@@ -829,11 +1062,12 @@ function gradeAnswer(button, picked, quiz) {
     button.classList.add("correct");
     el.quizFeedback.textContent = "정답!";
   } else {
+    updateCardMetaAfterQuiz(quiz, false);
     state.hearts -= 1;
     state.streak = 0;
     state.lastWrong.push(quiz);
-    if (quiz.id) {
-      if (!state.record.wrongCardIds.includes(quiz.id)) state.record.wrongCardIds.push(quiz.id);
+    if (quiz.cardId) {
+      if (!state.record.wrongCardIds.includes(quiz.cardId)) state.record.wrongCardIds.push(quiz.cardId);
       localStorage.setItem("vi-wrong-cards", JSON.stringify(state.record.wrongCardIds));
       localStorage.setItem("vi-wrong-meta", JSON.stringify({ cardId: quiz.cardId, quizType: quiz.type, category: quiz.category, at: Date.now() }));
     }
@@ -901,6 +1135,8 @@ function finishMode(reason = "") {
   const byType = state.quizStats ? Object.entries(state.quizStats.byType).map(([k,v]) => `${k}:${v.total ? Math.round((v.correct/v.total)*100) : 0}%`).join(" / ") : "-";
   const weak = state.quizStats ? Object.entries(state.quizStats.byCategory).sort((a,b)=> (a[1].correct/a[1].total) - (b[1].correct/b[1].total)).slice(0,2).map(([k])=>k).join(", ") : "-";
   el.resultText.textContent = `STEP ${idx}(${stage.slug}) ${status} | 이번 XP ${state.xp} | 총 정답률 ${totalAcc}% | 유형별 ${byType} | 약점 ${weak} | 오답 ${state.lastWrong.length} ${reason}`;
+  el.resultReviewBtn.disabled = !state.record.wrongCardIds.length;
+  el.resultDueBtn.disabled = !buildReviewQueueByDays(1).length;
 }
 
 function goHome() {
@@ -908,6 +1144,7 @@ function goHome() {
   state.audio.pause();
   speechSynthesis.cancel();
   activateScreen("home");
+  state.sessionLabel = "";
   renderStageInfo();
   renderDashboard();
   el.progressLabel.textContent = "시작 준비";

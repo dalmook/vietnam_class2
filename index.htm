@@ -39,6 +39,19 @@
           <button id="quickPron" class="btn">발음 복습</button>
           <button id="quickWrong" class="btn">오답 복습</button>
           <button id="quickOpic" class="btn">OPIc 모드</button>
+          <button id="quickReview1d" class="btn">1일 복습</button>
+          <button id="quickReview3d" class="btn">3일 복습</button>
+          <button id="quickReview7d" class="btn">7일 복습</button>
+          <button id="quickPronConfusion" class="btn">헷갈리는 소리 복습</button>
+          <button id="openWrongNote" class="btn ghost">오답노트</button>
+          <button id="openStarred" class="btn ghost">Starred 보기</button>
+          <button id="openDifficult" class="btn ghost">어려운 카드 보기</button>
+        </section>
+
+        <section class="summary-bar review-widget">
+          <div><small>오늘 복습할 카드</small><strong id="sumDueToday">0</strong></div>
+          <div><small>최근 틀린 카드</small><strong id="sumRecentWrong">0</strong></div>
+          <div><small>발음 헷갈림 묶음</small><strong id="sumPronConfusion">0</strong></div>
         </section>
 
         <div class="roadmap-card">
@@ -83,6 +96,7 @@
           <button id="slowSpeakBtn" class="btn">🐢 천천히</button>
           <button id="flipBtn" class="btn">뜻 보기/숨기기</button>
           <button id="toggleTipsBtn" class="btn">팁 보기/숨기기</button>
+          <button id="starBtn" class="btn">⭐ 스타</button>
           <button id="knownBtn" class="btn primary">외웠어요</button>
           <button id="againBtn" class="btn">다시 볼래요</button>
         </div>
@@ -99,6 +113,19 @@
         <div class="button-grid two">
           <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
           <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
+        </div>
+      </article>
+
+      <article id="reviewScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="reviewTitle">복습 목록</h2>
+          <button id="reviewHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+        <p id="reviewDesc" class="muted">복습할 카드를 선택해 바로 학습할 수 있어요.</p>
+        <div id="reviewList" class="review-list"></div>
+        <div class="button-grid two">
+          <button id="reviewStartBtn" class="btn primary">전체 복습 시작</button>
+          <button id="reviewClearBtn" class="btn">선택 목록 비우기</button>
         </div>
       </article>
 
@@ -150,6 +177,10 @@
         <div class="button-grid two">
           <button id="retryBtn" class="btn primary">같은 모드 다시</button>
           <button id="homeBtn" class="btn">홈으로</button>
+        </div>
+        <div class="button-grid two">
+          <button id="resultReviewBtn" class="btn blue">오답 바로 복습</button>
+          <button id="resultDueBtn" class="btn">오늘 복습 시작</button>
         </div>
       </article>
     </section>
