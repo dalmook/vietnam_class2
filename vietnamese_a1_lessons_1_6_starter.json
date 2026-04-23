@@ -1,0 +1,2169 @@
+{
+  "meta": {
+    "schemaVersion": "0.1.0",
+    "datasetId": "vietnamese-a1-listening-speaking-book-lessons-1-6-starter",
+    "title": "베트남어 듣기·말하기 A1 1~6과 스타터 데이터",
+    "sourcePdf": "베트남어+듣기+말하기A11~6과.pdf",
+    "sourceScope": "업로드된 PDF 기준. 1~6과만 포함.",
+    "intendedUse": [
+      "GitHub Pages 정적 학습 앱 초기 데이터",
+      "카드형 학습",
+      "순차 학습",
+      "듣기/발음 퀴즈용 문장 seed"
+    ],
+    "notes": [
+      "앱 시작용 스타터 JSON이다.",
+      "PDF 텍스트 추출 기반이라 일부 항목은 reviewNeeded=true 로 표시했다.",
+      "예문/단어는 가능한 한 PDF에 나온 표현만 넣었고, 임의 생성은 하지 않았다.",
+      "audioSrc 는 정적 사이트용 placeholder 경로다."
+    ],
+    "reviewStatus": "starter",
+    "reviewNeeded": true
+  },
+  "lessons": [
+    {
+      "lessonId": 1,
+      "unitLabel": "Bài 1",
+      "titleKo": "문자와 발음",
+      "titleVi": null,
+      "pageRange": {
+        "start": 6,
+        "end": 23
+      },
+      "goals": [
+        "베트남어의 특징에 대해 알 수 있다.",
+        "베트남어 문자와 발음에 대해 알 수 있다.",
+        "베트남어 성조에 대해 알 수 있다."
+      ],
+      "topicOverview": [
+        "베트남어",
+        "문자와 발음",
+        "성조",
+        "베트남어 단어 학습 방법",
+        "문자 및 성조 쓰기 연습"
+      ],
+      "cultureTopics": [],
+      "vocabCards": [
+        {
+          "id": "l1-v-01",
+          "term": "a",
+          "meaningKo": "한국어의 '아'음과 비슷합니다.",
+          "example": "ai",
+          "exampleMeaningKo": "누구",
+          "audioSrc": "/audio/lesson-1/a.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-02",
+          "term": "ă",
+          "meaningKo": "a보다 짧은 '아'음에 가깝습니다.",
+          "example": "ăn",
+          "exampleMeaningKo": "먹다",
+          "audioSrc": "/audio/lesson-1/aw.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-03",
+          "term": "â",
+          "meaningKo": "짧은 '어'음에 가깝습니다.",
+          "example": "dấu",
+          "exampleMeaningKo": "표시, 성조",
+          "audioSrc": "/audio/lesson-1/aa.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-04",
+          "term": "e",
+          "meaningKo": "한국어의 '애'음과 비슷합니다.",
+          "example": "em",
+          "exampleMeaningKo": "동생",
+          "audioSrc": "/audio/lesson-1/e.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-05",
+          "term": "ê",
+          "meaningKo": "한국어의 '에'음과 비슷합니다.",
+          "example": "đêm",
+          "exampleMeaningKo": "밤",
+          "audioSrc": "/audio/lesson-1/ee.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-06",
+          "term": "ơ",
+          "meaningKo": "한국어의 '어'음과 비슷합니다.",
+          "example": "cơm",
+          "exampleMeaningKo": "밥",
+          "audioSrc": "/audio/lesson-1/ow.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-07",
+          "term": "ư",
+          "meaningKo": "한국어의 '으'음과 비슷합니다.",
+          "example": "thư",
+          "exampleMeaningKo": "편지",
+          "audioSrc": "/audio/lesson-1/uw.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-08",
+          "term": "ph",
+          "meaningKo": "영어의 f와 비슷한 발음입니다.",
+          "example": "phở",
+          "exampleMeaningKo": "퍼(쌀국수)",
+          "audioSrc": "/audio/lesson-1/ph.mp3",
+          "sourcePage": 13,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-09",
+          "term": "v",
+          "meaningKo": "영어의 v와 비슷한 발음입니다.",
+          "example": "vé",
+          "exampleMeaningKo": "표",
+          "audioSrc": "/audio/lesson-1/v.mp3",
+          "sourcePage": 14,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-10",
+          "term": "tr",
+          "meaningKo": "한국어의 'ㅉ'음과 비슷합니다.",
+          "example": "trà",
+          "exampleMeaningKo": "차(茶)",
+          "audioSrc": "/audio/lesson-1/tr.mp3",
+          "sourcePage": 14,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-11",
+          "term": "ng",
+          "meaningKo": "앞에서는 '응', 끝에서는 'ㅇ'에 가깝습니다.",
+          "example": "người / ông",
+          "exampleMeaningKo": "사람 / 할아버지",
+          "audioSrc": "/audio/lesson-1/ng.mp3",
+          "sourcePage": 13,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-v-12",
+          "term": "nh",
+          "meaningKo": "앞에서는 '니', 끝에서는 '잉'에 가깝습니다.",
+          "example": "nhà / anh",
+          "exampleMeaningKo": "집 / 형·오빠",
+          "audioSrc": "/audio/lesson-1/nh.mp3",
+          "sourcePage": 13,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l1-s-01",
+          "textVi": "ma",
+          "textKo": "귀신",
+          "audioSrc": "/audio/lesson-1/ma.mp3",
+          "sourcePage": 16,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-02",
+          "textVi": "má",
+          "textKo": "어머니",
+          "audioSrc": "/audio/lesson-1/ma-sac.mp3",
+          "sourcePage": 16,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-03",
+          "textVi": "mà",
+          "textKo": "그러나",
+          "audioSrc": "/audio/lesson-1/ma-huyen.mp3",
+          "sourcePage": 16,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-04",
+          "textVi": "mả",
+          "textKo": "무덤",
+          "audioSrc": "/audio/lesson-1/ma-hoi.mp3",
+          "sourcePage": 17,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-05",
+          "textVi": "mã",
+          "textKo": "말",
+          "audioSrc": "/audio/lesson-1/ma-nga.mp3",
+          "sourcePage": 17,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-06",
+          "textVi": "mạ",
+          "textKo": "벼",
+          "audioSrc": "/audio/lesson-1/ma-nang.mp3",
+          "sourcePage": 17,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-07",
+          "textVi": "kia",
+          "textKo": "끼어(예시 발음)",
+          "audioSrc": "/audio/lesson-1/kia.mp3",
+          "sourcePage": 12,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-s-08",
+          "textVi": "qua",
+          "textKo": "꾸아(예외 발음)",
+          "audioSrc": "/audio/lesson-1/qua.mp3",
+          "sourcePage": 12,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [],
+      "grammarPoints": [
+        {
+          "id": "l1-g-01",
+          "title": "베트남어는 29개의 문자를 사용함",
+          "pattern": "A Ă Â ... Y",
+          "sourcePage": 10,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-g-02",
+          "title": "베트남어는 6개의 성조를 사용함",
+          "pattern": "không dấu / sắc / huyền / hỏi / ngã / nặng",
+          "sourcePage": 16,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-g-03",
+          "title": "단어 학습 시 철자와 성조를 함께 기억해야 함",
+          "pattern": "chào / cháo",
+          "sourcePage": 18,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l1-p-01",
+          "text": "a",
+          "hintKo": "길게 늘이지 말고 또렷하게",
+          "audioSrc": "/audio/lesson-1/a.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-p-02",
+          "text": "ă",
+          "hintKo": "a보다 짧게",
+          "audioSrc": "/audio/lesson-1/aw.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-p-03",
+          "text": "ơ",
+          "hintKo": "한국어 어와 비슷하게",
+          "audioSrc": "/audio/lesson-1/ow.mp3",
+          "sourcePage": 11,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-p-04",
+          "text": "phở",
+          "hintKo": "첫소리는 f 계열",
+          "audioSrc": "/audio/lesson-1/pho.mp3",
+          "sourcePage": 13,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-p-05",
+          "text": "ma / má / mà / mả / mã / mạ",
+          "hintKo": "같은 철자에 성조만 바꿔 읽기",
+          "audioSrc": "/audio/lesson-1/tones-ma.mp3",
+          "sourcePage": 16,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l1-q-01",
+          "type": "tone-identification",
+          "prompt": "ma 계열 6성조 구분",
+          "answerSet": [
+            "ma",
+            "má",
+            "mà",
+            "mả",
+            "mã",
+            "mạ"
+          ],
+          "sourcePage": 16,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l1-q-02",
+          "type": "sound-match",
+          "prompt": "모음과 예시 단어 연결",
+          "answerSet": [
+            "a-ai",
+            "ă-ăn",
+            "ê-đêm",
+            "ư-thư"
+          ],
+          "sourcePage": 11,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": null
+      },
+      "reviewNeeded": false
+    },
+    {
+      "lessonId": 2,
+      "unitLabel": "Bài 2",
+      "titleKo": null,
+      "titleVi": "Chào em.",
+      "pageRange": {
+        "start": 24,
+        "end": 39
+      },
+      "goals": [
+        "베트남어 호칭을 이해할 수 있다.",
+        "호칭을 사용하여 인사할 수 있다.",
+        "안부를 묻고 답할 수 있다."
+      ],
+      "topicOverview": [
+        "인사 표현",
+        "안부 묻고 답하기 표현",
+        "의미 전환 표현",
+        "또한, 역시 표현",
+        "정중함을 나타내는 표현",
+        "감사 표현",
+        "의문사 표현",
+        "헤어지는 인사 표현"
+      ],
+      "cultureTopics": [
+        "베트남 개요"
+      ],
+      "vocabCards": [
+        {
+          "id": "l2-v-01",
+          "term": "chào",
+          "meaningKo": "안녕, 안녕하세요",
+          "audioSrc": "/audio/lesson-2/chao.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-02",
+          "term": "anh",
+          "meaningKo": "형, 오빠",
+          "audioSrc": "/audio/lesson-2/anh.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-03",
+          "term": "chị",
+          "meaningKo": "누나, 언니",
+          "audioSrc": "/audio/lesson-2/chi.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-04",
+          "term": "em",
+          "meaningKo": "동생",
+          "audioSrc": "/audio/lesson-2/em.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-05",
+          "term": "khoẻ",
+          "meaningKo": "건강하다",
+          "audioSrc": "/audio/lesson-2/khoe.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-06",
+          "term": "vâng",
+          "meaningKo": "예, 그래요",
+          "audioSrc": "/audio/lesson-2/vang.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-07",
+          "term": "còn",
+          "meaningKo": "그런데, 그리고",
+          "audioSrc": "/audio/lesson-2/con.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-08",
+          "term": "cũng",
+          "meaningKo": "또한, 역시",
+          "audioSrc": "/audio/lesson-2/cung.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-09",
+          "term": "cảm ơn",
+          "meaningKo": "감사하다",
+          "audioSrc": "/audio/lesson-2/cam-on.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-10",
+          "term": "bình thường",
+          "meaningKo": "보통의, 정상적인",
+          "audioSrc": "/audio/lesson-2/binh-thuong.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-11",
+          "term": "tạm biệt",
+          "meaningKo": "잘 가, 잘 있어",
+          "audioSrc": "/audio/lesson-2/tam-biet.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-v-12",
+          "term": "không có gì",
+          "meaningKo": "천만에",
+          "audioSrc": "/audio/lesson-2/khong-co-gi.mp3",
+          "sourcePage": 33,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l2-s-01",
+          "textVi": "Chào anh.",
+          "textKo": "안녕하세요, 형/오빠.",
+          "audioSrc": "/audio/lesson-2/s01.mp3",
+          "sourcePage": 27,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-02",
+          "textVi": "Chào em.",
+          "textKo": "안녕, 동생.",
+          "audioSrc": "/audio/lesson-2/s02.mp3",
+          "sourcePage": 27,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-03",
+          "textVi": "Em khoẻ không?",
+          "textKo": "너(동생)는 건강하니?",
+          "audioSrc": "/audio/lesson-2/s03.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-04",
+          "textVi": "Vâng. Em khoẻ.",
+          "textKo": "예. 저는 건강해요.",
+          "audioSrc": "/audio/lesson-2/s04.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-05",
+          "textVi": "Còn anh khoẻ không?",
+          "textKo": "그런데 형은 건강하세요?",
+          "audioSrc": "/audio/lesson-2/s05.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-06",
+          "textVi": "Chị có khoẻ không ạ?",
+          "textKo": "누나는 건강하세요?",
+          "audioSrc": "/audio/lesson-2/s06.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-07",
+          "textVi": "Cảm ơn em.",
+          "textKo": "고마워.",
+          "audioSrc": "/audio/lesson-2/s07.mp3",
+          "sourcePage": 33,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-08",
+          "textVi": "Còn em thế nào?",
+          "textKo": "그런데 너는 어떠니?",
+          "audioSrc": "/audio/lesson-2/s08.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-09",
+          "textVi": "Em bình thường ạ.",
+          "textKo": "저는 보통이에요.",
+          "audioSrc": "/audio/lesson-2/s09.mp3",
+          "sourcePage": 32,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-s-10",
+          "textVi": "Tạm biệt em.",
+          "textKo": "잘 가./잘 있어.",
+          "audioSrc": "/audio/lesson-2/s10.mp3",
+          "sourcePage": 34,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [
+        {
+          "id": "l2-d-01",
+          "title": "회화 1",
+          "audioSrc": "/audio/lesson-2/dialogue-1.mp3",
+          "sourcePage": 26,
+          "lines": [
+            {
+              "speaker": "Hùng",
+              "vi": "Chào anh.",
+              "ko": "안녕하세요, 형."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Chào em. Em khoẻ không?",
+              "ko": "안녕, 동생. 너(동생) 건강하니?"
+            },
+            {
+              "speaker": "Hùng",
+              "vi": "Vâng. Em khoẻ. Còn anh khoẻ không?",
+              "ko": "예, 저(동생)는 건강해요. 그런데 형은 건강하세요?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Ừ. Anh cũng khoẻ.",
+              "ko": "응, 나(형)도 건강해."
+            }
+          ],
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-d-02",
+          "title": "회화 2",
+          "audioSrc": "/audio/lesson-2/dialogue-2.mp3",
+          "sourcePage": 32,
+          "lines": [
+            {
+              "speaker": "Hoa",
+              "vi": "Chào em.",
+              "ko": "안녕, 동생."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Chào chị. Chị có khoẻ không ạ?",
+              "ko": "안녕하세요, 누나. 누나는 건강하세요?"
+            },
+            {
+              "speaker": "Hoa",
+              "vi": "Cảm ơn em. Chị khoẻ. Còn em thế nào?",
+              "ko": "고마워. 나는 건강해. 그런데 너는 어떠니?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Cảm ơn chị. Em bình thường ạ.",
+              "ko": "감사합니다. 저는 보통이에요."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Chào chị ạ.",
+              "ko": "안녕히 계세요/가세요, 누나."
+            },
+            {
+              "speaker": "Hoa",
+              "vi": "Ừ, tạm biệt em.",
+              "ko": "그래. 잘 가./잘 있어."
+            }
+          ],
+          "reviewNeeded": false
+        }
+      ],
+      "grammarPoints": [
+        {
+          "id": "l2-g-01",
+          "title": "인사 표현",
+          "pattern": "Chào + 상대 호칭",
+          "sourcePage": 27,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-g-02",
+          "title": "안부 묻기",
+          "pattern": "[호칭] khoẻ không?",
+          "sourcePage": 28,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-g-03",
+          "title": "정중 표현",
+          "pattern": "문장 끝 + ạ",
+          "sourcePage": 33,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-g-04",
+          "title": "감사 표현",
+          "pattern": "Cảm ơn + 상대 호칭",
+          "sourcePage": 33,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-g-05",
+          "title": "헤어질 때 인사",
+          "pattern": "Tạm biệt + 상대 호칭",
+          "sourcePage": 34,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l2-p-01",
+          "text": "Chào anh.",
+          "hintKo": "chào 의 성조를 살려 읽기",
+          "audioSrc": "/audio/lesson-2/s01.mp3",
+          "sourcePage": 27,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-p-02",
+          "text": "Em khoẻ không?",
+          "hintKo": "khoẻ, không 의 모음과 성조 구분",
+          "audioSrc": "/audio/lesson-2/s03.mp3",
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-p-03",
+          "text": "Cảm ơn em.",
+          "hintKo": "감사 표현 짧게 또렷하게",
+          "audioSrc": "/audio/lesson-2/s07.mp3",
+          "sourcePage": 33,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l2-q-01",
+          "type": "match-term",
+          "prompt": "호칭과 의미 연결",
+          "answerSet": [
+            "anh-형/오빠",
+            "chị-누나/언니",
+            "em-동생"
+          ],
+          "sourcePage": 26,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l2-q-02",
+          "type": "order-dialogue",
+          "prompt": "회화 1 순서 맞추기",
+          "answerSet": [
+            "Chào anh.",
+            "Chào em. Em khoẻ không?",
+            "Vâng. Em khoẻ.",
+            "Ừ. Anh cũng khoẻ."
+          ],
+          "sourcePage": 26,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": 1
+      },
+      "reviewNeeded": false
+    },
+    {
+      "lessonId": 3,
+      "unitLabel": "Bài 3",
+      "titleKo": null,
+      "titleVi": "Tên của em là gì?",
+      "pageRange": {
+        "start": 40,
+        "end": 55
+      },
+      "goals": [
+        "다른 사람을 소개할 수 있다.",
+        "이름을 묻고 답할 수 있다.",
+        "관계성이 배제된 1인칭 tôi를 활용할 수 있다."
+      ],
+      "topicOverview": [
+        "실례/사과 표현",
+        "이름 묻고 답하기 표현",
+        "반가운 감정 표현",
+        "독립적 1인칭 tôi",
+        "상대를 부르는 표현",
+        "소개 표현",
+        "요청하는 표현 Xin"
+      ],
+      "cultureTopics": [
+        "베트남사람의 이름",
+        "호찌민 주석과 호찌민시"
+      ],
+      "vocabCards": [
+        {
+          "id": "l3-v-01",
+          "term": "xin lỗi",
+          "meaningKo": "실례합니다, 미안합니다",
+          "audioSrc": "/audio/lesson-3/xin-loi.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-02",
+          "term": "tên",
+          "meaningKo": "이름",
+          "audioSrc": "/audio/lesson-3/ten.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-03",
+          "term": "của",
+          "meaningKo": "~의",
+          "audioSrc": "/audio/lesson-3/cua.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-04",
+          "term": "gì",
+          "meaningKo": "무엇, 무슨",
+          "audioSrc": "/audio/lesson-3/gi.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-05",
+          "term": "rất",
+          "meaningKo": "매우",
+          "audioSrc": "/audio/lesson-3/rat.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-06",
+          "term": "vui",
+          "meaningKo": "기쁘다",
+          "audioSrc": "/audio/lesson-3/vui.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-07",
+          "term": "được",
+          "meaningKo": "~하게 되다",
+          "audioSrc": "/audio/lesson-3/duoc.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-08",
+          "term": "gặp",
+          "meaningKo": "만나다",
+          "audioSrc": "/audio/lesson-3/gap.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-09",
+          "term": "đây",
+          "meaningKo": "여기, 이쪽",
+          "audioSrc": "/audio/lesson-3/day.mp3",
+          "sourcePage": 48,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-10",
+          "term": "nhắc lại",
+          "meaningKo": "다시 말하다",
+          "audioSrc": "/audio/lesson-3/nhac-lai.mp3",
+          "sourcePage": 48,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-11",
+          "term": "không sao",
+          "meaningKo": "괜찮아요",
+          "audioSrc": "/audio/lesson-3/khong-sao.mp3",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-v-12",
+          "term": "ơi",
+          "meaningKo": "~야(부를 때)",
+          "audioSrc": "/audio/lesson-3/oi.mp3",
+          "sourcePage": 49,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l3-s-01",
+          "textVi": "Xin lỗi.",
+          "textKo": "실례/미안합니다.",
+          "audioSrc": "/audio/lesson-3/s01.mp3",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-02",
+          "textVi": "Tên của chị là gì?",
+          "textKo": "누나/언니의 이름이 뭐예요?",
+          "audioSrc": "/audio/lesson-3/s02.mp3",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-03",
+          "textVi": "Tên của em là Trang.",
+          "textKo": "제 이름은 짱이에요.",
+          "audioSrc": "/audio/lesson-3/s03.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-04",
+          "textVi": "Em rất vui được gặp anh.",
+          "textKo": "형/오빠를 만나게 되어 매우 반갑습니다.",
+          "audioSrc": "/audio/lesson-3/s04.mp3",
+          "sourcePage": 44,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-05",
+          "textVi": "Tôi tên là Se-ho.",
+          "textKo": "나는 이름이 세호예요.",
+          "audioSrc": "/audio/lesson-3/s05.mp3",
+          "sourcePage": 42,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-06",
+          "textVi": "Anh Se-ho ơi.",
+          "textKo": "세호 형/오빠.",
+          "audioSrc": "/audio/lesson-3/s06.mp3",
+          "sourcePage": 49,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-07",
+          "textVi": "Đây là em gái của em.",
+          "textKo": "이쪽은 저의 여동생이에요.",
+          "audioSrc": "/audio/lesson-3/s07.mp3",
+          "sourcePage": 49,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-s-08",
+          "textVi": "Xin nhắc lại.",
+          "textKo": "다시 말해주세요.",
+          "audioSrc": "/audio/lesson-3/s08.mp3",
+          "sourcePage": 48,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [
+        {
+          "id": "l3-d-01",
+          "title": "회화 1",
+          "audioSrc": "/audio/lesson-3/dialogue-1.mp3",
+          "sourcePage": 42,
+          "lines": [
+            {
+              "speaker": "Trang",
+              "vi": "Chào anh.",
+              "ko": "안녕하세요."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Chào chị. Xin lỗi, tên của chị là gì?",
+              "ko": "안녕하세요. 실례지만, 누나의 이름은 뭐예요?"
+            },
+            {
+              "speaker": "Trang",
+              "vi": "Tên của em là Trang. Em rất vui được gặp anh. Tên anh là gì?",
+              "ko": "제 이름은 짱이에요. 만나게 되어 매우 반갑습니다. 오빠 이름이 뭐예요?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Tôi tên là Se-ho. Tôi cũng rất vui được gặp chị.",
+              "ko": "나는 이름이 세호예요. 나도 누나를 만나게 되어 매우 반가워요."
+            }
+          ],
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-d-02",
+          "title": "회화 2",
+          "audioSrc": "/audio/lesson-3/dialogue-2.mp3",
+          "sourcePage": 48,
+          "lines": [
+            {
+              "speaker": "Hùng",
+              "vi": "Anh Se-ho ơi, đây là em gái của em.",
+              "ko": "세호 형, 이쪽은 저의 여동생이에요."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Chào em. Anh là Se-ho.",
+              "ko": "안녕. 오빠는 세호야."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Xin lỗi, xin nhắc lại.",
+              "ko": "죄송하지만, 다시 말해주세요."
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Tên của anh là Se-ho.",
+              "ko": "오빠의 이름은 세호야."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "À, cảm ơn anh Se-ho. Tên em là Thuý ạ.",
+              "ko": "아, 감사합니다, 세호 오빠. 제 이름은 투이예요."
+            }
+          ],
+          "reviewNeeded": false
+        }
+      ],
+      "grammarPoints": [
+        {
+          "id": "l3-g-01",
+          "title": "실례/사과 표현",
+          "pattern": "Xin lỗi (+ 상대 호칭)",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-g-02",
+          "title": "이름 묻기",
+          "pattern": "Tên của + [호칭] + là gì?",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-g-03",
+          "title": "주어 + là + 명사",
+          "pattern": "Em là học sinh.",
+          "sourcePage": 44,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-g-04",
+          "title": "상대를 부르는 표현",
+          "pattern": "[이름/호칭] + ơi",
+          "sourcePage": 49,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-g-05",
+          "title": "소개 표현",
+          "pattern": "Đây là ...",
+          "sourcePage": 49,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-g-06",
+          "title": "요청 표현",
+          "pattern": "Xin + 동사 / 명사",
+          "sourcePage": 50,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l3-p-01",
+          "text": "Xin lỗi.",
+          "hintKo": "xin, lỗi를 자연스럽게 연결",
+          "audioSrc": "/audio/lesson-3/s01.mp3",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-p-02",
+          "text": "Tên của chị là gì?",
+          "hintKo": "gì 의 성조 살리기",
+          "audioSrc": "/audio/lesson-3/s02.mp3",
+          "sourcePage": 43,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-p-03",
+          "text": "Em rất vui được gặp anh.",
+          "hintKo": "rất, được, gặp 자음 묶음에 주의",
+          "audioSrc": "/audio/lesson-3/s04.mp3",
+          "sourcePage": 44,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l3-q-01",
+          "type": "pattern-variation",
+          "prompt": "이름 묻는 다양한 표현 맞추기",
+          "answerSet": [
+            "Tên của em là gì?",
+            "Tên em là gì?",
+            "Em tên là gì?"
+          ],
+          "sourcePage": 44,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l3-q-02",
+          "type": "match-term",
+          "prompt": "소개 표현 연결",
+          "answerSet": [
+            "đây là-이쪽은 ~이다",
+            "kia là-저쪽은 ~이다",
+            "đó là-그것은/그는 ~이다"
+          ],
+          "sourcePage": 49,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": 2
+      },
+      "reviewNeeded": false
+    },
+    {
+      "lessonId": 4,
+      "unitLabel": "Bài 4",
+      "titleKo": null,
+      "titleVi": "Em là người Việt Nam.",
+      "pageRange": {
+        "start": 56,
+        "end": 73
+      },
+      "goals": [
+        "국적을 묻고 답할 수 있다.",
+        "직업을 묻고 답할 수 있다.",
+        "가족 구성원을 소개할 수 있다."
+      ],
+      "topicOverview": [
+        "국적 묻고 답하기 표현",
+        "부가 의문 표현",
+        "언어 표현",
+        "나열 표현",
+        "학교, 학년 표현",
+        "직업 묻고 답하기 표현"
+      ],
+      "cultureTopics": [
+        "명함",
+        "베트남인의 성씨"
+      ],
+      "vocabCards": [
+        {
+          "id": "l4-v-01",
+          "term": "người",
+          "meaningKo": "사람",
+          "audioSrc": "/audio/lesson-4/nguoi.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-02",
+          "term": "nước",
+          "meaningKo": "나라",
+          "audioSrc": "/audio/lesson-4/nuoc.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-03",
+          "term": "nào",
+          "meaningKo": "어느, 어떤",
+          "audioSrc": "/audio/lesson-4/nao.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-04",
+          "term": "phải không",
+          "meaningKo": "맞니? 맞나요?",
+          "audioSrc": "/audio/lesson-4/phai-khong.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-05",
+          "term": "không phải",
+          "meaningKo": "아니다, 맞지 않다",
+          "audioSrc": "/audio/lesson-4/khong-phai.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-06",
+          "term": "Hàn Quốc",
+          "meaningKo": "한국",
+          "audioSrc": "/audio/lesson-4/han-quoc.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-07",
+          "term": "nói",
+          "meaningKo": "말하다",
+          "audioSrc": "/audio/lesson-4/noi.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-08",
+          "term": "tiếng Việt",
+          "meaningKo": "베트남어",
+          "audioSrc": "/audio/lesson-4/tieng-viet.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-09",
+          "term": "giỏi",
+          "meaningKo": "잘하다",
+          "audioSrc": "/audio/lesson-4/gioi.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-10",
+          "term": "gia đình",
+          "meaningKo": "가정, 가족",
+          "audioSrc": "/audio/lesson-4/gia-dinh.mp3",
+          "sourcePage": 64,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-11",
+          "term": "kĩ sư xây dựng",
+          "meaningKo": "건설 엔지니어",
+          "audioSrc": "/audio/lesson-4/ki-su-xay-dung.mp3",
+          "sourcePage": 64,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-v-12",
+          "term": "bác sĩ",
+          "meaningKo": "의사",
+          "audioSrc": "/audio/lesson-4/bac-si.mp3",
+          "sourcePage": 64,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l4-s-01",
+          "textVi": "Em là người nước nào?",
+          "textKo": "너는 어느 나라 사람이니?",
+          "audioSrc": "/audio/lesson-4/s01.mp3",
+          "sourcePage": 59,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-02",
+          "textVi": "Em là người Việt Nam.",
+          "textKo": "저는 베트남 사람이에요.",
+          "audioSrc": "/audio/lesson-4/s02.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-03",
+          "textVi": "Anh cũng là người Việt Nam, phải không?",
+          "textKo": "오빠도 베트남 사람이 맞나요?",
+          "audioSrc": "/audio/lesson-4/s03.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-04",
+          "textVi": "Không phải. Anh là người Hàn Quốc.",
+          "textKo": "아니야. 나는 한국 사람이야.",
+          "audioSrc": "/audio/lesson-4/s04.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-05",
+          "textVi": "Anh nói tiếng Việt giỏi quá!",
+          "textKo": "오빠 베트남어 너무 잘해요!",
+          "audioSrc": "/audio/lesson-4/s05.mp3",
+          "sourcePage": 61,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-06",
+          "textVi": "Hôm nay, tôi xin giới thiệu gia đình tôi.",
+          "textKo": "오늘은 우리 가족을 소개하겠습니다.",
+          "audioSrc": "/audio/lesson-4/s06.mp3",
+          "sourcePage": 64,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-07",
+          "textVi": "Gia đình tôi có bốn người: bố mẹ, anh trai và tôi.",
+          "textKo": "우리 가족은 부모님, 오빠와 나 4명입니다.",
+          "audioSrc": "/audio/lesson-4/s07.mp3",
+          "sourcePage": 65,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-s-08",
+          "textVi": "Tôi là sinh viên năm thứ hai Khoa Tiếng Hàn, Trường Đại học Hà Nội.",
+          "textKo": "나는 하노이대학교 한국어과 2학년 학생입니다.",
+          "audioSrc": "/audio/lesson-4/s08.mp3",
+          "sourcePage": 65,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [
+        {
+          "id": "l4-d-01",
+          "title": "회화 1",
+          "audioSrc": "/audio/lesson-4/dialogue-1.mp3",
+          "sourcePage": 58,
+          "lines": [
+            {
+              "speaker": "Se-ho",
+              "vi": "Em là người nước nào?",
+              "ko": "너는 어느 나라 사람이니?"
+            },
+            {
+              "speaker": "Trang",
+              "vi": "Em là người Việt Nam. Anh cũng là người Việt Nam, phải không?",
+              "ko": "저는 베트남 사람이에요. 오빠도 베트남 사람이 맞나요?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Không phải. Anh là người Hàn Quốc.",
+              "ko": "아니야. 나는 한국 사람이야."
+            },
+            {
+              "speaker": "Trang",
+              "vi": "Anh nói tiếng Việt giỏi quá!",
+              "ko": "오빠 베트남어 너무 잘해요!"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Cảm ơn em.",
+              "ko": "고마워."
+            }
+          ],
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-d-02",
+          "title": "회화 2",
+          "audioSrc": "/audio/lesson-4/dialogue-2.mp3",
+          "sourcePage": 64,
+          "lines": [
+            {
+              "speaker": "Thuý",
+              "vi": "Hôm nay, tôi xin giới thiệu gia đình tôi.",
+              "ko": "오늘은 우리 가족을 소개하겠습니다."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Gia đình tôi có bốn người: bố mẹ, anh trai và tôi.",
+              "ko": "우리 가족은 부모님, 오빠와 나 4명입니다."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Bố tôi là kĩ sư xây dựng. Mẹ tôi là bác sĩ.",
+              "ko": "아버지는 건설 엔지니어입니다. 어머니는 의사입니다."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Anh trai tôi vui tính và rất yêu tôi.",
+              "ko": "오빠는 쾌활하고 나를 매우 사랑합니다."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Còn tôi là sinh viên năm thứ hai Khoa Tiếng Hàn, Trường Đại học Hà Nội.",
+              "ko": "그리고 나는 하노이대학교 한국어과 2학년 학생입니다."
+            }
+          ],
+          "reviewNeeded": false
+        }
+      ],
+      "grammarPoints": [
+        {
+          "id": "l4-g-01",
+          "title": "국적 묻고 답하기",
+          "pattern": "[호칭] là người nước nào? / [호칭] là người + 나라명",
+          "sourcePage": 59,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-g-02",
+          "title": "부가 의문문",
+          "pattern": "..., (có) phải không?",
+          "sourcePage": 60,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-g-03",
+          "title": "언어 표현",
+          "pattern": "tiếng + 나라명",
+          "sourcePage": 61,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-g-04",
+          "title": "나열",
+          "pattern": "A, B, C và D",
+          "sourcePage": 65,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-g-05",
+          "title": "학교/학년 표현",
+          "pattern": "sinh viên năm thứ hai ...",
+          "sourcePage": 65,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l4-p-01",
+          "text": "Em là người Việt Nam.",
+          "hintKo": "người, Việt 의 성조 구분",
+          "audioSrc": "/audio/lesson-4/s02.mp3",
+          "sourcePage": 58,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-p-02",
+          "text": "Anh nói tiếng Việt giỏi quá!",
+          "hintKo": "tiếng Việt를 한 덩어리로",
+          "audioSrc": "/audio/lesson-4/s05.mp3",
+          "sourcePage": 61,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-p-03",
+          "text": "Gia đình tôi có bốn người.",
+          "hintKo": "bốn, người 발음 또렷하게",
+          "audioSrc": "/audio/lesson-4/s07.mp3",
+          "sourcePage": 65,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l4-q-01",
+          "type": "match-term",
+          "prompt": "나라와 국적 표현 연결",
+          "answerSet": [
+            "Việt Nam-người Việt Nam",
+            "Hàn Quốc-người Hàn Quốc"
+          ],
+          "sourcePage": 59,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l4-q-02",
+          "type": "pattern-variation",
+          "prompt": "언어 표현 고르기",
+          "answerSet": [
+            "tiếng Việt",
+            "tiếng Anh"
+          ],
+          "sourcePage": 61,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": 3
+      },
+      "reviewNeeded": false
+    },
+    {
+      "lessonId": 5,
+      "unitLabel": "Bài 5",
+      "titleKo": null,
+      "titleVi": "Em sống ở đâu?",
+      "pageRange": {
+        "start": 74,
+        "end": 91
+      },
+      "goals": [
+        "시제 표현을 활용할 수 있다.",
+        "거주지를 묻고 답할 수 있다.",
+        "나이를 묻고 답할 수 있다."
+      ],
+      "topicOverview": [
+        "거주지 묻고 답하기 표현",
+        "인과 관계 표현",
+        "시제 표현",
+        "정도부사 표현",
+        "독백 표현",
+        "동시 진행 표현",
+        "나이 묻고 답하기 표현"
+      ],
+      "cultureTopics": [
+        "베트남 도로명"
+      ],
+      "vocabCards": [
+        {
+          "id": "l5-v-01",
+          "term": "sống",
+          "meaningKo": "살다",
+          "audioSrc": "/audio/lesson-5/song.mp3",
+          "sourcePage": 77,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-02",
+          "term": "ở",
+          "meaningKo": "~에/에서, 있다",
+          "audioSrc": "/audio/lesson-5/o.mp3",
+          "sourcePage": 77,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-03",
+          "term": "đường",
+          "meaningKo": "길, 거리",
+          "audioSrc": "/audio/lesson-5/duong.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-04",
+          "term": "nhà",
+          "meaningKo": "집",
+          "audioSrc": "/audio/lesson-5/nha.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-05",
+          "term": "vì ... nên ...",
+          "meaningKo": "왜냐하면 A라서 B하다",
+          "audioSrc": "/audio/lesson-5/vi-nen.mp3",
+          "sourcePage": 78,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-06",
+          "term": "đang",
+          "meaningKo": "~하고 있다(현재 진행)",
+          "audioSrc": "/audio/lesson-5/dang.mp3",
+          "sourcePage": 78,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-07",
+          "term": "thuê nhà",
+          "meaningKo": "집을 얻다, 집을 빌리다",
+          "audioSrc": "/audio/lesson-5/thue-nha.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-08",
+          "term": "vợ",
+          "meaningKo": "아내",
+          "audioSrc": "/audio/lesson-5/vo.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-09",
+          "term": "con gái",
+          "meaningKo": "딸",
+          "audioSrc": "/audio/lesson-5/con-gai.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-10",
+          "term": "con trai",
+          "meaningKo": "아들",
+          "audioSrc": "/audio/lesson-5/con-trai.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-11",
+          "term": "thông minh",
+          "meaningKo": "총명하다",
+          "audioSrc": "/audio/lesson-5/thong-minh.mp3",
+          "sourcePage": 84,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-v-12",
+          "term": "bao nhiêu tuổi",
+          "meaningKo": "몇 살",
+          "audioSrc": "/audio/lesson-5/bao-nhieu-tuoi.mp3",
+          "sourcePage": 82,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l5-s-01",
+          "textVi": "Em sống ở đâu?",
+          "textKo": "너는 어디에서 사니?",
+          "audioSrc": "/audio/lesson-5/s01.mp3",
+          "sourcePage": 77,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-02",
+          "textVi": "Em sống ở đường Hai Bà Trưng.",
+          "textKo": "저는 하이바쯩길에 살아요.",
+          "audioSrc": "/audio/lesson-5/s02.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-03",
+          "textVi": "Nhà anh ở Seoul.",
+          "textKo": "오빠 집은 서울에 있어.",
+          "audioSrc": "/audio/lesson-5/s03.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-04",
+          "textVi": "Vì anh đang làm việc ở công ti Hàn Quốc tại Hà Nội nên thuê nhà ở đây.",
+          "textKo": "형이 하노이에 있는 한국 회사에서 일하고 있어서 여기에서 집을 얻었어.",
+          "audioSrc": "/audio/lesson-5/s04.mp3",
+          "sourcePage": 78,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-05",
+          "textVi": "Anh sống với ai?",
+          "textKo": "오빠는 누구와 살아요?",
+          "audioSrc": "/audio/lesson-5/s05.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-06",
+          "textVi": "Anh sống với vợ, một con gái và một con trai.",
+          "textKo": "오빠는 아내, 딸 한 명 그리고 아들 한 명과 살아.",
+          "audioSrc": "/audio/lesson-5/s06.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-07",
+          "textVi": "Em gái của em đẹp quá nhỉ.",
+          "textKo": "네 여동생 너무 예쁘네.",
+          "audioSrc": "/audio/lesson-5/s07.mp3",
+          "sourcePage": 83,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-08",
+          "textVi": "Em ấy vừa đẹp vừa thông minh.",
+          "textKo": "그 애는 예쁘면서 총명해요.",
+          "audioSrc": "/audio/lesson-5/s08.mp3",
+          "sourcePage": 84,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-09",
+          "textVi": "Em ấy bao nhiêu tuổi?",
+          "textKo": "그 애는 몇 살이니?",
+          "audioSrc": "/audio/lesson-5/s09.mp3",
+          "sourcePage": 82,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-s-10",
+          "textVi": "Em ấy hai mươi tuổi.",
+          "textKo": "그 애는 스무 살이에요.",
+          "audioSrc": "/audio/lesson-5/s10.mp3",
+          "sourcePage": 82,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [
+        {
+          "id": "l5-d-01",
+          "title": "회화 1",
+          "audioSrc": "/audio/lesson-5/dialogue-1.mp3",
+          "sourcePage": 76,
+          "lines": [
+            {
+              "speaker": "Se-ho",
+              "vi": "Em sống ở đâu?",
+              "ko": "너는 어디에서 사니?"
+            },
+            {
+              "speaker": "Trang",
+              "vi": "Em sống ở đường Hai Bà Trưng. Ở Hàn Quốc, nhà anh ở đâu?",
+              "ko": "저는 하이바쯩길에 살아요. 한국에서 오빠 집은 어디에 있어요?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Nhà anh ở Seoul. Nhưng vì anh đang làm việc ở công ti Hàn Quốc tại Hà Nội nên thuê nhà ở đây.",
+              "ko": "오빠 집은 서울에 있어. 하지만 오빠가 하노이에 있는 한국 회사에서 일하고 있어서 여기에서 집을 얻었어."
+            },
+            {
+              "speaker": "Trang",
+              "vi": "Anh sống với ai?",
+              "ko": "오빠는 누구와 살아요?"
+            },
+            {
+              "speaker": "Se-ho",
+              "vi": "Anh sống với vợ, một con gái và một con trai.",
+              "ko": "오빠는 아내, 딸 한 명 그리고 아들 한 명과 살아."
+            }
+          ],
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-d-02",
+          "title": "회화 2",
+          "audioSrc": "/audio/lesson-5/dialogue-2.mp3",
+          "sourcePage": 82,
+          "lines": [
+            {
+              "speaker": "Hùng",
+              "vi": "Đây là em gái của em đấy.",
+              "ko": "이쪽은 저의 여동생이에요."
+            },
+            {
+              "speaker": "Mi-na",
+              "vi": "Em gái của em đẹp quá nhỉ.",
+              "ko": "네 여동생 너무 예쁘네."
+            },
+            {
+              "speaker": "Hùng",
+              "vi": "Vâng. Em ấy vừa đẹp vừa thông minh.",
+              "ko": "네. 그 애는 예쁘면서 총명해요."
+            },
+            {
+              "speaker": "Mi-na",
+              "vi": "Em ấy bao nhiêu tuổi?",
+              "ko": "그 애는 몇 살이니?"
+            },
+            {
+              "speaker": "Hùng",
+              "vi": "Em ấy hai mươi tuổi.",
+              "ko": "그 애는 스무 살이에요."
+            }
+          ],
+          "reviewNeeded": false
+        }
+      ],
+      "grammarPoints": [
+        {
+          "id": "l5-g-01",
+          "title": "거주지 묻고 답하기",
+          "pattern": "[사람] sống ở đâu? / [집] ở đâu?",
+          "sourcePage": 77,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-g-02",
+          "title": "인과 관계",
+          "pattern": "(Bởi) vì A nên B / B (bởi) vì A",
+          "sourcePage": 78,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-g-03",
+          "title": "현재 진행",
+          "pattern": "주어 + đang + 서술어",
+          "sourcePage": 78,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-g-04",
+          "title": "정도부사",
+          "pattern": "hơi/khá/rất/quá + 피수식어, 피수식어 + lắm/quá",
+          "sourcePage": 83,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-g-05",
+          "title": "동시 진행/동시 성질",
+          "pattern": "vừa A vừa B",
+          "sourcePage": 84,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-g-06",
+          "title": "나이 묻기",
+          "pattern": "bao nhiêu tuổi?",
+          "sourcePage": 82,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l5-p-01",
+          "text": "Em sống ở đâu?",
+          "hintKo": "sống, ở, đâu 성조를 천천히",
+          "audioSrc": "/audio/lesson-5/s01.mp3",
+          "sourcePage": 77,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-p-02",
+          "text": "Anh sống với ai?",
+          "hintKo": "với 와 ai를 분리해 말하기",
+          "audioSrc": "/audio/lesson-5/s05.mp3",
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-p-03",
+          "text": "Em ấy vừa đẹp vừa thông minh.",
+          "hintKo": "vừa A vừa B 리듬 살리기",
+          "audioSrc": "/audio/lesson-5/s08.mp3",
+          "sourcePage": 84,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l5-q-01",
+          "type": "match-term",
+          "prompt": "가족 표현 연결",
+          "answerSet": [
+            "vợ-아내",
+            "con gái-딸",
+            "con trai-아들"
+          ],
+          "sourcePage": 76,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l5-q-02",
+          "type": "pattern-variation",
+          "prompt": "정도부사 구별",
+          "answerSet": [
+            "rất-매우",
+            "lắm-매우",
+            "quá-너무"
+          ],
+          "sourcePage": 83,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": 4
+      },
+      "reviewNeeded": false
+    },
+    {
+      "lessonId": 6,
+      "unitLabel": "Bài 6",
+      "titleKo": null,
+      "titleVi": "Bây giờ là mấy giờ?",
+      "pageRange": {
+        "start": 92,
+        "end": 109
+      },
+      "goals": [
+        "가능성을 묻고 답할 수 있다.",
+        "시간을 묻고 답할 수 있다.",
+        "날짜를 묻고 답할 수 있다."
+      ],
+      "topicOverview": [
+        "가능성 묻고 답하기 표현",
+        "시간 묻고 답하기 표현",
+        "1인칭 복수 표현",
+        "날짜 표현",
+        "요일 표현",
+        "cả + 집합명사 표현"
+      ],
+      "cultureTopics": [
+        "베트남의 주요 명절과 기념일",
+        "기타 기념일"
+      ],
+      "vocabCards": [
+        {
+          "id": "l6-v-01",
+          "term": "được không",
+          "meaningKo": "될까요?, 가능해요?",
+          "audioSrc": "/audio/lesson-6/duoc-khong.mp3",
+          "sourcePage": 95,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-02",
+          "term": "được chứ",
+          "meaningKo": "그럼!, 가능하지!",
+          "audioSrc": "/audio/lesson-6/duoc-chu.mp3",
+          "sourcePage": 94,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-03",
+          "term": "mấy giờ",
+          "meaningKo": "몇 시",
+          "audioSrc": "/audio/lesson-6/may-gio.mp3",
+          "sourcePage": 96,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-04",
+          "term": "một tiếng sau",
+          "meaningKo": "한 시간 후",
+          "audioSrc": "/audio/lesson-6/mot-tieng-sau.mp3",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-05",
+          "term": "chúng ta",
+          "meaningKo": "우리(듣는 사람 포함)",
+          "audioSrc": "/audio/lesson-6/chung-ta.mp3",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-06",
+          "term": "chúng tôi",
+          "meaningKo": "우리(듣는 사람 제외)",
+          "audioSrc": "/audio/lesson-6/chung-toi.mp3",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-07",
+          "term": "ngày",
+          "meaningKo": "일(日)",
+          "audioSrc": "/audio/lesson-6/ngay.mp3",
+          "sourcePage": 101,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-08",
+          "term": "tháng",
+          "meaningKo": "월(月)",
+          "audioSrc": "/audio/lesson-6/thang.mp3",
+          "sourcePage": 101,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-09",
+          "term": "thứ sáu",
+          "meaningKo": "금요일",
+          "audioSrc": "/audio/lesson-6/thu-sau.mp3",
+          "sourcePage": 102,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-10",
+          "term": "sinh nhật",
+          "meaningKo": "생일",
+          "audioSrc": "/audio/lesson-6/sinh-nhat.mp3",
+          "sourcePage": 102,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-11",
+          "term": "quà",
+          "meaningKo": "선물",
+          "audioSrc": "/audio/lesson-6/qua.mp3",
+          "sourcePage": 100,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-v-12",
+          "term": "cả gia đình",
+          "meaningKo": "온 가족",
+          "audioSrc": "/audio/lesson-6/ca-gia-dinh.mp3",
+          "sourcePage": 100,
+          "reviewNeeded": false
+        }
+      ],
+      "sentenceCards": [
+        {
+          "id": "l6-s-01",
+          "textVi": "Hôm nay chị đi xem phim với em, được không?",
+          "textKo": "오늘 누나 저와 영화 보러 갈 수 있어요?",
+          "audioSrc": "/audio/lesson-6/s01.mp3",
+          "sourcePage": 95,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-02",
+          "textVi": "Được chứ!",
+          "textKo": "그럼!",
+          "audioSrc": "/audio/lesson-6/s02.mp3",
+          "sourcePage": 94,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-03",
+          "textVi": "Bây giờ là mấy giờ?",
+          "textKo": "지금 몇 시예요?",
+          "audioSrc": "/audio/lesson-6/s03.mp3",
+          "sourcePage": 96,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-04",
+          "textVi": "Bây giờ là bốn giờ.",
+          "textKo": "지금 4시예요.",
+          "audioSrc": "/audio/lesson-6/s04.mp3",
+          "sourcePage": 94,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-05",
+          "textVi": "Mấy giờ chúng ta đi?",
+          "textKo": "우리 몇 시에 갈까?",
+          "audioSrc": "/audio/lesson-6/s05.mp3",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-06",
+          "textVi": "Một tiếng sau đi nhé.",
+          "textKo": "한 시간 후에 가요.",
+          "audioSrc": "/audio/lesson-6/s06.mp3",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-07",
+          "textVi": "Hôm nay là ngày 13 tháng 5.",
+          "textKo": "오늘은 5월 13일입니다.",
+          "audioSrc": "/audio/lesson-6/s07.mp3",
+          "sourcePage": 101,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-08",
+          "textVi": "Thứ sáu tuần sau đó là sinh nhật của bố tôi.",
+          "textKo": "그다음 주 금요일이 우리 아버지의 생일입니다.",
+          "audioSrc": "/audio/lesson-6/s08.mp3",
+          "sourcePage": 102,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-09",
+          "textVi": "Cuối tuần này, tôi định đi mua quà với chị gái tôi.",
+          "textKo": "이번 주말에 나는 누나/언니와 함께 선물을 사러 가려고 합니다.",
+          "audioSrc": "/audio/lesson-6/s09.mp3",
+          "sourcePage": 100,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-s-10",
+          "textVi": "Cả gia đình tôi sẽ đi du lịch nước ngoài trong tháng 5.",
+          "textKo": "우리 온 가족은 5월 중에 외국 여행을 갈 것입니다.",
+          "audioSrc": "/audio/lesson-6/s10.mp3",
+          "sourcePage": 100,
+          "reviewNeeded": false
+        }
+      ],
+      "dialogues": [
+        {
+          "id": "l6-d-01",
+          "title": "회화 1",
+          "audioSrc": "/audio/lesson-6/dialogue-1.mp3",
+          "sourcePage": 94,
+          "lines": [
+            {
+              "speaker": "Thuý",
+              "vi": "Hôm nay chị đi xem phim với em, được không?",
+              "ko": "오늘 언니 저와 영화 보러 갈 수 있어요?"
+            },
+            {
+              "speaker": "Mi-na",
+              "vi": "Được chứ! Mấy giờ chúng ta đi?",
+              "ko": "그럼! 우리 몇 시에 갈까?"
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Bây giờ là mấy giờ?",
+              "ko": "지금 몇 시예요?"
+            },
+            {
+              "speaker": "Mi-na",
+              "vi": "Bây giờ là bốn giờ.",
+              "ko": "지금 네 시야."
+            },
+            {
+              "speaker": "Thuý",
+              "vi": "Một tiếng sau đi nhé.",
+              "ko": "한 시간 후에 가요."
+            },
+            {
+              "speaker": "Mi-na",
+              "vi": "Ừ.",
+              "ko": "그래."
+            }
+          ],
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-d-02",
+          "title": "회화 2",
+          "audioSrc": "/audio/lesson-6/dialogue-2.mp3",
+          "sourcePage": 100,
+          "lines": [
+            {
+              "speaker": "Narration",
+              "vi": "Hôm nay là ngày 13 tháng 5.",
+              "ko": "오늘은 5월 13일입니다."
+            },
+            {
+              "speaker": "Narration",
+              "vi": "Một tuần sau là sinh nhật của mẹ tôi.",
+              "ko": "일주일 후가 우리 어머니의 생일입니다."
+            },
+            {
+              "speaker": "Narration",
+              "vi": "Còn thứ sáu tuần sau đó là sinh nhật của bố tôi.",
+              "ko": "그리고 그다음 주 금요일이 우리 아버지의 생일입니다."
+            },
+            {
+              "speaker": "Narration",
+              "vi": "Cuối tuần này, tôi định đi mua quà với chị gái tôi.",
+              "ko": "이번 주말에 나는 누나/언니와 함께 선물을 사러 가려고 합니다."
+            },
+            {
+              "speaker": "Narration",
+              "vi": "Cả gia đình tôi sẽ đi du lịch nước ngoài trong tháng 5.",
+              "ko": "우리 온 가족은 5월 중에 외국 여행을 갈 것입니다."
+            }
+          ],
+          "reviewNeeded": false
+        }
+      ],
+      "grammarPoints": [
+        {
+          "id": "l6-g-01",
+          "title": "가능 여부 묻기",
+          "pattern": "[문장], được không?",
+          "sourcePage": 95,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-g-02",
+          "title": "시간 묻기",
+          "pattern": "Bây giờ là mấy giờ?",
+          "sourcePage": 96,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-g-03",
+          "title": "1인칭 복수",
+          "pattern": "chúng ta / chúng tôi",
+          "sourcePage": 97,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-g-04",
+          "title": "날짜 표현",
+          "pattern": "ngày + 숫자 / tháng + 숫자 / năm + 숫자",
+          "sourcePage": 101,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-g-05",
+          "title": "요일 표현",
+          "pattern": "chủ nhật / thứ 2 ... thứ 7",
+          "sourcePage": 102,
+          "reviewNeeded": false
+        }
+      ],
+      "pronunciationTargets": [
+        {
+          "id": "l6-p-01",
+          "text": "Bây giờ là mấy giờ?",
+          "hintKo": "bây giờ, mấy giờ 리듬 있게",
+          "audioSrc": "/audio/lesson-6/s03.mp3",
+          "sourcePage": 96,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-p-02",
+          "text": "Được chứ!",
+          "hintKo": "짧고 강하게",
+          "audioSrc": "/audio/lesson-6/s02.mp3",
+          "sourcePage": 94,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-p-03",
+          "text": "Hôm nay là ngày 13 tháng 5.",
+          "hintKo": "ngày, tháng 숫자 표현 또렷하게",
+          "audioSrc": "/audio/lesson-6/s07.mp3",
+          "sourcePage": 101,
+          "reviewNeeded": false
+        }
+      ],
+      "quizSeeds": [
+        {
+          "id": "l6-q-01",
+          "type": "time-readout",
+          "prompt": "시간 읽기 연습",
+          "answerSet": [
+            "bốn giờ",
+            "ba giờ rưỡi chiều",
+            "năm giờ kém mười phút"
+          ],
+          "sourcePage": 96,
+          "reviewNeeded": false
+        },
+        {
+          "id": "l6-q-02",
+          "type": "weekday-match",
+          "prompt": "요일 표현 연결",
+          "answerSet": [
+            "chủ nhật-일요일",
+            "thứ 6-금요일",
+            "thứ 7-토요일"
+          ],
+          "sourcePage": 102,
+          "reviewNeeded": false
+        }
+      ],
+      "unlockCondition": {
+        "previousLessonId": 5
+      },
+      "reviewNeeded": false
+    }
+  ]
+}
