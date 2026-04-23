@@ -1,0 +1,1475 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "source": "seed"
+  },
+  "stages": [
+    {
+      "id": "c01",
+      "slug": "letters-tones",
+      "title": "문자·모음·자음·성조",
+      "subtitle": "발음 기초",
+      "goal": "자모/성조 구분",
+      "tasks": [
+        "자음군",
+        "모음",
+        "성조"
+      ],
+      "recommendedDeckTypes": [
+        "pronunciation"
+      ],
+      "opicRelevance": "low"
+    },
+    {
+      "id": "c02",
+      "slug": "pronunciation-rules",
+      "title": "발음 규칙 심화",
+      "subtitle": "최소대립쌍",
+      "goal": "발음 정확도 향상",
+      "tasks": [
+        "최소대립쌍",
+        "종성"
+      ],
+      "recommendedDeckTypes": [
+        "pronunciation",
+        "sentence"
+      ],
+      "opicRelevance": "low"
+    },
+    {
+      "id": "c03",
+      "slug": "greetings-politeness",
+      "title": "인사/호칭/예의표현",
+      "subtitle": "초기회화",
+      "goal": "기본 인사 사용",
+      "tasks": [
+        "인사",
+        "감사"
+      ],
+      "recommendedDeckTypes": [
+        "vocab",
+        "sentence"
+      ],
+      "opicRelevance": "medium"
+    },
+    {
+      "id": "c04",
+      "slug": "self-intro-basics",
+      "title": "자기소개/이름/국적/직업",
+      "subtitle": "자기소개",
+      "goal": "30초 자기소개",
+      "tasks": [
+        "이름",
+        "국적",
+        "직업"
+      ],
+      "recommendedDeckTypes": [
+        "sentence",
+        "opic"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c05",
+      "slug": "numbers-time-date",
+      "title": "숫자/시간/요일/날짜",
+      "subtitle": "생활정보",
+      "goal": "시간/가격 표현",
+      "tasks": [
+        "숫자",
+        "시간"
+      ],
+      "recommendedDeckTypes": [
+        "vocab"
+      ],
+      "opicRelevance": "medium"
+    },
+    {
+      "id": "c06",
+      "slug": "core-pos-location",
+      "title": "기본 동사/형용사/대명사/위치어",
+      "subtitle": "핵심어",
+      "goal": "기본문장 구성",
+      "tasks": [
+        "동사",
+        "형용사"
+      ],
+      "recommendedDeckTypes": [
+        "vocab",
+        "sentence"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c07",
+      "slug": "home-family-work-food",
+      "title": "집/가족/회사/학교/음식",
+      "subtitle": "주제어휘",
+      "goal": "생활주제 말하기",
+      "tasks": [
+        "가족",
+        "음식"
+      ],
+      "recommendedDeckTypes": [
+        "vocab",
+        "opic"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c08",
+      "slug": "daily-routine-lifestyle",
+      "title": "일상 루틴/취미/쇼핑/카페/교통",
+      "subtitle": "루틴회화",
+      "goal": "일상 루틴 설명",
+      "tasks": [
+        "취미",
+        "교통"
+      ],
+      "recommendedDeckTypes": [
+        "sentence",
+        "opic"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c09",
+      "slug": "reasons-frequency-emotions",
+      "title": "이유/빈도/감정/연결어",
+      "subtitle": "문장확장",
+      "goal": "이유/감정 연결",
+      "tasks": [
+        "이유",
+        "빈도"
+      ],
+      "recommendedDeckTypes": [
+        "sentence",
+        "opic"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c10",
+      "slug": "comparison-experience-time",
+      "title": "비교/과거-현재/경험 표현",
+      "subtitle": "시제/비교",
+      "goal": "경험/비교 말하기",
+      "tasks": [
+        "비교",
+        "경험"
+      ],
+      "recommendedDeckTypes": [
+        "sentence",
+        "opic"
+      ],
+      "opicRelevance": "high"
+    },
+    {
+      "id": "c11",
+      "slug": "opic-im1-speaking",
+      "title": "OPIc IM1 주제별 말하기",
+      "subtitle": "실전 대비",
+      "goal": "40~60초 답변",
+      "tasks": [
+        "주제별 답변",
+        "타이머"
+      ],
+      "recommendedDeckTypes": [
+        "opic"
+      ],
+      "opicRelevance": "very_high"
+    },
+    {
+      "id": "c12",
+      "slug": "survival-repair-review",
+      "title": "상황 대응/말 버티기/복습 모드",
+      "subtitle": "복습",
+      "goal": "말 버티기/복습",
+      "tasks": [
+        "재질문",
+        "복습"
+      ],
+      "recommendedDeckTypes": [
+        "opic",
+        "sentence"
+      ],
+      "opicRelevance": "very_high"
+    }
+  ],
+  "stageDecks": {
+    "letters-tones": {
+      "cardIds": [
+        "l1-v-01",
+        "l1-v-02",
+        "l1-v-03",
+        "l1-v-04",
+        "l1-v-05",
+        "l1-v-06",
+        "l1-v-07",
+        "l1-v-08",
+        "l1-v-09",
+        "l1-v-10",
+        "l1-v-11",
+        "l1-v-12",
+        "l1-s-01",
+        "l1-s-02",
+        "l1-s-03",
+        "l1-s-04",
+        "l1-s-05",
+        "l1-s-06",
+        "l1-s-07",
+        "l1-s-08"
+      ]
+    },
+    "pronunciation-rules": {
+      "cardIds": [
+        "l2-v-01",
+        "l2-v-02",
+        "l2-v-03",
+        "l2-v-04",
+        "l2-v-05",
+        "l2-v-06",
+        "l2-v-07",
+        "l2-v-08",
+        "l2-v-09",
+        "l2-v-10",
+        "l2-v-11",
+        "l2-v-12",
+        "l2-s-01",
+        "l2-s-02",
+        "l2-s-03",
+        "l2-s-04",
+        "l2-s-05",
+        "l2-s-06",
+        "l2-s-07",
+        "l2-s-08",
+        "l2-s-09",
+        "l2-s-10"
+      ]
+    },
+    "greetings-politeness": {
+      "cardIds": [
+        "l3-v-01",
+        "l3-v-02",
+        "l3-v-03",
+        "l3-v-04",
+        "l3-v-05",
+        "l3-v-06",
+        "l3-v-07",
+        "l3-v-08",
+        "l3-v-09",
+        "l3-v-10",
+        "l3-v-11",
+        "l3-v-12",
+        "l3-s-01",
+        "l3-s-02",
+        "l3-s-03",
+        "l3-s-04",
+        "l3-s-05",
+        "l3-s-06",
+        "l3-s-07",
+        "l3-s-08"
+      ]
+    },
+    "self-intro-basics": {
+      "cardIds": [
+        "l4-v-01",
+        "l4-v-02",
+        "l4-v-03",
+        "l4-v-04",
+        "l4-v-05",
+        "l4-v-06",
+        "l4-v-07",
+        "l4-v-08",
+        "l4-v-09",
+        "l4-v-10",
+        "l4-v-11",
+        "l4-v-12",
+        "l4-s-01",
+        "l4-s-02",
+        "l4-s-03",
+        "l4-s-04",
+        "l4-s-05",
+        "l4-s-06",
+        "l4-s-07",
+        "l4-s-08"
+      ]
+    },
+    "numbers-time-date": {
+      "cardIds": [
+        "l5-v-01",
+        "l5-v-02",
+        "l5-v-03",
+        "l5-v-04",
+        "l5-v-05",
+        "l5-v-06",
+        "l5-v-07",
+        "l5-v-08",
+        "l5-v-09",
+        "l5-v-10",
+        "l5-v-11",
+        "l5-v-12",
+        "l5-s-01",
+        "l5-s-02",
+        "l5-s-03",
+        "l5-s-04",
+        "l5-s-05",
+        "l5-s-06",
+        "l5-s-07",
+        "l5-s-08",
+        "l5-s-09",
+        "l5-s-10"
+      ]
+    },
+    "core-pos-location": {
+      "cardIds": [
+        "l6-v-01",
+        "l6-v-02",
+        "l6-v-03",
+        "l6-v-04",
+        "l6-v-05",
+        "l6-v-06",
+        "l6-v-07",
+        "l6-v-08",
+        "l6-v-09",
+        "l6-v-10",
+        "l6-v-11",
+        "l6-v-12",
+        "l6-s-01",
+        "l6-s-02",
+        "l6-s-03",
+        "l6-s-04",
+        "l6-s-05",
+        "l6-s-06",
+        "l6-s-07",
+        "l6-s-08",
+        "l6-s-09",
+        "l6-s-10"
+      ]
+    },
+    "opic-im1-speaking": {
+      "cardIds": [
+        "opic-01",
+        "opic-02"
+      ]
+    }
+  },
+  "cards": [
+    {
+      "id": "l1-v-01",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "a",
+      "meaningKo": "한국어의 '아'음과 비슷합니다.",
+      "pronGuide": "한국어의 '아'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/a.mp3"
+    },
+    {
+      "id": "l1-v-02",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ă",
+      "meaningKo": "a보다 짧은 '아'음에 가깝습니다.",
+      "pronGuide": "a보다 짧은 '아'음에 가깝습니다.",
+      "audioSrc": "/audio/lesson-1/aw.mp3"
+    },
+    {
+      "id": "l1-v-03",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "â",
+      "meaningKo": "짧은 '어'음에 가깝습니다.",
+      "pronGuide": "짧은 '어'음에 가깝습니다.",
+      "audioSrc": "/audio/lesson-1/aa.mp3"
+    },
+    {
+      "id": "l1-v-04",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "e",
+      "meaningKo": "한국어의 '애'음과 비슷합니다.",
+      "pronGuide": "한국어의 '애'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/e.mp3"
+    },
+    {
+      "id": "l1-v-05",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ê",
+      "meaningKo": "한국어의 '에'음과 비슷합니다.",
+      "pronGuide": "한국어의 '에'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/ee.mp3"
+    },
+    {
+      "id": "l1-v-06",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ơ",
+      "meaningKo": "한국어의 '어'음과 비슷합니다.",
+      "pronGuide": "한국어의 '어'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/ow.mp3"
+    },
+    {
+      "id": "l1-v-07",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ư",
+      "meaningKo": "한국어의 '으'음과 비슷합니다.",
+      "pronGuide": "한국어의 '으'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/uw.mp3"
+    },
+    {
+      "id": "l1-v-08",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ph",
+      "meaningKo": "영어의 f와 비슷한 발음입니다.",
+      "pronGuide": "영어의 f와 비슷한 발음입니다.",
+      "audioSrc": "/audio/lesson-1/ph.mp3"
+    },
+    {
+      "id": "l1-v-09",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "v",
+      "meaningKo": "영어의 v와 비슷한 발음입니다.",
+      "pronGuide": "영어의 v와 비슷한 발음입니다.",
+      "audioSrc": "/audio/lesson-1/v.mp3"
+    },
+    {
+      "id": "l1-v-10",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "tr",
+      "meaningKo": "한국어의 'ㅉ'음과 비슷합니다.",
+      "pronGuide": "한국어의 'ㅉ'음과 비슷합니다.",
+      "audioSrc": "/audio/lesson-1/tr.mp3"
+    },
+    {
+      "id": "l1-v-11",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "ng",
+      "meaningKo": "앞에서는 '응', 끝에서는 'ㅇ'에 가깝습니다.",
+      "pronGuide": "앞에서는 '응', 끝에서는 'ㅇ'에 가깝습니다.",
+      "audioSrc": "/audio/lesson-1/ng.mp3"
+    },
+    {
+      "id": "l1-v-12",
+      "type": "pronunciation",
+      "stageSlug": "letters-tones",
+      "text": "nh",
+      "meaningKo": "앞에서는 '니', 끝에서는 '잉'에 가깝습니다.",
+      "pronGuide": "앞에서는 '니', 끝에서는 '잉'에 가깝습니다.",
+      "audioSrc": "/audio/lesson-1/nh.mp3"
+    },
+    {
+      "id": "l1-s-01",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "ma",
+      "meaningKo": "귀신",
+      "audioSrc": "/audio/lesson-1/ma.mp3"
+    },
+    {
+      "id": "l1-s-02",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "má",
+      "meaningKo": "어머니",
+      "audioSrc": "/audio/lesson-1/ma-sac.mp3"
+    },
+    {
+      "id": "l1-s-03",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "mà",
+      "meaningKo": "그러나",
+      "audioSrc": "/audio/lesson-1/ma-huyen.mp3"
+    },
+    {
+      "id": "l1-s-04",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "mả",
+      "meaningKo": "무덤",
+      "audioSrc": "/audio/lesson-1/ma-hoi.mp3"
+    },
+    {
+      "id": "l1-s-05",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "mã",
+      "meaningKo": "말",
+      "audioSrc": "/audio/lesson-1/ma-nga.mp3"
+    },
+    {
+      "id": "l1-s-06",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "mạ",
+      "meaningKo": "벼",
+      "audioSrc": "/audio/lesson-1/ma-nang.mp3"
+    },
+    {
+      "id": "l1-s-07",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "kia",
+      "meaningKo": "끼어(예시 발음)",
+      "audioSrc": "/audio/lesson-1/kia.mp3"
+    },
+    {
+      "id": "l1-s-08",
+      "type": "sentence",
+      "stageSlug": "letters-tones",
+      "text": "qua",
+      "meaningKo": "꾸아(예외 발음)",
+      "audioSrc": "/audio/lesson-1/qua.mp3"
+    },
+    {
+      "id": "l2-v-01",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "chào",
+      "meaningKo": "안녕, 안녕하세요",
+      "pronGuide": "안녕, 안녕하세요",
+      "audioSrc": "/audio/lesson-2/chao.mp3"
+    },
+    {
+      "id": "l2-v-02",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "anh",
+      "meaningKo": "형, 오빠",
+      "pronGuide": "형, 오빠",
+      "audioSrc": "/audio/lesson-2/anh.mp3"
+    },
+    {
+      "id": "l2-v-03",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "chị",
+      "meaningKo": "누나, 언니",
+      "pronGuide": "누나, 언니",
+      "audioSrc": "/audio/lesson-2/chi.mp3"
+    },
+    {
+      "id": "l2-v-04",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "em",
+      "meaningKo": "동생",
+      "pronGuide": "동생",
+      "audioSrc": "/audio/lesson-2/em.mp3"
+    },
+    {
+      "id": "l2-v-05",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "khoẻ",
+      "meaningKo": "건강하다",
+      "pronGuide": "건강하다",
+      "audioSrc": "/audio/lesson-2/khoe.mp3"
+    },
+    {
+      "id": "l2-v-06",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "vâng",
+      "meaningKo": "예, 그래요",
+      "pronGuide": "예, 그래요",
+      "audioSrc": "/audio/lesson-2/vang.mp3"
+    },
+    {
+      "id": "l2-v-07",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "còn",
+      "meaningKo": "그런데, 그리고",
+      "pronGuide": "그런데, 그리고",
+      "audioSrc": "/audio/lesson-2/con.mp3"
+    },
+    {
+      "id": "l2-v-08",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "cũng",
+      "meaningKo": "또한, 역시",
+      "pronGuide": "또한, 역시",
+      "audioSrc": "/audio/lesson-2/cung.mp3"
+    },
+    {
+      "id": "l2-v-09",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "cảm ơn",
+      "meaningKo": "감사하다",
+      "pronGuide": "감사하다",
+      "audioSrc": "/audio/lesson-2/cam-on.mp3"
+    },
+    {
+      "id": "l2-v-10",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "bình thường",
+      "meaningKo": "보통의, 정상적인",
+      "pronGuide": "보통의, 정상적인",
+      "audioSrc": "/audio/lesson-2/binh-thuong.mp3"
+    },
+    {
+      "id": "l2-v-11",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "tạm biệt",
+      "meaningKo": "잘 가, 잘 있어",
+      "pronGuide": "잘 가, 잘 있어",
+      "audioSrc": "/audio/lesson-2/tam-biet.mp3"
+    },
+    {
+      "id": "l2-v-12",
+      "type": "pronunciation",
+      "stageSlug": "pronunciation-rules",
+      "text": "không có gì",
+      "meaningKo": "천만에",
+      "pronGuide": "천만에",
+      "audioSrc": "/audio/lesson-2/khong-co-gi.mp3"
+    },
+    {
+      "id": "l2-s-01",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Chào anh.",
+      "meaningKo": "안녕하세요, 형/오빠.",
+      "audioSrc": "/audio/lesson-2/s01.mp3"
+    },
+    {
+      "id": "l2-s-02",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Chào em.",
+      "meaningKo": "안녕, 동생.",
+      "audioSrc": "/audio/lesson-2/s02.mp3"
+    },
+    {
+      "id": "l2-s-03",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Em khoẻ không?",
+      "meaningKo": "너(동생)는 건강하니?",
+      "audioSrc": "/audio/lesson-2/s03.mp3"
+    },
+    {
+      "id": "l2-s-04",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Vâng. Em khoẻ.",
+      "meaningKo": "예. 저는 건강해요.",
+      "audioSrc": "/audio/lesson-2/s04.mp3"
+    },
+    {
+      "id": "l2-s-05",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Còn anh khoẻ không?",
+      "meaningKo": "그런데 형은 건강하세요?",
+      "audioSrc": "/audio/lesson-2/s05.mp3"
+    },
+    {
+      "id": "l2-s-06",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Chị có khoẻ không ạ?",
+      "meaningKo": "누나는 건강하세요?",
+      "audioSrc": "/audio/lesson-2/s06.mp3"
+    },
+    {
+      "id": "l2-s-07",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Cảm ơn em.",
+      "meaningKo": "고마워.",
+      "audioSrc": "/audio/lesson-2/s07.mp3"
+    },
+    {
+      "id": "l2-s-08",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Còn em thế nào?",
+      "meaningKo": "그런데 너는 어떠니?",
+      "audioSrc": "/audio/lesson-2/s08.mp3"
+    },
+    {
+      "id": "l2-s-09",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Em bình thường ạ.",
+      "meaningKo": "저는 보통이에요.",
+      "audioSrc": "/audio/lesson-2/s09.mp3"
+    },
+    {
+      "id": "l2-s-10",
+      "type": "sentence",
+      "stageSlug": "pronunciation-rules",
+      "text": "Tạm biệt em.",
+      "meaningKo": "잘 가./잘 있어.",
+      "audioSrc": "/audio/lesson-2/s10.mp3"
+    },
+    {
+      "id": "l3-v-01",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "xin lỗi",
+      "meaningKo": "실례합니다, 미안합니다",
+      "pronGuide": "실례합니다, 미안합니다",
+      "audioSrc": "/audio/lesson-3/xin-loi.mp3"
+    },
+    {
+      "id": "l3-v-02",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "tên",
+      "meaningKo": "이름",
+      "pronGuide": "이름",
+      "audioSrc": "/audio/lesson-3/ten.mp3"
+    },
+    {
+      "id": "l3-v-03",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "của",
+      "meaningKo": "~의",
+      "pronGuide": "~의",
+      "audioSrc": "/audio/lesson-3/cua.mp3"
+    },
+    {
+      "id": "l3-v-04",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "gì",
+      "meaningKo": "무엇, 무슨",
+      "pronGuide": "무엇, 무슨",
+      "audioSrc": "/audio/lesson-3/gi.mp3"
+    },
+    {
+      "id": "l3-v-05",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "rất",
+      "meaningKo": "매우",
+      "pronGuide": "매우",
+      "audioSrc": "/audio/lesson-3/rat.mp3"
+    },
+    {
+      "id": "l3-v-06",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "vui",
+      "meaningKo": "기쁘다",
+      "pronGuide": "기쁘다",
+      "audioSrc": "/audio/lesson-3/vui.mp3"
+    },
+    {
+      "id": "l3-v-07",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "được",
+      "meaningKo": "~하게 되다",
+      "pronGuide": "~하게 되다",
+      "audioSrc": "/audio/lesson-3/duoc.mp3"
+    },
+    {
+      "id": "l3-v-08",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "gặp",
+      "meaningKo": "만나다",
+      "pronGuide": "만나다",
+      "audioSrc": "/audio/lesson-3/gap.mp3"
+    },
+    {
+      "id": "l3-v-09",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "đây",
+      "meaningKo": "여기, 이쪽",
+      "pronGuide": "여기, 이쪽",
+      "audioSrc": "/audio/lesson-3/day.mp3"
+    },
+    {
+      "id": "l3-v-10",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "nhắc lại",
+      "meaningKo": "다시 말하다",
+      "pronGuide": "다시 말하다",
+      "audioSrc": "/audio/lesson-3/nhac-lai.mp3"
+    },
+    {
+      "id": "l3-v-11",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "không sao",
+      "meaningKo": "괜찮아요",
+      "pronGuide": "괜찮아요",
+      "audioSrc": "/audio/lesson-3/khong-sao.mp3"
+    },
+    {
+      "id": "l3-v-12",
+      "type": "vocab",
+      "stageSlug": "greetings-politeness",
+      "text": "ơi",
+      "meaningKo": "~야(부를 때)",
+      "pronGuide": "~야(부를 때)",
+      "audioSrc": "/audio/lesson-3/oi.mp3"
+    },
+    {
+      "id": "l3-s-01",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Xin lỗi.",
+      "meaningKo": "실례/미안합니다.",
+      "audioSrc": "/audio/lesson-3/s01.mp3"
+    },
+    {
+      "id": "l3-s-02",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Tên của chị là gì?",
+      "meaningKo": "누나/언니의 이름이 뭐예요?",
+      "audioSrc": "/audio/lesson-3/s02.mp3"
+    },
+    {
+      "id": "l3-s-03",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Tên của em là Trang.",
+      "meaningKo": "제 이름은 짱이에요.",
+      "audioSrc": "/audio/lesson-3/s03.mp3"
+    },
+    {
+      "id": "l3-s-04",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Em rất vui được gặp anh.",
+      "meaningKo": "형/오빠를 만나게 되어 매우 반갑습니다.",
+      "audioSrc": "/audio/lesson-3/s04.mp3"
+    },
+    {
+      "id": "l3-s-05",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Tôi tên là Se-ho.",
+      "meaningKo": "나는 이름이 세호예요.",
+      "audioSrc": "/audio/lesson-3/s05.mp3"
+    },
+    {
+      "id": "l3-s-06",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Anh Se-ho ơi.",
+      "meaningKo": "세호 형/오빠.",
+      "audioSrc": "/audio/lesson-3/s06.mp3"
+    },
+    {
+      "id": "l3-s-07",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Đây là em gái của em.",
+      "meaningKo": "이쪽은 저의 여동생이에요.",
+      "audioSrc": "/audio/lesson-3/s07.mp3"
+    },
+    {
+      "id": "l3-s-08",
+      "type": "sentence",
+      "stageSlug": "greetings-politeness",
+      "text": "Xin nhắc lại.",
+      "meaningKo": "다시 말해주세요.",
+      "audioSrc": "/audio/lesson-3/s08.mp3"
+    },
+    {
+      "id": "l4-v-01",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "người",
+      "meaningKo": "사람",
+      "pronGuide": "사람",
+      "audioSrc": "/audio/lesson-4/nguoi.mp3"
+    },
+    {
+      "id": "l4-v-02",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "nước",
+      "meaningKo": "나라",
+      "pronGuide": "나라",
+      "audioSrc": "/audio/lesson-4/nuoc.mp3"
+    },
+    {
+      "id": "l4-v-03",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "nào",
+      "meaningKo": "어느, 어떤",
+      "pronGuide": "어느, 어떤",
+      "audioSrc": "/audio/lesson-4/nao.mp3"
+    },
+    {
+      "id": "l4-v-04",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "phải không",
+      "meaningKo": "맞니? 맞나요?",
+      "pronGuide": "맞니? 맞나요?",
+      "audioSrc": "/audio/lesson-4/phai-khong.mp3"
+    },
+    {
+      "id": "l4-v-05",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "không phải",
+      "meaningKo": "아니다, 맞지 않다",
+      "pronGuide": "아니다, 맞지 않다",
+      "audioSrc": "/audio/lesson-4/khong-phai.mp3"
+    },
+    {
+      "id": "l4-v-06",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "Hàn Quốc",
+      "meaningKo": "한국",
+      "pronGuide": "한국",
+      "audioSrc": "/audio/lesson-4/han-quoc.mp3"
+    },
+    {
+      "id": "l4-v-07",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "nói",
+      "meaningKo": "말하다",
+      "pronGuide": "말하다",
+      "audioSrc": "/audio/lesson-4/noi.mp3"
+    },
+    {
+      "id": "l4-v-08",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "tiếng Việt",
+      "meaningKo": "베트남어",
+      "pronGuide": "베트남어",
+      "audioSrc": "/audio/lesson-4/tieng-viet.mp3"
+    },
+    {
+      "id": "l4-v-09",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "giỏi",
+      "meaningKo": "잘하다",
+      "pronGuide": "잘하다",
+      "audioSrc": "/audio/lesson-4/gioi.mp3"
+    },
+    {
+      "id": "l4-v-10",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "gia đình",
+      "meaningKo": "가정, 가족",
+      "pronGuide": "가정, 가족",
+      "audioSrc": "/audio/lesson-4/gia-dinh.mp3"
+    },
+    {
+      "id": "l4-v-11",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "kĩ sư xây dựng",
+      "meaningKo": "건설 엔지니어",
+      "pronGuide": "건설 엔지니어",
+      "audioSrc": "/audio/lesson-4/ki-su-xay-dung.mp3"
+    },
+    {
+      "id": "l4-v-12",
+      "type": "vocab",
+      "stageSlug": "self-intro-basics",
+      "text": "bác sĩ",
+      "meaningKo": "의사",
+      "pronGuide": "의사",
+      "audioSrc": "/audio/lesson-4/bac-si.mp3"
+    },
+    {
+      "id": "l4-s-01",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Em là người nước nào?",
+      "meaningKo": "너는 어느 나라 사람이니?",
+      "audioSrc": "/audio/lesson-4/s01.mp3"
+    },
+    {
+      "id": "l4-s-02",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Em là người Việt Nam.",
+      "meaningKo": "저는 베트남 사람이에요.",
+      "audioSrc": "/audio/lesson-4/s02.mp3"
+    },
+    {
+      "id": "l4-s-03",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Anh cũng là người Việt Nam, phải không?",
+      "meaningKo": "오빠도 베트남 사람이 맞나요?",
+      "audioSrc": "/audio/lesson-4/s03.mp3"
+    },
+    {
+      "id": "l4-s-04",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Không phải. Anh là người Hàn Quốc.",
+      "meaningKo": "아니야. 나는 한국 사람이야.",
+      "audioSrc": "/audio/lesson-4/s04.mp3"
+    },
+    {
+      "id": "l4-s-05",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Anh nói tiếng Việt giỏi quá!",
+      "meaningKo": "오빠 베트남어 너무 잘해요!",
+      "audioSrc": "/audio/lesson-4/s05.mp3"
+    },
+    {
+      "id": "l4-s-06",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Hôm nay, tôi xin giới thiệu gia đình tôi.",
+      "meaningKo": "오늘은 우리 가족을 소개하겠습니다.",
+      "audioSrc": "/audio/lesson-4/s06.mp3"
+    },
+    {
+      "id": "l4-s-07",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Gia đình tôi có bốn người: bố mẹ, anh trai và tôi.",
+      "meaningKo": "우리 가족은 부모님, 오빠와 나 4명입니다.",
+      "audioSrc": "/audio/lesson-4/s07.mp3"
+    },
+    {
+      "id": "l4-s-08",
+      "type": "sentence",
+      "stageSlug": "self-intro-basics",
+      "text": "Tôi là sinh viên năm thứ hai Khoa Tiếng Hàn, Trường Đại học Hà Nội.",
+      "meaningKo": "나는 하노이대학교 한국어과 2학년 학생입니다.",
+      "audioSrc": "/audio/lesson-4/s08.mp3"
+    },
+    {
+      "id": "l5-v-01",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "sống",
+      "meaningKo": "살다",
+      "pronGuide": "살다",
+      "audioSrc": "/audio/lesson-5/song.mp3"
+    },
+    {
+      "id": "l5-v-02",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "ở",
+      "meaningKo": "~에/에서, 있다",
+      "pronGuide": "~에/에서, 있다",
+      "audioSrc": "/audio/lesson-5/o.mp3"
+    },
+    {
+      "id": "l5-v-03",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "đường",
+      "meaningKo": "길, 거리",
+      "pronGuide": "길, 거리",
+      "audioSrc": "/audio/lesson-5/duong.mp3"
+    },
+    {
+      "id": "l5-v-04",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "nhà",
+      "meaningKo": "집",
+      "pronGuide": "집",
+      "audioSrc": "/audio/lesson-5/nha.mp3"
+    },
+    {
+      "id": "l5-v-05",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "vì ... nên ...",
+      "meaningKo": "왜냐하면 A라서 B하다",
+      "pronGuide": "왜냐하면 A라서 B하다",
+      "audioSrc": "/audio/lesson-5/vi-nen.mp3"
+    },
+    {
+      "id": "l5-v-06",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "đang",
+      "meaningKo": "~하고 있다(현재 진행)",
+      "pronGuide": "~하고 있다(현재 진행)",
+      "audioSrc": "/audio/lesson-5/dang.mp3"
+    },
+    {
+      "id": "l5-v-07",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "thuê nhà",
+      "meaningKo": "집을 얻다, 집을 빌리다",
+      "pronGuide": "집을 얻다, 집을 빌리다",
+      "audioSrc": "/audio/lesson-5/thue-nha.mp3"
+    },
+    {
+      "id": "l5-v-08",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "vợ",
+      "meaningKo": "아내",
+      "pronGuide": "아내",
+      "audioSrc": "/audio/lesson-5/vo.mp3"
+    },
+    {
+      "id": "l5-v-09",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "con gái",
+      "meaningKo": "딸",
+      "pronGuide": "딸",
+      "audioSrc": "/audio/lesson-5/con-gai.mp3"
+    },
+    {
+      "id": "l5-v-10",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "con trai",
+      "meaningKo": "아들",
+      "pronGuide": "아들",
+      "audioSrc": "/audio/lesson-5/con-trai.mp3"
+    },
+    {
+      "id": "l5-v-11",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "thông minh",
+      "meaningKo": "총명하다",
+      "pronGuide": "총명하다",
+      "audioSrc": "/audio/lesson-5/thong-minh.mp3"
+    },
+    {
+      "id": "l5-v-12",
+      "type": "vocab",
+      "stageSlug": "numbers-time-date",
+      "text": "bao nhiêu tuổi",
+      "meaningKo": "몇 살",
+      "pronGuide": "몇 살",
+      "audioSrc": "/audio/lesson-5/bao-nhieu-tuoi.mp3"
+    },
+    {
+      "id": "l5-s-01",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em sống ở đâu?",
+      "meaningKo": "너는 어디에서 사니?",
+      "audioSrc": "/audio/lesson-5/s01.mp3"
+    },
+    {
+      "id": "l5-s-02",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em sống ở đường Hai Bà Trưng.",
+      "meaningKo": "저는 하이바쯩길에 살아요.",
+      "audioSrc": "/audio/lesson-5/s02.mp3"
+    },
+    {
+      "id": "l5-s-03",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Nhà anh ở Seoul.",
+      "meaningKo": "오빠 집은 서울에 있어.",
+      "audioSrc": "/audio/lesson-5/s03.mp3"
+    },
+    {
+      "id": "l5-s-04",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Vì anh đang làm việc ở công ti Hàn Quốc tại Hà Nội nên thuê nhà ở đây.",
+      "meaningKo": "형이 하노이에 있는 한국 회사에서 일하고 있어서 여기에서 집을 얻었어.",
+      "audioSrc": "/audio/lesson-5/s04.mp3"
+    },
+    {
+      "id": "l5-s-05",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Anh sống với ai?",
+      "meaningKo": "오빠는 누구와 살아요?",
+      "audioSrc": "/audio/lesson-5/s05.mp3"
+    },
+    {
+      "id": "l5-s-06",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Anh sống với vợ, một con gái và một con trai.",
+      "meaningKo": "오빠는 아내, 딸 한 명 그리고 아들 한 명과 살아.",
+      "audioSrc": "/audio/lesson-5/s06.mp3"
+    },
+    {
+      "id": "l5-s-07",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em gái của em đẹp quá nhỉ.",
+      "meaningKo": "네 여동생 너무 예쁘네.",
+      "audioSrc": "/audio/lesson-5/s07.mp3"
+    },
+    {
+      "id": "l5-s-08",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em ấy vừa đẹp vừa thông minh.",
+      "meaningKo": "그 애는 예쁘면서 총명해요.",
+      "audioSrc": "/audio/lesson-5/s08.mp3"
+    },
+    {
+      "id": "l5-s-09",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em ấy bao nhiêu tuổi?",
+      "meaningKo": "그 애는 몇 살이니?",
+      "audioSrc": "/audio/lesson-5/s09.mp3"
+    },
+    {
+      "id": "l5-s-10",
+      "type": "sentence",
+      "stageSlug": "numbers-time-date",
+      "text": "Em ấy hai mươi tuổi.",
+      "meaningKo": "그 애는 스무 살이에요.",
+      "audioSrc": "/audio/lesson-5/s10.mp3"
+    },
+    {
+      "id": "l6-v-01",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "được không",
+      "meaningKo": "될까요?, 가능해요?",
+      "pronGuide": "될까요?, 가능해요?",
+      "audioSrc": "/audio/lesson-6/duoc-khong.mp3"
+    },
+    {
+      "id": "l6-v-02",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "được chứ",
+      "meaningKo": "그럼!, 가능하지!",
+      "pronGuide": "그럼!, 가능하지!",
+      "audioSrc": "/audio/lesson-6/duoc-chu.mp3"
+    },
+    {
+      "id": "l6-v-03",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "mấy giờ",
+      "meaningKo": "몇 시",
+      "pronGuide": "몇 시",
+      "audioSrc": "/audio/lesson-6/may-gio.mp3"
+    },
+    {
+      "id": "l6-v-04",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "một tiếng sau",
+      "meaningKo": "한 시간 후",
+      "pronGuide": "한 시간 후",
+      "audioSrc": "/audio/lesson-6/mot-tieng-sau.mp3"
+    },
+    {
+      "id": "l6-v-05",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "chúng ta",
+      "meaningKo": "우리(듣는 사람 포함)",
+      "pronGuide": "우리(듣는 사람 포함)",
+      "audioSrc": "/audio/lesson-6/chung-ta.mp3"
+    },
+    {
+      "id": "l6-v-06",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "chúng tôi",
+      "meaningKo": "우리(듣는 사람 제외)",
+      "pronGuide": "우리(듣는 사람 제외)",
+      "audioSrc": "/audio/lesson-6/chung-toi.mp3"
+    },
+    {
+      "id": "l6-v-07",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "ngày",
+      "meaningKo": "일(日)",
+      "pronGuide": "일(日)",
+      "audioSrc": "/audio/lesson-6/ngay.mp3"
+    },
+    {
+      "id": "l6-v-08",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "tháng",
+      "meaningKo": "월(月)",
+      "pronGuide": "월(月)",
+      "audioSrc": "/audio/lesson-6/thang.mp3"
+    },
+    {
+      "id": "l6-v-09",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "thứ sáu",
+      "meaningKo": "금요일",
+      "pronGuide": "금요일",
+      "audioSrc": "/audio/lesson-6/thu-sau.mp3"
+    },
+    {
+      "id": "l6-v-10",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "sinh nhật",
+      "meaningKo": "생일",
+      "pronGuide": "생일",
+      "audioSrc": "/audio/lesson-6/sinh-nhat.mp3"
+    },
+    {
+      "id": "l6-v-11",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "quà",
+      "meaningKo": "선물",
+      "pronGuide": "선물",
+      "audioSrc": "/audio/lesson-6/qua.mp3"
+    },
+    {
+      "id": "l6-v-12",
+      "type": "vocab",
+      "stageSlug": "core-pos-location",
+      "text": "cả gia đình",
+      "meaningKo": "온 가족",
+      "pronGuide": "온 가족",
+      "audioSrc": "/audio/lesson-6/ca-gia-dinh.mp3"
+    },
+    {
+      "id": "l6-s-01",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Hôm nay chị đi xem phim với em, được không?",
+      "meaningKo": "오늘 누나 저와 영화 보러 갈 수 있어요?",
+      "audioSrc": "/audio/lesson-6/s01.mp3"
+    },
+    {
+      "id": "l6-s-02",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Được chứ!",
+      "meaningKo": "그럼!",
+      "audioSrc": "/audio/lesson-6/s02.mp3"
+    },
+    {
+      "id": "l6-s-03",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Bây giờ là mấy giờ?",
+      "meaningKo": "지금 몇 시예요?",
+      "audioSrc": "/audio/lesson-6/s03.mp3"
+    },
+    {
+      "id": "l6-s-04",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Bây giờ là bốn giờ.",
+      "meaningKo": "지금 4시예요.",
+      "audioSrc": "/audio/lesson-6/s04.mp3"
+    },
+    {
+      "id": "l6-s-05",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Mấy giờ chúng ta đi?",
+      "meaningKo": "우리 몇 시에 갈까?",
+      "audioSrc": "/audio/lesson-6/s05.mp3"
+    },
+    {
+      "id": "l6-s-06",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Một tiếng sau đi nhé.",
+      "meaningKo": "한 시간 후에 가요.",
+      "audioSrc": "/audio/lesson-6/s06.mp3"
+    },
+    {
+      "id": "l6-s-07",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Hôm nay là ngày 13 tháng 5.",
+      "meaningKo": "오늘은 5월 13일입니다.",
+      "audioSrc": "/audio/lesson-6/s07.mp3"
+    },
+    {
+      "id": "l6-s-08",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Thứ sáu tuần sau đó là sinh nhật của bố tôi.",
+      "meaningKo": "그다음 주 금요일이 우리 아버지의 생일입니다.",
+      "audioSrc": "/audio/lesson-6/s08.mp3"
+    },
+    {
+      "id": "l6-s-09",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Cuối tuần này, tôi định đi mua quà với chị gái tôi.",
+      "meaningKo": "이번 주말에 나는 누나/언니와 함께 선물을 사러 가려고 합니다.",
+      "audioSrc": "/audio/lesson-6/s09.mp3"
+    },
+    {
+      "id": "l6-s-10",
+      "type": "sentence",
+      "stageSlug": "core-pos-location",
+      "text": "Cả gia đình tôi sẽ đi du lịch nước ngoài trong tháng 5.",
+      "meaningKo": "우리 온 가족은 5월 중에 외국 여행을 갈 것입니다.",
+      "audioSrc": "/audio/lesson-6/s10.mp3"
+    },
+    {
+      "id": "opic-01",
+      "type": "opic",
+      "stageSlug": "opic-im1-speaking",
+      "text": "자기소개를 40초로 말해보세요.",
+      "meaningKo": "이름/직업/취미 포함"
+    },
+    {
+      "id": "opic-02",
+      "type": "opic",
+      "stageSlug": "opic-im1-speaking",
+      "text": "평일 루틴을 말해보세요.",
+      "meaningKo": "아침-점심-저녁"
+    }
+  ],
+  "opicTopics": [
+    {
+      "id": "ot1",
+      "slug": "self-intro",
+      "title": "자기소개"
+    },
+    {
+      "id": "ot2",
+      "slug": "daily-routine",
+      "title": "일상 루틴"
+    },
+    {
+      "id": "ot3",
+      "slug": "hobby",
+      "title": "취미"
+    },
+    {
+      "id": "ot4",
+      "slug": "home-town",
+      "title": "집/동네"
+    }
+  ]
+}

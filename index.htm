@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnam Word Quest · 베트남어 IM1 학습 앱</title>
+  <meta name="description" content="베트남어 IM1 학습을 위한 스테이지 학습/퀴즈/복습/OPIc 연습 정적 웹앱입니다." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="appNotice" class="app-notice hidden" role="status" aria-live="polite"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <h1>🇻🇳 Vietnam Word Quest</h1>
+      <div class="hud">
+        <span>🔥 <strong id="streak">0</strong></span>
+        <span>⭐ <strong id="xp">0</strong></span>
+        <span>❤️ <strong id="hearts">3</strong></span>
+      </div>
+    </header>
+
+    <section class="progress-wrap">
+      <div class="progress-head">
+        <span id="progressLabel">시작 준비</span>
+        <span id="timerLabel">⏱️ --</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section class="screen-wrap">
+      <article id="homeScreen" class="screen active home-screen">
+        <section class="summary-bar">
+          <div><small>누적 학습 수</small><strong id="sumTotal">0</strong></div>
+          <div><small>오늘 학습 수</small><strong id="sumToday">0</strong></div>
+          <div><small>오늘 복습 수</small><strong id="sumReview">0</strong></div>
+          <div><small>연속 학습일</small><strong id="sumStreakDays">0</strong></div>
+        </section>
+
+        <section class="quick-entry">
+          <button id="quickToday" class="btn blue">오늘 추천 학습</button>
+          <button id="quickPron" class="btn">발음 복습</button>
+          <button id="quickWrong" class="btn">오답 복습</button>
+          <button id="quickOpic" class="btn">OPIc 모드</button>
+          <button id="quickReview1d" class="btn">1일 복습</button>
+          <button id="quickReview3d" class="btn">3일 복습</button>
+          <button id="quickReview7d" class="btn">7일 복습</button>
+          <button id="quickPronConfusion" class="btn">헷갈리는 소리 복습</button>
+          <button id="openWrongNote" class="btn ghost">오답노트</button>
+          <button id="openStarred" class="btn ghost">즐겨찾기 보기</button>
+          <button id="openDifficult" class="btn ghost">어려운 카드 보기</button>
+        </section>
+
+        <section class="summary-bar review-widget">
+          <div><small>오늘 복습할 카드</small><strong id="sumDueToday">0</strong></div>
+          <div><small>최근 틀린 카드</small><strong id="sumRecentWrong">0</strong></div>
+          <div><small>발음 헷갈림 묶음</small><strong id="sumPronConfusion">0</strong></div>
+        </section>
+
+        <div class="roadmap-card">
+          <p class="stage-chip" id="stageChip">현재 단계</p>
+          <h3 id="stageTitle"></h3>
+          <p id="stageGoal" class="muted"></p>
+          <p id="stageTasks" class="tiny"></p>
+          <p id="savedStats" class="tiny"></p>
+        </div>
+
+        <label for="sizeSelect">학습량</label>
+        <select id="sizeSelect">
+          <option value="8">짧게 (8개)</option>
+          <option value="12" selected>보통 (12개)</option>
+          <option value="18">집중 (18개)</option>
+        </select>
+
+        <section id="stageList" class="stage-map"></section>
+      </article>
+
+      <article id="studyScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="studyTitle">단어 학습</h2>
+          <button id="studyHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+
+        <section class="study-meta">
+          <p id="studyStageName"></p>
+          <p id="studySubtopic"></p>
+          <p id="studyProgressMeta"></p>
+          <p id="studyRemaining"></p>
+        </section>
+
+        <div id="flashCard" class="flash-card">
+          <p id="studyReason" class="study-reason"></p>
+          <div id="studyBody"></div>
+          <section id="studyTipsWrap" class="hidden"></section>
+        </div>
+
+        <div class="button-grid six">
+          <button id="speakBtn" class="btn">🔊 듣기</button>
+          <button id="slowSpeakBtn" class="btn">🐢 천천히</button>
+          <button id="flipBtn" class="btn">뜻 보기/숨기기</button>
+          <button id="toggleTipsBtn" class="btn">팁 보기/숨기기</button>
+          <button id="starBtn" class="btn">⭐ 스타</button>
+          <button id="knownBtn" class="btn primary">외웠어요</button>
+          <button id="againBtn" class="btn">다시 볼래요</button>
+        </div>
+      </article>
+
+      <article id="quizScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="quizTitle">퀴즈</h2>
+          <button id="quizHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+        <p id="quizQuestion" class="quiz-question"></p>
+        <div id="quizOptions" class="options"></div>
+        <p id="quizFeedback" class="feedback"></p>
+        <div class="button-grid two">
+          <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
+          <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
+        </div>
+      </article>
+
+      <article id="reviewScreen" class="screen">
+        <div class="screen-head">
+          <h2 id="reviewTitle">복습 목록</h2>
+          <button id="reviewHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+        <p id="reviewDesc" class="muted">복습할 카드를 선택해 바로 학습할 수 있어요.</p>
+        <div id="reviewList" class="review-list"></div>
+        <div class="button-grid two">
+          <button id="reviewStartBtn" class="btn primary">전체 복습 시작</button>
+          <button id="reviewClearBtn" class="btn">선택 목록 비우기</button>
+        </div>
+      </article>
+
+      
+      <article id="opicScreen" class="screen">
+        <div class="screen-head">
+          <h2>OPIc IM1 모드</h2>
+          <button id="opicHomeBtn" class="btn ghost">홈으로</button>
+        </div>
+
+        <p class="muted">한국어 설명을 보며 베트남어 표현으로 30~60초 답변 초안을 만드세요.</p>
+
+        <section id="opicTopicList" class="topic-list"></section>
+
+        <section id="opicDetail" class="opic-detail hidden">
+          <h3 id="opicTopicTitle"></h3>
+          <p id="opicTopicGuide" class="tiny"></p>
+          <div class="opic-block">
+            <h4>핵심 표현</h4>
+            <ul id="opicCoreExpr"></ul>
+          </div>
+          <div class="opic-block">
+            <h4>추천 vocab 카드</h4>
+            <div id="opicVocabCards" class="chip-wrap"></div>
+          </div>
+          <div class="opic-block">
+            <h4>추천 sentence 카드</h4>
+            <div id="opicSentenceCards" class="chip-wrap"></div>
+          </div>
+          <div class="opic-block">
+            <h4>답변 패턴 템플릿</h4>
+            <ul id="opicTemplates"></ul>
+          </div>
+          <div class="opic-block">
+            <h4>답변 Builder</h4>
+            <p class="tiny">카드를 눌러 초안을 조합하세요.</p>
+            <div id="opicBuilderChips" class="chip-wrap"></div>
+            <textarea id="opicDraft" rows="5" placeholder="여기에 30~60초 답변 초안이 만들어집니다."></textarea>
+            <div class="button-grid two">
+              <button id="opicBuild30" class="btn">30초 가이드</button>
+              <button id="opicBuild60" class="btn blue">60초 가이드</button>
+            </div>
+          </div>
+        </section>
+      </article>
+      <article id="resultScreen" class="screen">
+        <h2>결과</h2>
+        <p id="resultText" class="result-text"></p>
+        <div class="button-grid two">
+          <button id="retryBtn" class="btn primary">같은 모드 다시</button>
+          <button id="homeBtn" class="btn">홈으로</button>
+        </div>
+        <div class="button-grid two">
+          <button id="resultReviewBtn" class="btn blue">오답 바로 복습</button>
+          <button id="resultDueBtn" class="btn">오늘 복습 시작</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="onboardingDialog" class="onboarding" aria-label="앱 시작 안내">
+    <h2>Vietnam Word Quest 시작 안내</h2>
+    <ol>
+      <li>이 앱은 <strong>학습 → 퀴즈 → 복습</strong> 루프로 IM1 표현을 누적합니다.</li>
+      <li><strong>발음 모드</strong>: ‘듣기/천천히’ 버튼으로 음성 확인, 지원이 없으면 텍스트 팁이 표시됩니다.</li>
+      <li><strong>복습 큐</strong>: 틀리거나 다시 보기한 카드는 1/3/7일 복습 큐에 자동 쌓입니다.</li>
+    </ol>
+    <div class="button-grid two">
+      <button id="onboardingStartBtn" class="btn primary" aria-label="안내 닫고 시작">확인하고 시작</button>
+      <button id="onboardingSkipBtn" class="btn" aria-label="안내 다음에 보기">다음에 보기</button>
+    </div>
+  </dialog>
+
+  <script src="data/curriculum.js"></script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
