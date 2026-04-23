@@ -1,0 +1,90 @@
+:root {
+  --bg: #eef7ff;
+  --panel: #fff;
+  --line: #dbe7f4;
+  --text: #1f2937;
+  --muted: #64748b;
+  --green: #58cc02;
+  --blue: #1cb0f6;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; min-height: 100%; font-family: "Pretendard", "Noto Sans KR", sans-serif; color: var(--text); background: radial-gradient(circle at top, #dff0ff, var(--bg)); }
+
+.app-shell { width: min(920px, 100vw); min-height: 100dvh; margin: 0 auto; padding: 12px; display: grid; gap: 10px; grid-template-rows: auto auto 1fr; }
+.topbar, .progress-wrap, .screen { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
+.topbar { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+.topbar h1 { margin: 0; font-size: 1.3rem; }
+.hud { display: flex; gap: 10px; font-weight: 700; }
+.progress-wrap { padding: 10px 14px; }
+.progress-head { display: flex; justify-content: space-between; margin-bottom: 7px; color: var(--muted); font-weight: 700; }
+.progress-track { height: 10px; background: #e0f2fe; border-radius: 999px; overflow: hidden; }
+.progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--green), var(--blue)); transition: width 0.2s; }
+
+.screen-wrap { position: relative; min-height: 0; }
+.screen { position: absolute; inset: 0; padding: 16px; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: none; flex-direction: column; gap: 10px; overflow-y: auto; }
+.screen.active { display: flex; }
+
+h2, h3 { margin: 0; }
+label { font-weight: 700; font-size: 0.95rem; }
+.muted { color: var(--muted); margin: 0; }
+.tiny { font-size: .92rem; margin: 0; color: #334155; }
+
+.roadmap-card { border: 1px solid #dbeafe; border-radius: 12px; background: #f8fbff; padding: 12px; display: grid; gap: 6px; }
+.stage-chip { margin: 0; font-weight: 700; color: #0f766e; }
+
+.screen-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+select, .btn { border: 1px solid var(--line); border-radius: 12px; padding: 11px; font-size: 1rem; }
+.btn { font-weight: 700; background: #fff; cursor: pointer; }
+.btn.primary { background: var(--green); color: #fff; }
+.btn.blue { background: var(--blue); color: #fff; }
+.btn.ghost { background: #f8fafc; color: var(--text); width: auto; padding: 8px 12px; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.button-grid { display: grid; gap: 8px; }
+.button-grid.two { grid-template-columns: 1fr 1fr; }
+.button-grid.four { grid-template-columns: repeat(4, 1fr); }
+
+.flash-card { border: 2px solid #dbeafe; border-radius: 14px; background: #f8fbff; padding: 16px; display: grid; align-content: center; min-height: 190px; cursor: pointer; }
+.flash-card.flipped { border-color: #bbf7d0; }
+.term { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; margin: 0; }
+.pron { color: #0f766e; font-weight: 700; margin: 6px 0 0; }
+.meaning { font-size: 1.2rem; margin: 8px 0 0; }
+.example { color: var(--muted); margin: 8px 0 0; }
+
+.quiz-question { font-size: 1.15rem; font-weight: 700; margin: 0; }
+.options { display: grid; gap: 8px; }
+.option { text-align: left; border: 2px solid var(--line); border-radius: 12px; padding: 12px; background: #fff; cursor: pointer; }
+.option.correct { border-color: var(--green); background: #f0ffe4; }
+.option.wrong { border-color: #ef4444; background: #fff1f2; }
+.feedback { font-weight: 700; margin: 0; min-height: 24px; }
+.result-text { font-size: 1.1rem; line-height: 1.5; }
+.hidden { display: none; }
+
+@media (max-width: 700px) {
+  .button-grid.four, .button-grid.two { grid-template-columns: 1fr 1fr; }
+  .topbar { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+.stage-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.stage-pill {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.stage-pill.active {
+  border-color: var(--blue);
+  background: #eff8ff;
+  font-weight: 700;
+}
