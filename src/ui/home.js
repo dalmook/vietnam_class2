@@ -16,9 +16,10 @@ export function renderStageCards(state, el, onSelect) {
     const stats = getStageStats(state, s.slug);
     const completion = stageCompletion(state, s.slug);
     const status = s.slug === state.stageSlug ? 'current' : stats.completed ? 'done' : stats.seenCount > 0 ? 'in-progress' : 'new';
+    const cta = stats.seenCount > 0 ? '이어서 하기' : '시작하기';
     const recent = stats.lastStudiedAt ? `최근 학습: ${new Date(stats.lastStudiedAt).toLocaleDateString()}` : '최근 학습 없음';
     const cardCount = getStageCardPoolBySlug(state, s.slug).length;
-    return `<button class="stage-card ${status}" data-slug="${s.slug}"><div class="stage-head"><span>STEP ${i + 1}</span><span>${completion}%</span></div><h4>${s.title}</h4><p class="sub">${s.subtitle || ''}</p><p class="goal">${s.goal || ''}</p><p class="meta">카드 ${cardCount}개 · 완료율 ${completion}%</p><p class="meta">${recent}</p></button>`;
+    return `<button class="stage-card ${status}" data-slug="${s.slug}"><div class="stage-head"><span>STEP ${i + 1}</span><span>${completion}%</span></div><h4>${s.title}</h4><p class="sub">${s.subtitle || ''}</p><p class="meta">카드 ${cardCount}개 · ${recent}</p><p class="goal">${cta}</p></button>`;
   }).join('');
 
   [...el.stageList.querySelectorAll('.stage-card')].forEach((btn) => btn.addEventListener('click', () => onSelect(btn.dataset.slug)));

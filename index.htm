@@ -29,40 +29,41 @@
 
     <section class="screen-wrap">
       <article id="homeScreen" class="screen active home-screen">
-        <section class="summary-bar">
-          <div><small>누적 학습 수</small><strong id="sumTotal">0</strong></div>
-          <div><small>오늘 학습 수</small><strong id="sumToday">0</strong></div>
-          <div><small>오늘 복습 수</small><strong id="sumReview">0</strong></div>
-          <div><small>연속 학습일</small><strong id="sumStreakDays">0</strong></div>
+        <section class="home-hero">
+          <p class="stage-chip" id="stageChip">현재 단계</p>
+          <h2 id="stageTitle"></h2>
+          <p id="stageGoal" class="muted"></p>
+          <p id="savedStats" class="tiny"></p>
         </section>
 
-        <section class="quick-entry">
+        <section class="summary-bar compact">
+          <div><small>오늘 학습</small><strong id="sumToday">0</strong></div>
+          <div><small>오늘 복습</small><strong id="sumReview">0</strong></div>
+          <div><small>연속일</small><strong id="sumStreakDays">0</strong></div>
+          <div><small>누적 세션</small><strong id="sumTotal">0</strong></div>
+        </section>
+
+        <section class="quick-entry chips">
           <button id="quickToday" class="btn blue">오늘 추천 학습</button>
           <button id="quickPron" class="btn">발음 복습</button>
-          <button id="quickWrong" class="btn">오답 복습</button>
-          <button id="quickOpic" class="btn">OPIc 모드</button>
+          <button id="quickWrong" class="btn">오답</button>
+          <button id="quickOpic" class="btn">OPIc</button>
           <button id="quickReview1d" class="btn">1일 복습</button>
-          <button id="quickReview3d" class="btn">3일 복습</button>
-          <button id="quickReview7d" class="btn">7일 복습</button>
-          <button id="quickPronConfusion" class="btn">헷갈리는 소리 복습</button>
+          <button id="quickReview3d" class="btn">3일</button>
+          <button id="quickReview7d" class="btn">7일</button>
+          <button id="quickPronConfusion" class="btn">헷갈림</button>
           <button id="openWrongNote" class="btn ghost">오답노트</button>
-          <button id="openStarred" class="btn ghost">즐겨찾기 보기</button>
-          <button id="openDifficult" class="btn ghost">어려운 카드 보기</button>
+          <button id="openStarred" class="btn ghost">즐겨찾기</button>
+          <button id="openDifficult" class="btn ghost">어려운 카드</button>
         </section>
 
-        <section class="summary-bar review-widget">
+        <section class="summary-bar review-widget compact">
           <div><small>오늘 복습할 카드</small><strong id="sumDueToday">0</strong></div>
           <div><small>최근 틀린 카드</small><strong id="sumRecentWrong">0</strong></div>
           <div><small>발음 헷갈림 묶음</small><strong id="sumPronConfusion">0</strong></div>
         </section>
 
-        <div class="roadmap-card">
-          <p class="stage-chip" id="stageChip">현재 단계</p>
-          <h3 id="stageTitle"></h3>
-          <p id="stageGoal" class="muted"></p>
-          <p id="stageTasks" class="tiny"></p>
-          <p id="savedStats" class="tiny"></p>
-        </div>
+        <p id="stageTasks" class="tiny"></p>
 
         <label for="sizeSelect">학습량</label>
         <select id="sizeSelect">
@@ -75,44 +76,53 @@
       </article>
 
       <article id="studyScreen" class="screen">
-        <div class="screen-head">
-          <h2 id="studyTitle">단어 학습</h2>
+        <div class="screen-head study-head">
+          <div>
+            <h2 id="studyTitle">학습 카드</h2>
+            <p id="studyStageName" class="tiny"></p>
+          </div>
+          <p id="studyProgressMeta" class="tiny"></p>
           <button id="studyHomeBtn" class="btn ghost">홈으로</button>
         </div>
 
-        <section class="study-meta">
-          <p id="studyStageName"></p>
+        <section class="study-meta slim">
           <p id="studySubtopic"></p>
-          <p id="studyProgressMeta"></p>
           <p id="studyRemaining"></p>
         </section>
 
-        <div id="flashCard" class="flash-card">
+        <div id="flashCard" class="flash-card full">
           <p id="studyReason" class="study-reason"></p>
           <div id="studyBody"></div>
           <section id="studyTipsWrap" class="hidden"></section>
         </div>
 
-        <div class="button-grid six">
-          <button id="speakBtn" class="btn">🔊 듣기</button>
-          <button id="slowSpeakBtn" class="btn">🐢 천천히</button>
-          <button id="flipBtn" class="btn">뜻 보기/숨기기</button>
-          <button id="toggleTipsBtn" class="btn">팁 보기/숨기기</button>
-          <button id="starBtn" class="btn">⭐ 스타</button>
-          <button id="knownBtn" class="btn primary">외웠어요</button>
-          <button id="againBtn" class="btn">다시 볼래요</button>
+        <div class="action-dock">
+          <div class="button-grid two">
+            <button id="speakBtn" class="btn blue">🔊 듣기</button>
+            <button id="flipBtn" class="btn">뜻 보기/숨기기</button>
+          </div>
+          <div class="button-grid two">
+            <button id="knownBtn" class="btn primary">외웠어요</button>
+            <button id="againBtn" class="btn">다시 볼래요</button>
+          </div>
+          <div class="button-grid two secondary-tools">
+            <button id="slowSpeakBtn" class="btn ghost">🐢 천천히</button>
+            <button id="toggleTipsBtn" class="btn ghost">부가정보</button>
+          </div>
         </div>
+
+        <button id="starBtn" class="btn ghost hidden">⭐ 스타</button>
       </article>
 
       <article id="quizScreen" class="screen">
-        <div class="screen-head">
+        <div class="screen-head study-head">
           <h2 id="quizTitle">퀴즈</h2>
           <button id="quizHomeBtn" class="btn ghost">홈으로</button>
         </div>
-        <p id="quizQuestion" class="quiz-question"></p>
+        <p id="quizQuestion" class="quiz-question big"></p>
         <div id="quizOptions" class="options"></div>
         <p id="quizFeedback" class="feedback"></p>
-        <div class="button-grid two">
+        <div class="action-dock quiz-dock">
           <button id="quizSpeakBtn" class="btn">🔊 문제 발음</button>
           <button id="nextQuizBtn" class="btn blue" disabled>다음</button>
         </div>

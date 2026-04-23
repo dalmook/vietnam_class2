@@ -3,8 +3,8 @@ export function renderQuiz(state, el, onPick) {
   if (!quiz) return false;
   const stage = state.curriculum.find((c) => c.slug === state.stageSlug) || state.curriculum[0];
   const idx = state.curriculum.findIndex((c) => c.slug === stage.slug) + 1;
-  el.quizTitle.textContent = `STEP ${idx} 퀴즈 (${state.index + 1}/${state.queue.length})`;
-  el.quizQuestion.textContent = `[${quiz.type}] ${quiz.prompt}`;
+  el.quizTitle.textContent = `STEP ${idx} · ${state.index + 1}/${state.queue.length}`;
+  el.quizQuestion.textContent = quiz.prompt;
   el.quizFeedback.textContent = '';
   el.quizOptions.innerHTML = '';
   el.nextQuizBtn.disabled = true;

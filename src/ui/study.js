@@ -29,13 +29,21 @@ export function renderStudy(state, el) {
 
 function renderCardByType(item, type, showMeaning) {
   const text = item.text || item.term || '';
-  const meaning = showMeaning ? `<p class="meaning-block">뜻: ${item.meaningKo || '-'}</p>` : '';
+  const meaning = showMeaning ? `<p class="meaning-block">뜻: ${item.meaningKo || '-'}</p>` : '<p class="tiny">뜻은 아래 버튼으로 확인하세요.</p>';
+  const pronMeta = `
+    <div class="info-grid">
+      <p>발음 가이드: ${item.pronGuideKo || item.pronGuide || '-'}</p>
+      <p>IPA: ${item.ipa || '-'}</p>
+      <p>성조: ${(item.toneName || '-')} ${(item.toneMarks ? `(${item.toneMarks})` : '')}</p>
+      <p>음절: ${item.syllables || '-'}</p>
+    </div>
+  `;
   if (type === 'pronunciation') {
-    return `<p class="term big">${text}</p><div class="info-grid"><p>음절: ${item.syllables || '-'}</p><p>성조/IPA: ${(item.toneName || '-')} ${(item.toneMarks ? `(${item.toneMarks})` : '')} / ${item.ipa || '-'}</p><p>한국어 참고 발음: ${item.pronGuideKo || item.pronGuide || '-'}</p><p>minimal pairs: ${item.minimalPairGroup || '-'}</p></div>${meaning}`;
+    return `<p class="term big">${text}</p>${pronMeta}${meaning}<details><summary>발음 상세</summary><p>최소대립쌍: ${item.minimalPairGroup || '-'}</p><p>발음 팁: ${item.pronTips || '-'}</p></details>`;
   }
-  if (type === 'sentence') return `<p class="term">${text}</p>${meaning}<p>핵심 패턴: ${item.corePattern || item.pattern || 'S + V + O'}</p>`;
-  if (type === 'opic') return `<p class="term">${text}</p>${meaning}<p>답변 확장 힌트: ${item.extendHint || '이유 + 예시 + 감정 한 문장 추가'}</p>`;
-  return `<p class="term">${text}</p>${meaning}<p>예문: ${item.example || '-'}</p><p>예문 번역: ${item.exampleKo || item.exampleMeaningKo || '-'}</p>`;
+  if (type === 'sentence') return `<p class="term">${text}</p>${pronMeta}${meaning}<details><summary>패턴 힌트</summary><p>${item.corePattern || item.pattern || 'S + V + O'}</p></details>`;
+  if (type === 'opic') return `<p class="term">${text}</p>${pronMeta}${meaning}<details><summary>답변 확장 힌트</summary><p>${item.extendHint || '이유 + 예시 + 감정 한 문장 추가'}</p><p>관련 topic: ${item.topicTag || item.topic || '-'}</p></details>`;
+  return `<p class="term">${text}</p>${pronMeta}${meaning}<details><summary>예문 / 설명</summary><p>예문: ${item.example || '-'}</p><p>예문 번역: ${item.exampleKo || item.exampleMeaningKo || '-'}</p></details>`;
 }
 
 function getTipsHtml(item, type) {
